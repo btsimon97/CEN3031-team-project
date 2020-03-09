@@ -49,14 +49,13 @@ app.post('/api/coordinates', getCoordinates, (req, res) => {
    Sends a response (res) to go to the homepage for all routes not specified */
 app.all('/*', (req, res) => {
 
-
     /*Add YOUR CODE HERE
        see https://expressjs.com/en/api.html#res.sendFile
        see https://nodejs.org/api/path.html
        The path.resolve() method returns a string and resolves a sequence of paths or path segments into an absolute path.
        If no path segments are passed, path.resolve() will return the absolute path of the current working directory.
     */
-    res.sendFile(path.resolve('client', 'index.html'));
+   res.sendFile(path.resolve('client', 'index.html'));
 });
 
 app.listen(config.port, () => console.log(`App now listening on port ${config.port}`));

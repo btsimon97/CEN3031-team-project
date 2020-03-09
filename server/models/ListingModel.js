@@ -6,13 +6,18 @@ import mongoose from 'mongoose';
      See also https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
   */
 const listingSchema = new mongoose.Schema({
-  code: {type: String, required: true},
-  name: {type: String, required: true},
-  coordinates: {
-    latitude: Number, 
-    longitude: Number
-  },
-  address: String
+  /* Your code for a schema here */
+  //Check out - https://mongoosejs.com/docs/guide.html
+  
+  code: {type: String, required: true}, 
+  name: {type: String, required: true}, 
+  address: {type: String}, 
+  coordinates: {                                    
+        latitude: {type: mongoose.Number},
+        longitude: {type: mongoose.Number}
+   },
+    keyterms: {type: Array}
+   
 });
 
 /* Use your schema to instantiate a Mongoose model

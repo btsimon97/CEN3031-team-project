@@ -1,7 +1,8 @@
 /* Dependencies */
-import mongoose from 'mongoose';
+// import mongoose, { Query } from 'mongoose';
 import Listing from '../models/ListingModel.js';
 import coordinates from './coordinatesController.js';
+import  sortBy   from 'async';
 
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
@@ -22,99 +23,132 @@ import coordinates from './coordinatesController.js';
 
 /* Create a listing */
 export const create = async (req, res) => {
-    /* Instantiate a Listing*/
+    /* Instantiate a Listing */
     /* save the coordinates from the coordinatesController (located in req.results if there is an address property) */
     /* Then save the listing to the database */
-    let listing = new Listing({
+
+
+    // Validate request
+    if(!req.body) {
+        return res.status(400).send({
+            message: "Note content can not be empty"
+        });
+    }
+    // Create a Note
+    const newlisting = new Listing({
         code: req.body.code,
         name: req.body.name,
-        coordinates: {
-            latitude: req.results.lat,
-            longitude: req.results.lng
-        },
-        address: req.body.address
+        address : req.body.address,
+        coordinates : req.results,
+        keyterms : req.keyterms
     });
-    listing.save(err =>{
-        if(err) throw err;
-    });    
-    res.send(listing);
 
-    
-
+    // Save Note in the database
+    newlisting.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
 };
 
 /* Show the current listing */
 export const read = (req, res) => {
-    if(!req.params.listingId){
-        return res.send({message:'error: Can not find entry with provided id.'})
-    }
     /* send back the listing as json from the request */
     /* If the listing could _not_ be found, be sure to send back a response in the following format: {error: 'Some message that indicates an error'} */
     Listing.findById(req.params.listingId)
-    .then(data =>{
-        res.status(200).send(data);
-    }).catch(err =>{
-        throw err;
+    .then(listing => {
+        if(!listing) {
+            return res.status(404).send({
+                message: "Listing not found with id " + req.body.id
+            });            
+        }
+        res.send(listing);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving note with id " + req.params.id
+        });
     });
 };
 
 /* Update a listing - note the order in which this function is called by the router*/
 export const update = (req, res) => {
-    if(!req.params.listingId){
-        return res.send({message:'error: Can not find entry with provided id.'})
+    const listing = req.listing;
+
+    if(!req.body) {
+        return res.status(400).send({
+            message: "Note content can not be empty"
+        });
     }
 
-    Listing.findByIdAndUpdate(req.params.listingId, {
-        code: req.body.code,
-        name: req.body.name,
-        coordinates:{
-            latitude: req.results.lat,
-            longitude: req.results.lng
-        },
-        address: req.body.address,
-    }, {new: true})
-    .then(data =>{
-        res.status(200).send(data);
-    }).catch(err =>{
-        throw err;
-    });
-
-}
-
     /* Replace the listings's properties with the new properties found in req.body */
+
+    Listing.findByIdAndUpdate(req.params.listingId, {
+        code: req.body.code || res.body.code,
+        name: req.body.name || res.body.name,
+        address: req.body.address || res.body.address,
+        coordinates : req.results,
+        keyterms: req.keyterms
+    }, {new: true})
+    .then(listing => {
+        if(!listing) {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.listingId
+            });
+        }
+        res.send(listing);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Listing not found with id " + req.params.listingId
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating note with id " + req.params.listingId
+        });
+    });
 
     /*save the coordinates (located in req.results if there is an address property) */
 
     /* Save the listing */
 
-
-;
+};
 
 /* Delete a listing */
 export const remove = (req, res) => {
-    if(!req.params.listingId){
-        return res.send({message:'error: Can not find entry with provided id.'});
-    };
     /* Add your code to remove the listins */
     /* If the listing could _not_ be found, be sure to send back a response in the following format: {error: 'Some message that indicates an error'} */
-    Listing.findByIdAndDelete(req.params.listingId, (err,result) =>{
-        if (err) throw err;
-        res.send(result);
-    });
-    
-    
-    
+    if(req.body.name===null) {
+        return res.status(400).send({
+            message: "Note content can not be empty"
+        });
+    } 
+    let myQuery = {code: req.body.code, name: req.body.name, address: req.body.address}
+    Listing.findOneAndRemove(myQuery)
+    .then(mylisting => {
+        // if(!mylisting) {
+        //     return res.status(404).send({
+        //         message: "mylisting not found with id " + req.params.listingId
+        //     });
+        // }
+        res.send({message: "Listing deleted successfully!"});
+    })
     
 };
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 export const list = (req, res) => {
     /* Add your code. Make sure to send the documents as a JSON response.*/
-    Listing.find()
-    .then(listing =>{
-        res.json(listing);
-    }).catch(err =>{
-        throw err;
+    Listing.find({}, (err, data) => {
+        if (err) throw err
+        res.send(data)
     });
 };
 
@@ -126,4 +160,9 @@ export const list = (req, res) => {
         then finally call next
  */
 export const listingByID = (req, res, next, id) => {
+    Listing.findById(id, (err, data) => {
+        if (err) throw err
+        res.send(data)
+        next()
+    });
 };

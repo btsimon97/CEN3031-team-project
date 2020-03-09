@@ -17,17 +17,15 @@ export default (req, res, next) => {
             url: 'https://api.opencagedata.com/geocode/v1/json',
             qs: options
         }, async (error, response, body) => {
-            let place = JSON.parse(body).results[0];
-            req.results = place.geometry;
-            
             // For ideas about response and error processing see https://opencagedata.com/tutorials/geocode-in-nodejs
-
+            
             /* Save the coordinates in req.results -> this information will be accessed by listingsController.js to add the coordinates to the Listing to be saved in the database.
               To access the coordinates, you can JSON.parse(body) and find which attribute(s) store some sort of latitude and longitude coordinate pair.
               Make SURE to store in req.results.
             */
-            
-            next();
+            let arr = JSON.parse(body).results[0].geometry
+            req.results = {latitude: arr.lat, longitude: arr.lng}
+            next(); 
         });
     } else {
         next();
