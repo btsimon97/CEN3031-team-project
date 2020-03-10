@@ -4,7 +4,10 @@
 
 export default {
   db: {
-    uri: 'mongodb+srv://ryanfjh:ryan99fjh@cen3031-spring-2020-btguz.mongodb.net/test?retryWrites=true&w=majority'//place the URI of your mongo database here.
+    uri: 'mongodb+srv://antonio:%4015Antonio@mycluster-8pcgo.mongodb.net/test?retryWrites=true&w=majority'//place the URI of your mongo database here.
+  }, 
+  openCage: {
+    key: '07aa249497314a62939dee9c320955ee' //place your openCage public key here - Sign-up for a free key https://opencagedata.com/
   },
   port: 5000
 };

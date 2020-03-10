@@ -129,7 +129,8 @@ export const remove = (req, res) => {
         return res.status(400).send({
             message: "Note content can not be empty"
         });
-    } 
+    }
+    console.log(req.body)
     let myQuery = {code: req.body.code, name: req.body.name, address: req.body.address}
     Listing.findOneAndRemove(myQuery)
     .then(mylisting => {

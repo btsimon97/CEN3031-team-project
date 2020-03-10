@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ViewBuilding = (props) => {
-    if(props.selectedBuildingId === 0)
+const ViewBuilding = ({building, objectId, selectedBuildingId}) => {
+    if(selectedBuildingId === 0)
     {
         return (
         <div>
@@ -15,24 +15,24 @@ const ViewBuilding = (props) => {
             <div>
                 <p>
                     {' '}
-                    <i> Name: {props.building.name}</i>
+                    <i> Name: {building.name}</i>
                     <br/>
-                    <i> Code: {props.building.code}</i>
+                    <i> Code: {building.code}</i>
                     <br/>
                     {
-                        !props.building.address || <i> Address: {props.building.address}</i>
+                        !building.address || <i> Address: {building.address}</i>
                     }
                     <br/>
                     {
-                        !props.building.coordinates || <i> longitude: {props.building.coordinates.longitude}</i>
+                        !building.coordinates || <i> longitude: {building.coordinates.longitude}</i>
                     }
                     <br/>
                     {
-                        !props.building.coordinates || <i> latitude: {props.building.coordinates.latitude}</i>
+                        !building.coordinates || <i> latitude: {building.coordinates.latitude}</i>
                     }
                     <br/>
                     {
-                        !props.building.keyterms || <i> keyterms: {props.building.keyterms.toString()}</i>
+                        !building.keyterms || <i> keyterms: {building.keyterms.toString()}</i>
                     }
                 </p>
             </div>

@@ -4,11 +4,27 @@ import ViewBuilding from './components/ViewBuilding';
 import BuildingList from './components/BuildingList';
 import Credit from './components/Credit';
 import AddBuilding from "./components/AddBuilding";
+import axios from 'axios';
+
 
 const App = ({data}) => {
     const [filterText, setFilterText] = useState('');
     const [selectedBuildingId, setBuildingSelectedId] = useState(0);
+    const [objectId, setObjectId] = useState("");
     const [currentAppData, setCurrentAppData] = useState(data);
+    const [building, setBuilding] = useState(data);
+
+    
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/listings/')
+            .then(response => {
+                setCurrentAppData(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [])
+
 
     return (
         <div className="bg">
@@ -33,13 +49,16 @@ const App = ({data}) => {
                                               setBuildingSelectedId={setBuildingSelectedId}
                                               selectedBuildingId={selectedBuildingId}
                                               setCurrentAppData = {setCurrentAppData}
-                                              currentAppData = {currentAppData} />
+                                              currentAppData = {currentAppData}
+                                              setObjectId = {setObjectId}
+                                              objectId = {objectId}
+                                              setBuilding = {setBuilding}/>
                             </table>
                         </div>
                     </div>
                     <div className="column2">
                         {!selectedBuildingId ? (<ViewBuilding selectedBuildingId={0} />)
-                            : (<ViewBuilding building={currentAppData[selectedBuildingId - 1]}/>)
+                            : (<ViewBuilding building={building} objectId = {objectId}/>)
                         }
 
 
@@ -47,14 +66,10 @@ const App = ({data}) => {
                     <div>
                         <p style = {{fontAlign: "center", position:"absolute", right:"0", top:"200px"}}>
                             <AddBuilding setCurrentAppData = {setCurrentAppData}
-                                         currentAppData = {currentAppData}/>
+                                         currentAppData = {currentAppData}
+                                         selectedBuildingId = {selectedBuildingId}/>
                         </p>
                     </div>
-
-
-
-
-
                 </div>
                 <Credit/>
             </main>

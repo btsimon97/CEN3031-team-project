@@ -1,18 +1,22 @@
 import React, {useState, useEffect} from 'react';
-// import DeleteItem from "./DeleteItem";
+import DeleteItem from "./DeleteItem";
+import axios from 'axios';
 
-const BuildingList = ({data, filterText, setBuildingSelectedId, selectedBuildingId}) => {
-    const [list, setList] = useState(data)
+const BuildingList = ({filterText, setBuildingSelectedId, selectedBuildingId, currentAppData, setCurrentAppData, setObjectId, building, setBuilding, objectId}) => {
+    console.log(currentAppData)
+    
+   
 
-    const deleteItem = (id) => {
-        let newlist = list.filter(element => element.id !== id)
-        console.log(newlist)
-        setList(newlist)
+    currentAppData = currentAppData.sort((left, right) => {
+        return left.code.localeCompare(right.code)
+    })
+    let i = 0
+    for (i; i < currentAppData.length; i++) {
+        currentAppData[i].id = i + 1
     }
-
-    const buildingList = list.filter(building => {
-        // Got from https://stackoverflow.com/questions/8808783/regex-javascript-match-multiple-search-terms-ignoring-their-order
-        if (filterText.trim() !== '') {
+    const buildingList = currentAppData.filter(building => {
+        if (filterText.trim() !== '')
+        {
             let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
             let searchText = filterText.split(",");
             if(searchText.length>1){
@@ -35,10 +39,15 @@ const BuildingList = ({data, filterText, setBuildingSelectedId, selectedBuilding
         return true
     }).map(directory => {
         return (
-            <tr key={directory.id} onClick={() => setBuildingSelectedId(directory.id)}>
+            <tr style={{fontSize: "24px", fontFamily:"New Times Roman", textAlign:"center"}} key={directory._id} onClick={() => {
+                setBuildingSelectedId(directory.id)
+                setBuilding(currentAppData[directory.id-1])
+                setObjectId(currentAppData[directory.id-1]._id)
+            }}>
                 <td>{directory.code} </td>
                 <td> {directory.name} </td>
-                <button style = {{backgroundColor: 'red', color:"white",borderRadius: "25px"}} onClick={() => deleteItem(directory.id)}>
+                <button style = {{backgroundColor: 'red', color:"white",borderRadius: "25px"}}
+                        onClick={ () =>  DeleteItem(currentAppData, setCurrentAppData,selectedBuildingId, objectId)}>
                 DELETE
                 </button>
             </tr>
