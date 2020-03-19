@@ -5,7 +5,6 @@
 */
 
 import * as listings from '../controllers/listingsController.js';
-import getCoordinates from '../controllers/coordinatesController.js';
 import express from 'express'; //refers to Express the middleware helper for Node.js
 const listingsRouter = express.Router();
 /* 
@@ -15,13 +14,13 @@ const listingsRouter = express.Router();
   Note: the listings variable above and the file it is connected to help you trace
  */
 listingsRouter.get('/', listings.list);
-listingsRouter.post('/', getCoordinates, listings.create);
+listingsRouter.post('/', listings.create);
 
 /*
   The ':' specifies a URL parameter. 
  */
 listingsRouter.get('/:listingId', listings.read);
-listingsRouter.put('/:listingId', getCoordinates, listings.update);
+listingsRouter.put('/:listingId', listings.update);
 listingsRouter.delete('/:listingId', listings.remove);
 
 export default listingsRouter;

@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
-import getCoordinates from './controllers/coordinatesController.js';
 import cors from 'cors'
 
 //connect to database
@@ -39,13 +38,6 @@ app.use('/', express.static('./../../client'));
    check the variables list above
 */
 app.use('/api/listings/', listingsRouter);
-
-
-/* Request Handler for coordinates
-   This is a server wrapper around Open Cage Data Geocoding API to get latitude + longitude coordinates from address */
-app.post('/api/coordinates', getCoordinates, (req, res) => {
-    res.send(req.results);
-});
 
 
 /* Request handler for all other routes

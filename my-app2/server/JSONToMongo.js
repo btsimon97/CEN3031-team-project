@@ -5,19 +5,17 @@
  */
 import * as fs from 'fs';
 import mongoose from 'mongoose';
-import Listing from './models/ListingModel.js';
+import InstrumentModel from '../server/models/instrumentModel.js';
 import config from './config/config.js';
 import async from 'async';
 
 /* Connect to your database */
-let listingData;
-
+let instrumentData;
 fs.readFile('listings.json', 'utf8', (err, data) => {
   if (err) throw err
-  listingData  = JSON.parse(data);
-  listingData.entries.forEach(element => {
-    // console.log(element.name);
-    const newDoc = new Listing(element);
-    newDoc.save().then(console.log("Element saved!"))
+  instrumentData  = JSON.parse(data);
+  instrumentData.entries.forEach(element => {
+    const newInstrment = new InstrumentModel(element);
+    newInstrment.save().then(console.log("Element saved!"))
   })
 });

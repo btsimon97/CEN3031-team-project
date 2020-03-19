@@ -4,8 +4,6 @@ import axios from 'axios';
 
 const BuildingList = ({filterText, setBuildingSelectedId, selectedBuildingId, currentAppData, setCurrentAppData, setObjectId, building, setBuilding, objectId}) => {
     console.log(currentAppData)
-    
-   
 
     currentAppData = currentAppData.sort((left, right) => {
         return left.code.localeCompare(right.code)

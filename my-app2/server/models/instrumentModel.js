@@ -5,22 +5,13 @@ import mongoose from 'mongoose';
      See https://mongoosejs.com/docs/guide.html for examples for creating schemas
      See also https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
   */
-const listingSchema = new mongoose.Schema({
+const instrumentSchema = new mongoose.Schema({
   /* Your code for a schema here */
   //Check out - https://mongoosejs.com/docs/guide.html
-  
-  code: {type: String, required: true}, 
-  name: {type: String, required: true}, 
-  address: {type: String}, 
-  coordinates: {                                    
-        latitude: {type: mongoose.Number},
-        longitude: {type: mongoose.Number}
-   },
-    keyterms: {type: Array}
-   
+  keyterms: {type: Array, required: true}
 });
 
 /* Use your schema to instantiate a Mongoose model
 Export the model to make it avaiable to other parts of your Node application */
 //Check out - https://mongoosejs.com/docs/guide.html#models
-export default mongoose.model('listings', listingSchema);
+export default mongoose.model('instruments', instrumentSchema);

@@ -3,21 +3,14 @@
 
 
 import mongoose from 'mongoose';
-import Listing from '../models/ListingModel.js';
+import InstrumentModel from '../models/instrumentModel.js';
 import config from '../config/config.js';
-import {clearAndRefill} from "../JSONToMongo";
 
-let listing = {
-    code: "LBWEST",
-    name: "Library West",
-    coordinates: {
-        latitude: 29.6508246,
-        longitude: -82.3417565
-    },
-    address: "1545 W University Ave, Gainesville, FL 32603, United States"
+let instrument = {
+    keyterms: ["knife","sharp", "shiny"]
 }, id, db;
 
-describe('Listing Schema Unit Tests', () => {
+describe('Medical Instrument Schema Unit Tests', () => {
     describe('Saving to database', () => {
 
         beforeAll(async () => {
@@ -29,7 +22,7 @@ describe('Listing Schema Unit Tests', () => {
 
         afterEach(async () => {
             if (id) {
-                await Listing.deleteOne({_id: id}).exec(() => {
+                await InstrumentModel.deleteOne({_id: id}).exec(() => {
                     id = null;
                 });
             }
@@ -40,44 +33,27 @@ describe('Listing Schema Unit Tests', () => {
         });
 
         test('saves properly when code and name provided', async (done) => {
-            await new Listing({
-                name: listing.name,
-                code: listing.code
+            await new InstrumentModel({
+                keyterms: {Bone_chisel, knife, not_shiny}
             }).save((err, listing) => {
                 expect(err).toBeNull();
                 id = listing._id;
                 expect(id).not.toBeNull();
-                expect(listing.name).toBe('Library West');
+                expect(keyterms).toBe({Bone_chisel, knife, not_shiny});
                 done();
             });
         }, 10000);
 
-        test('saves properly when all three properties provided', async (done) => {
-            await new Listing(listing).save((err, listing) => {
-                expect(err).toBeNull();
-                id = listing._id;
-                expect(id).not.toBeNull();
-                done();
-            });
-        });
-
-        test('throws an error when name not provided', async (done) => {
-            await new Listing({
-                code: listing.code
+        test('throws an error when keyterms not provided', async (done) => {
+            await new InstrumentModel({
+        
             }).save(err => {
                 expect(err).not.toBeNull();
                 done();
             });
         });
 
-        test('throws an error when code not provided', async (done) => {
-            await new Listing({
-                name: listing.name
-            }).save((err) => {
-                expect(err).not.toBeNull();
-                done();
-            })
-        });
+       
 
     });
 });

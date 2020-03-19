@@ -1,7 +1,6 @@
 /* Dependencies */
 // import mongoose, { Query } from 'mongoose';
-import Listing from '../models/ListingModel.js';
-import coordinates from './coordinatesController.js';
+import InstrumentModel from '../models/instrumentModel.js';
 import  sortBy   from 'async';
 
 /*
@@ -34,22 +33,18 @@ export const create = async (req, res) => {
             message: "Note content can not be empty"
         });
     }
-    // Create a Note
-    const newlisting = new Listing({
-        code: req.body.code,
-        name: req.body.name,
-        address : req.body.address,
-        coordinates : req.results,
+    // Create a instrument model
+    const newInstrument = new InstrumentModel({
         keyterms : req.keyterms
     });
 
     // Save Note in the database
-    newlisting.save()
+    newInstrument.save()
     .then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while creating the Note."
+            message: err.message || "Some error occurred while creating the instrument."
         });
     });
 };
@@ -58,60 +53,56 @@ export const create = async (req, res) => {
 export const read = (req, res) => {
     /* send back the listing as json from the request */
     /* If the listing could _not_ be found, be sure to send back a response in the following format: {error: 'Some message that indicates an error'} */
-    Listing.findById(req.params.listingId)
-    .then(listing => {
-        if(!listing) {
+    InstrumentModel.findById(req.params.listingId)
+    .then(instrument => {
+        if(!instrument) {
             return res.status(404).send({
-                message: "Listing not found with id " + req.body.id
+                message: "Instrument not found with id " + req.body.id
             });            
         }
-        res.send(listing);
+        res.send(instrument);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.id
+                message: "Instrument not found with id " + req.params.id
             });                
         }
         return res.status(500).send({
-            message: "Error retrieving note with id " + req.params.id
+            message: "Error retrieving instrument with id " + req.params.id
         });
     });
 };
 
 /* Update a listing - note the order in which this function is called by the router*/
 export const update = (req, res) => {
-    const listing = req.listing;
-
+    const instrument = req.instrument;
+    
     if(!req.body) {
         return res.status(400).send({
-            message: "Note content can not be empty"
+            message: "Instrument content can not be empty"
         });
     }
 
     /* Replace the listings's properties with the new properties found in req.body */
 
-    Listing.findByIdAndUpdate(req.params.listingId, {
-        code: req.body.code || res.body.code,
-        name: req.body.name || res.body.name,
-        address: req.body.address || res.body.address,
-        coordinates : req.results,
+    InstrumentModel.findByIdAndUpdate(req.params.listingId, {
         keyterms: req.keyterms
     }, {new: true})
-    .then(listing => {
-        if(!listing) {
+    .then(instrument => {
+        if(!instrument) {
             return res.status(404).send({
                 message: "Note not found with id " + req.params.listingId
             });
         }
-        res.send(listing);
+        res.send(instrument);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Listing not found with id " + req.params.listingId
+                message: "Instrument not found with id " + req.params.listingId
             });                
         }
         return res.status(500).send({
-            message: "Error updating note with id " + req.params.listingId
+            message: "Error updating instrument with id " + req.params.listingId
         });
     });
 
@@ -125,14 +116,13 @@ export const update = (req, res) => {
 export const remove = (req, res) => {
     /* Add your code to remove the listins */
     /* If the listing could _not_ be found, be sure to send back a response in the following format: {error: 'Some message that indicates an error'} */
-    if(req.body.name===null) {
+    if(!req.body) {
         return res.status(400).send({
             message: "Note content can not be empty"
         });
     }
     console.log(req.body)
-    let myQuery = {code: req.body.code, name: req.body.name, address: req.body.address}
-    Listing.findOneAndRemove(myQuery)
+    InstrumentModel.findOneAndRemove({_id:req._id})
     .then(mylisting => {
         // if(!mylisting) {
         //     return res.status(404).send({
@@ -147,7 +137,8 @@ export const remove = (req, res) => {
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 export const list = (req, res) => {
     /* Add your code. Make sure to send the documents as a JSON response.*/
-    Listing.find({}, (err, data) => {
+    InstrumentModel.find({}, (err, data) => {
+        console.log(data)
         if (err) throw err
         res.send(data)
     });
@@ -161,7 +152,7 @@ export const list = (req, res) => {
         then finally call next
  */
 export const listingByID = (req, res, next, id) => {
-    Listing.findById(id, (err, data) => {
+    InstrumentModel.findById(id, (err, data) => {
         if (err) throw err
         res.send(data)
         next()
