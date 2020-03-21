@@ -63,7 +63,7 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
         onSubmit={handleSubmit}
         style={{
           position: "absolute",
-          left: "-850px",
+          left: "-700px",
           top: "200px",
           height: "20px"
         }}
@@ -75,28 +75,8 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
           }}
         >
           {" "}
-          Add a new building below!{" "}
+          Fill out the fields to add a new instrument{" "}
         </p>{" "}
-        <input
-          style={{
-            width: "800px",
-            height: "50px"
-          }}
-          type="text"
-          placeholder={"Enter building name: "}
-          name={name}
-          onChange={event => setName(event.target.value)}
-        />{" "}
-        <input
-          style={{
-            width: "800px",
-            height: "50px"
-          }}
-          type="text"
-          placeholder={"Enter building code "}
-          code={code}
-          onChange={event => setCode(event.target.value)}
-        />{" "}
         <input
           style={{
             width: "800px",
@@ -106,30 +86,6 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
           placeholder={"Enter keyterms "}
           keyterms={keyterms}
           onChange={event => setKeyterms(event.target.value)}
-        />{" "}
-        <input
-          style={{
-            width: "800px",
-            height: "50px"
-          }}
-          type="text"
-          placeholder={"Enter building Address "}
-          address={address}
-          onChange={event => setAddress(event.target.value)}
-        />{" "}
-        <input
-          type="number"
-          step="0.00000001"
-          placeholder={"Enter building longitude "}
-          longitude={longitude}
-          onChange={event => setLongitude(event.target.value)}
-        />{" "}
-        <input
-          type="number"
-          step="0.00000001"
-          placeholder={"Enter building latitude "}
-          latitude={latitude}
-          onChange={event => setLatitude(event.target.value)}
         />{" "}
         <input
           style={{

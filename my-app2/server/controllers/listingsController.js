@@ -42,6 +42,9 @@ export const create = async (req, res) => {
     newInstrument.save()
     .then(data => {
         res.send(data);
+        res.status(200).send({
+            message: "Instrument added!"
+        });
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the instrument."
@@ -121,17 +124,26 @@ export const remove = (req, res) => {
             message: "Note content can not be empty"
         });
     }
-    console.log(req.body)
-    InstrumentModel.findOneAndRemove({_id:req._id})
-    .then(mylisting => {
-        // if(!mylisting) {
-        //     return res.status(404).send({
-        //         message: "mylisting not found with id " + req.params.listingId
-        //     });
-        // }
-        res.send({message: "Listing deleted successfully!"});
-    })
-    
+    console.log(req.params)
+    InstrumentModel.findByIdAndRemove(req.params.listingId)
+    .then(instrument => {
+        if(!instrument) {
+            return res.status(404).send({
+                message: "Instrument not found with id " + req.body.id
+            });
+        }
+        res.send({message: "Instrument deleted successfully!"});
+    }).catch(err => {
+        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.body.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Could not delete instrument with id " + req.body.id
+        });
+    });
+    console.log("Delete successful!")
 };
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */

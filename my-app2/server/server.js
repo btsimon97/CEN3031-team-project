@@ -8,9 +8,17 @@ import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
 
 //connect to database
-mongoose.connect(config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() => {
-    console.log(`Successfully connected to mongoose database.`)
-});
+mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
+   if(!error)
+   {
+      console.log(`Successfully connected to mongoose database.`)
+   } else {
+      console.log('Unsuccess at connecting to mongoose database')
+   }
+})
+
+
+
 
 //initialize app
 const app = express();

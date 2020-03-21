@@ -5,9 +5,6 @@ import axios from 'axios';
 const BuildingList = ({filterText, setBuildingSelectedId, selectedBuildingId, currentAppData, setCurrentAppData, setObjectId, building, setBuilding, objectId}) => {
     console.log(currentAppData)
 
-    currentAppData = currentAppData.sort((left, right) => {
-        return left.code.localeCompare(right.code)
-    })
     let i = 0
     for (i; i < currentAppData.length; i++) {
         currentAppData[i].id = i + 1
@@ -42,8 +39,7 @@ const BuildingList = ({filterText, setBuildingSelectedId, selectedBuildingId, cu
                 setBuilding(currentAppData[directory.id-1])
                 setObjectId(currentAppData[directory.id-1]._id)
             }}>
-                <td>{directory.code} </td>
-                <td> {directory.name} </td>
+                <td>{directory.keyterms.toString()} </td>
                 <button style = {{backgroundColor: 'red', color:"white",borderRadius: "25px"}}
                         onClick={ () =>  DeleteItem(currentAppData, setCurrentAppData,selectedBuildingId, objectId)}>
                 DELETE

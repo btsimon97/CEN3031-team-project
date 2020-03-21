@@ -15,22 +15,6 @@ const ViewBuilding = ({building, objectId, selectedBuildingId}) => {
             <div>
                 <p>
                     {' '}
-                    <i> Name: {building.name}</i>
-                    <br/>
-                    <i> Code: {building.code}</i>
-                    <br/>
-                    {
-                        !building.address || <i> Address: {building.address}</i>
-                    }
-                    <br/>
-                    {
-                        !building.coordinates || <i> longitude: {building.coordinates.longitude}</i>
-                    }
-                    <br/>
-                    {
-                        !building.coordinates || <i> latitude: {building.coordinates.latitude}</i>
-                    }
-                    <br/>
                     {
                         !building.keyterms || <i> keyterms: {building.keyterms.toString()}</i>
                     }

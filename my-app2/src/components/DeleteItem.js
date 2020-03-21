@@ -11,7 +11,10 @@ const DeleteItem = (currentAppData, setCurrentAppData, selectedBuildingId, objec
     console.log(objectId)
     // let newList = currentAppData.filter(element => element.id !== selectedBuildingId)
     // setCurrentAppData(newList)
-    axios.delete(`http://localhost:5000/api/listings/${objectId}`);
+    axios.delete(`http://localhost:5000/api/listings/${objectId}`)
+    .then(res => console.log(res.data))
+    .then(console.log("success!"));
+    
     //Fix me
  
 };

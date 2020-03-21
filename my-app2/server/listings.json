@@ -1,13 +1,19 @@
 {
     "entries": [
         {
-            "keyterms": ["Building", "alpha", "number1","findme"]
+            "keyterms": ["bone_distractor", "clamps", "distractors"]
         },
         {
-            "keyterms": ["Plant", "Pathology", "Research", "Hall", "Building"]
+            "keyterms": ["bone_chisal", "cutting_instrument"]
         },
         {
-            "keyterms": ["knife", "sharp", "shiny"]
+            "keyterms": ["knife", "sharp", "shiny","cutting_instrument"]
+        },
+        {
+            "keyterms": ["mask", "face_mask", "corana_repellent"]
+        },
+        {
+            "keyterms": ["Dissecting_knife", "cutter", "shinny","cutting_instrument"]
         }
     ]
 }
