@@ -13,6 +13,16 @@ const App = ({data}) => {
     const [objectId, setObjectId] = useState("");
     const [currentAppData, setCurrentAppData] = useState(data);
     const [building, setBuilding] = useState(data);
+    const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
+
+    const onLoginSuccess = () => {
+        setCurrentUser(httpUser.getCurrentUser());
+    };
+
+    const logOut = () => {
+        httpUser.logOut();
+        setCurrentUser(null);
+    };
 
     
     useEffect(() => {
