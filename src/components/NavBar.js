@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container'
 
 const NavBar = (props) => {
     return (
-        <Container>
+        <div>
 
             {/* Page Links */}
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -37,7 +37,7 @@ const NavBar = (props) => {
                 </Navbar.Collapse>
             </Navbar>
 
-        </Container>
+        </div>
     )
 };
 
