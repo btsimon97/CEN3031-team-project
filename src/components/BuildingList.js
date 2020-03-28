@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component, Fragment} from 'react';
 import DeleteItem from "./DeleteItem";
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap'
+import Button from 'react-bootstrap/Button'
+import Table from 'react-bootstrap/Table'
+
 
 const BuildingList = ({filterText, setBuildingSelectedId, selectedBuildingId, currentAppData, setCurrentAppData, setObjectId, building, setBuilding, objectId}) => {
-    console.log(currentAppData)
-
     let i = 0
     for (i; i < currentAppData.length; i++) {
         currentAppData[i].id = i + 1
@@ -34,17 +37,16 @@ const BuildingList = ({filterText, setBuildingSelectedId, selectedBuildingId, cu
         return true
     }).map(directory => {
         return (
-            <tr style={{fontSize: "24px", fontFamily:"New Times Roman", textAlign:"center"}} key={directory._id} onClick={() => {
+            <Fragment>
+            <tr key={directory._id} onClick={() => {
                 setBuildingSelectedId(directory.id)
                 setBuilding(currentAppData[directory.id-1])
                 setObjectId(currentAppData[directory.id-1]._id)
             }}>
                 <td>{directory.keyterms.toString()} </td>
-                <button style = {{backgroundColor: 'red', color:"white",borderRadius: "25px"}}
-                        onClick={ () =>  DeleteItem(currentAppData, setCurrentAppData,selectedBuildingId, objectId)}>
-                DELETE
-                </button>
+                <td><Button variant="danger" onClick={ () =>  DeleteItem(currentAppData, setCurrentAppData, selectedBuildingId, objectId)}>Delete!</Button></td>
             </tr>
+            </Fragment>
         );
     });
     return (

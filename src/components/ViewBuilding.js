@@ -1,24 +1,24 @@
 import React from 'react';
 
-const ViewBuilding = ({building, objectId, selectedBuildingId}) => {
+const ViewBuilding = ({building,selectedBuildingId}) => {
     if(selectedBuildingId === 0)
     {
         return (
         <div>
-            <p>
+            <vmore>
                 {' '}
-                <i>Click on a name to view more information</i>
-            </p>
+                <i>Click on a tool to view more information</i>
+            </vmore>
         </div>
     )} else {
         return (
             <div>
-                <p>
+                <more>
                     {' '}
                     {
                         !building.keyterms || <i> keyterms: {building.keyterms.toString()}</i>
                     }
-                </p>
+                </more>
             </div>
         )
     }

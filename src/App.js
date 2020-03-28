@@ -5,14 +5,17 @@ import BuildingList from './components/BuildingList';
 import Credit from './components/Credit';
 import AddBuilding from "./components/AddBuilding";
 import axios from 'axios';
+import httpUser from './httpUser'
+import Home from './components/Home';
+import NavBar from './components/NavBar';
+import LogIn from "./LogIn.js"
+import SignUp from "./SignUp"
+import LogOut from "./LogOut"
+import Dashboard from "./Dashboard.js"
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
 
-const App = ({data}) => {
-    const [filterText, setFilterText] = useState('');
-    const [selectedBuildingId, setBuildingSelectedId] = useState(0);
-    const [objectId, setObjectId] = useState("");
-    const [currentAppData, setCurrentAppData] = useState(data);
-    const [building, setBuilding] = useState(data);
+const App = () => {
     const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
 
     const onLoginSuccess = () => {
@@ -24,66 +27,34 @@ const App = ({data}) => {
         setCurrentUser(null);
     };
 
-    
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/listings/')
-            .then(response => {
-                setCurrentAppData(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, [])
-
+    //https://www.youtube.com/watch?v=Law7wfdg_ls&t=456s
 
     return (
-        <div className="bg">
-            <div className="row">
-                <h1 style={{textAlign: "center",fontFamily: "Times New Roman", fontSize: "48px"}}>UF Directory App</h1>
-            </div>
-            <Search setFilterText={setFilterText}/>
-            <main>
-                <div className="row">
-                    <div className="column1">
-                        <div className="tableWrapper">
-                            <table className="table table-striped table-hover">
-                                <tr>
-                                    <td style={{textAlign:"left", fontSize: "36px", wordSpacing:"250px", fontFamily:"New Times Roman"}}>
-                                        <b>Code Building</b>
+        
+        <Router> 
+            <div className="main">
+            <NavBar currentUser={currentUser}/>
+                <Switch> 
+                <Route path="/login" render={(props) => {
+                  return <LogIn {...props} onLoginSuccess={onLoginSuccess} Redirect to="/home"/>
+                }} />
+                <Route path="/signup" render={(props) => {
+                   return <SignUp {...props} onSignUpSuccess={onLoginSuccess} />
+                }} />
+                 <Route path="/logout" render={(props) => {
+                  return <LogOut onLogOut={logOut} />
+                }}/>
+                <Route path="/dashboard" render={() => {
+                 return currentUser ? <Dashboard /> : <Redirect to="/login" />
+                }}/>
+                    <Route path="/add" exact component={AddBuilding} />
+                    <Route path="/" exact component={Home} />
+                    <Route path="/home" exact component={Home} />
+                    <Route path="/login" exact component={LogIn}/>
 
-                                    </td>
-
-                                </tr>
-                                <BuildingList data={data}
-                                              filterText={filterText}
-                                              setBuildingSelectedId={setBuildingSelectedId}
-                                              selectedBuildingId={selectedBuildingId}
-                                              setCurrentAppData = {setCurrentAppData}
-                                              currentAppData = {currentAppData}
-                                              setObjectId = {setObjectId}
-                                              objectId = {objectId}
-                                              setBuilding = {setBuilding}/>
-                            </table>
-                        </div>
-                    </div>
-                    <div className="column2">
-                        {!selectedBuildingId ? (<ViewBuilding selectedBuildingId={0} />)
-                            : (<ViewBuilding building={building} objectId = {objectId}/>)
-                        }
-
-
-                    </div>
-                    <div>
-                        <p style = {{fontAlign: "center", position:"absolute", right:"0", top:"200px"}}>
-                            <AddBuilding setCurrentAppData = {setCurrentAppData}
-                                         currentAppData = {currentAppData}
-                                         selectedBuildingId = {selectedBuildingId}/>
-                        </p>
-                    </div>
-                </div>
-                <Credit/>
-            </main>
-        </div>
+                </Switch>
+            </div>            
+        </Router>
     );
 };
 

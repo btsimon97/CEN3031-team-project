@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Row from 'react-bootstrap/Row'
+import Form from 'react-bootstrap/Form'
 const Search = ({setFilterText}) => {
     // const filterUpdate = (event) => {
     //     //Here you will need to update the value of the filter with the value from the textbox
@@ -9,6 +10,7 @@ const Search = ({setFilterText}) => {
     //You will need the onChange value for the input tag to capture the textbox value
 
     return (
+        <Row>
         <form>
             <input
                 type="text" placeholder="Type to Filter"
@@ -16,6 +18,7 @@ const Search = ({setFilterText}) => {
                        setFilterText(event.target.value)
                    }}/>
         </form>
+        </Row>
     );
 
 };
