@@ -2,6 +2,9 @@ import React, {useState} from 'react'
 import httpUser from './httpUser'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 
 const LogIn = (props) => {
     const [fields, setFields] = useState({email: "", password: ""});
@@ -26,13 +29,19 @@ const LogIn = (props) => {
     };
 
     return(
-        <div>
-            <h1>Log In Page</h1>
-            <form onChange={onInputChange} onSubmit={onFormSubmit}>
-                <input type="text" placeholder="Email" name="email" value={fields.email} />
-                <input type="password" placeholder="Password" name="password" value={fields.password} />
-                <button>Log In</button>
-            </form>
+        <div className="row">
+            <h1>Log In</h1>
+            <Form onChange={onInputChange} onSubmit={onFormSubmit}>
+            <Form.Group controlId="formbasicEmail">
+                <Form.Label>Email Address</Form.label>
+                <Form.Control type="email" placeholder="email@example.com" value={fields.email} />
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" value={fields.password} />
+            </Form.Group>
+            <Button variant="primary" type="submit>Login</Button
+            </Form>
         </div>
     )
 };
