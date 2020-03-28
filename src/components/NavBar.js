@@ -19,13 +19,13 @@ const NavBar = (props) => {
                         <LinkContainer to='/add'><Nav.Link href="#">Add</Nav.Link></LinkContainer>
                         {props.currentUser ?
                         (
-                            <NavDropdown title="Account" id="basic-nav-dropdown">
+                            <NavDropdown title="Account" id="basic-nav-dropdown" bg="dark" variant="dark">
                             <LinkContainer to='/dashboard'><NavDropdown.Item href="#">Profile</NavDropdown.Item></LinkContainer>
                             <LinkContainer to='/logout'><NavDropdown.Item href="#">Logout</NavDropdown.Item></LinkContainer>
                             </NavDropdown>
                         ) :
                         ( 
-                            <NavDropdown title="Login/Register" id="basic-nav-dropdown">
+                            <NavDropdown title="Login/Register" id="basic-nav-dropdown" bg="dark" variant="dark">
                             <LinkContainer to='/login'><NavDropdown.Item href="#">Login</NavDropdown.Item></LinkContainer>
                             <LinkContainer to='/signup'><NavDropdown.Item href="#">Sign-Up</NavDropdown.Item></LinkContainer>
                             </NavDropdown>
