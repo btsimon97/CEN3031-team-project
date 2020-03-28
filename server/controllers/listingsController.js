@@ -35,7 +35,8 @@ export const create = async (req, res) => {
     }
     // Create a instrument model
     const newInstrument = new InstrumentModel({
-        keyterms : req.keyterms
+        keyterms : req.keyterms,
+        img: { data: Buffer, contentType: String}
     });
 
     // Save Note in the database
@@ -89,7 +90,8 @@ export const update = (req, res) => {
     /* Replace the listings's properties with the new properties found in req.body */
 
     InstrumentModel.findByIdAndUpdate(req.params.listingId, {
-        keyterms: req.keyterms
+        keyterms: req.keyterms,
+        img: req.img
     }, {new: true})
     .then(instrument => {
         if(!instrument) {

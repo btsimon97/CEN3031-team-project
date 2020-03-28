@@ -6,14 +6,19 @@ import bodyParser from 'body-parser';
 import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
+// import {BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
+import fs from 'fs'
+
+import multer from 'multer'
+
 
 //connect to database
 mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
    if(!error)
    {
       console.log(`Successfully connected to mongoose database.`)
-   } else {
-      console.log('Unsuccess at connecting to mongoose database')
+   } else {     
+      console.log('Failed to connect to mongoose database')
    }
 })
 
@@ -27,6 +32,26 @@ app.use(cors())
 
 //enable request logging for development debugging
 app.use(morgan('dev'));
+
+
+// const upload = multer({ storage: storage });
+	
+//https://medium.com/@colinrlly/send-store-and-show-images-with-react-express-and-mongodb-592bc38a9ed
+
+// const storage = multer.diskStorage({
+//    destination: function (req, res, cb) {
+//        cb(null, 'uploads/')
+//    }
+// });
+
+// Router.route('/img_data')
+// .post(upload.single('file'), function(req, res) {
+//     var new_img = new img;
+//     new_img.img.data = fs.readFileSync(req.file.path)
+//     new_img.img.contentType = 'image/jpeg';
+//     new_img.save();
+//     res.json({ message: 'New image added to the db!' });
+// })
 
 //body parsing middleware
 app.use(bodyParser.urlencoded({

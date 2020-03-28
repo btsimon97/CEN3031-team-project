@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 const instrumentSchema = new mongoose.Schema({
   /* Your code for a schema here */
   //Check out - https://mongoosejs.com/docs/guide.html
+  img: {data: Buffer, contentType: String}, // TODO: Add required tag
   keyterms: {type: Array, required: true}
 });
 

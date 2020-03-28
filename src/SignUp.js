@@ -3,6 +3,8 @@ import httpUser from './httpUser'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
 const SignUp = (props) => {
     const [fields, setFields] = useState({name: '', email: "", password: ""});
@@ -27,8 +29,8 @@ const SignUp = (props) => {
 
     return(
         <Fragment>
-            <div className="row justify-content-center">
-                <div className="col-5">
+            <Row className="justify-content-center">
+                <Col className="col-5">
                     <h1>Sign Up</h1>
                     <Form onChange={onInputChange} onSubmit={onFormSubmit}>
                         <Form.Group controlId="">
@@ -45,8 +47,8 @@ const SignUp = (props) => {
                         </Form.Group>
                         <Button variant="primary" type="submit">Register</Button>
                     </Form>
-                </div>
-            </div>
+                </Col>
+            </Row>
         </Fragment>
     )
 };

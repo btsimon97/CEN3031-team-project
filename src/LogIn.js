@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
 
 const LogIn = (props) => {
@@ -30,22 +32,22 @@ const LogIn = (props) => {
 
     return(
         <Fragment>
-        <div className="row justify-content-center">
-            <div className="col-5">
-            <h1>Log In</h1>
-            <Form onChange={onInputChange} onSubmit={onFormSubmit}>
-            <Form.Group controlId="formbasicEmail">
-                <Form.Label>Email Address</Form.Label>
-                <Form.Control type="email" placeholder="email@example.com" value={fields.email} />
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" value={fields.password} />
-            </Form.Group>
-            <Button variant="primary" type="submit">Login</Button>
-            </Form>
-            </div>
-        </div>
+        <Row className="justify-content-center">
+            <Col className="col-5">
+                <h1>Log In</h1>
+                <Form onChange={onInputChange} onSubmit={onFormSubmit}>
+                <Form.Group controlId="formbasicEmail">
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control type="email" placeholder="email@example.com" value={fields.email} />
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" value={fields.password} />
+                </Form.Group>
+                <Button variant="primary" type="submit">Login</Button>
+                </Form>
+            </Col>
+        </Row>
         </Fragment>
     )
 };

@@ -1,7 +1,7 @@
 {
     "entries": [
         {
-            "keyterms": ["bone_distractor", "clamps", "distractors"]
+            "keyterms": [ "bone_distractor", "clamps", "distractors" ]
         },
         {
             "keyterms": ["bone_chisel", "cutting_instrument"]
@@ -10,7 +10,7 @@
             "keyterms": ["knife", "sharp", "shiny","cutting_instrument"]
         },
         {
-            "keyterms": ["mask", "face_mask", "corona_repellent"]
+            "keyterms": ["mask", "face_mask", "corana_repellent"]
         },
         {
             "keyterms": ["Dissecting_knife", "cutter", "shinny","cutting_instrument"]
