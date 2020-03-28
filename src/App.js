@@ -15,6 +15,8 @@ import Dashboard from "./Dashboard.js"
 import NotFound from "./NotFound"
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
+import Container from 'react-bootstrap/Container'
+
 const App = () => {
     const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
 
@@ -35,7 +37,7 @@ const App = () => {
             
             <NavBar currentUser={currentUser}/>
             <body>
-            <div className="container-fluid">
+            <Container fluid>
                 <Switch> 
                 <Route path="/login" render={(props) => {
                   return <LogIn {...props} onLoginSuccess={onLoginSuccess} Redirect to="/home"/>
@@ -55,7 +57,7 @@ const App = () => {
                     <Route path="/login" exact component={LogIn} />
                     <Route path= "*" component={NotFound}/>
                 </Switch>
-            </div>
+            </Container>
             </body>            
         </Router>
     );

@@ -3,6 +3,8 @@ import axios from "axios";
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
   const [keyterms, setKeyterms] = useState([]);
@@ -40,8 +42,8 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
 
   return (
     <Fragment>
-      <div className="row justify-content-center">
-        <div className="col-5">
+      <Row className="justify-content-center">
+        <Col className="col-5">
           <h1>Add New Instrument</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
@@ -51,8 +53,8 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
             </Form.Group>
             <Button variant="primary" type="submit">Add Instrument</Button>
           </Form>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </Fragment>
   );
 };
