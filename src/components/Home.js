@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component, Fragment} from 'react';
 import Search from './Search';
 import ViewBuilding from './ViewBuilding';
 import BuildingList from './BuildingList';
@@ -11,6 +11,8 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 const Home = () => {
     const [filterText, setFilterText] = useState('');
@@ -33,36 +35,33 @@ const Home = () => {
 
 
     return (
-        <Container>
-
-            <Search setFilterText={setFilterText}/>
-            <main>
-                <Row>
-                    <Col>
-                        <h2>Medical Device List</h2>
-                        <h3>Search Results</h3>
-                        <Table bordered hover striped responsive>
-                            <tbody>
-                                <BuildingList filterText={filterText}
-                                                setBuildingSelectedId={setBuildingSelectedId}
-                                                selectedBuildingId={selectedBuildingId}
-                                                setCurrentAppData = {setCurrentAppData}
-                                                currentAppData = {currentAppData}
-                                                setObjectId = {setObjectId}
-                                                objectId = {objectId}
-                                                setBuilding = {setBuilding}/>
-                            </tbody>
-                        </Table>
-                    </Col>
-                    <Col>
-                        {!selectedBuildingId ? (<ViewBuilding selectedBuildingId={0} />)
-                            : (<ViewBuilding building={building} />)
-                        }
-                    </Col>
-                </Row>
-                <Credit/>
-            </main>
-        </Container>
+        <Fragment>
+            <Row>
+                <Search setFilterText={setFilterText}/>
+            </Row>
+            <Row>
+                <Col>
+                    <h2>Medical Device List</h2>
+                    <Table bordered hover striped responsive>
+                        <tbody>
+                            <BuildingList filterText={filterText}
+                                            setBuildingSelectedId={setBuildingSelectedId}
+                                            selectedBuildingId={selectedBuildingId}
+                                            setCurrentAppData = {setCurrentAppData}
+                                            currentAppData = {currentAppData}
+                                            setObjectId = {setObjectId}
+                                            objectId = {objectId}
+                                            setBuilding = {setBuilding}/>
+                        </tbody>
+                    </Table>
+                </Col>
+                <Col>
+                    {!selectedBuildingId ? (<ViewBuilding selectedBuildingId={0} />)
+                        : (<ViewBuilding building={building} />)
+                    }
+                </Col>
+            </Row>
+        </Fragment>
     );
 };
 
