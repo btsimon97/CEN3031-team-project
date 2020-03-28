@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component, Fragment} from 'react';
 import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 const Search = ({setFilterText}) => {
@@ -10,15 +10,16 @@ const Search = ({setFilterText}) => {
     //You will need the onChange value for the input tag to capture the textbox value
 
     return (
-        <Row>
-        <form>
-            <input
-                type="text" placeholder="Type to Filter"
-                   onChange={(event) => {
+        <Fragment>
+            <Form>
+                <Form.Group>
+                    <Form.Label>Search Term(s)</Form.Label>
+                    <Form.Control type="text" placeholder="Enter search terms" onChange={(event) => {
                        setFilterText(event.target.value)
                    }}/>
-        </form>
-        </Row>
+                </Form.Group>
+            </Form>
+        </Fragment>
     );
 
 };
