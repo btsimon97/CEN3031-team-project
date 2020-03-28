@@ -49,7 +49,7 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
               <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
               <Form.Text className="text-muted">Enter the keywords you want to use to find this instrument. Separate your keywords with a comma if using multiple keywords.</Form.Text>
             </Form.Group>
-            <Buton variant="primary" type="submit">Add Instrument</Buton>
+            <Button variant="primary" type="submit">Add Instrument</Button>
           </Form>
         </div>
       </div>
