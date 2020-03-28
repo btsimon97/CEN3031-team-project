@@ -29,7 +29,7 @@ const SignUp = (props) => {
         <Fragment>
             <div className="row justify-content-center">
                 <div className="col-5">
-                    <h1>Sign Up Page</h1>
+                    <h1>Sign Up</h1>
                     <Form onChange={onInputChange} onSubmit={onFormSubmit}>
                         <Form.Group controlId="">
                             <Form.Label>Name</Form.Label>
