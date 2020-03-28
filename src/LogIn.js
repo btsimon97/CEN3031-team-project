@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, Component, Fragment} from 'react'
 import httpUser from './httpUser'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
@@ -29,8 +29,11 @@ const LogIn = (props) => {
     };
 
     return(
+        <Fragment>
         <div className="row">
             <h1>Log In</h1>
+        </div>
+        <div className="row">
             <Form onChange={onInputChange} onSubmit={onFormSubmit}>
             <Form.Group controlId="formbasicEmail">
                 <Form.Label>Email Address</Form.Label>
@@ -43,6 +46,7 @@ const LogIn = (props) => {
             <Button variant="primary" type="submit">Login</Button>
             </Form>
         </div>
+        </Fragment>
     )
 };
 
