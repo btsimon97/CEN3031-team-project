@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component, Fragment} from "react";
 import axios from "axios";
+
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
   const [keyterms, setKeyterms] = useState([]);
@@ -36,25 +39,21 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
   };
 
   return (
-    <div class="col">
-      <form
-        onSubmit={handleSubmit}
-      >
-        <div class="form-group">
-         <h2>Add New Instrument</h2>
-        <input class="form-control" 
-        type="text"
-        placeholder={"Enter individual keyterms separated by commas"}
-        keyterms={keyterms}
-        onChange={event => setKeyterms(event.target.value)}
-        />
-        <input class="form-control"
-          type="submit"
-          value="Submit"
-        />
+    <Fragment>
+      <div className="row justify-content-center">
+        <div className="col-5">
+          <h1>Add New Instrument</h1>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>Instrument Keywords</Form.Label>
+              <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
+              <Form.Text className="text-muted">Enter the keywords you want to use to find this instrument. Separate your keywords with a comma if using multiple keywords.</Form.Text>
+            </Form.Group>
+            <Buton variant="primary" type="submit">Add Instrument</Buton>
+          </Form>
         </div>
-      </form>
-    </div>
+      </div>
+    </Fragment>
   );
 };
 export default AddBuilding;
