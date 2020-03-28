@@ -32,8 +32,10 @@ const App = () => {
     return (
         
         <Router> 
-            <div className="main">
+            
             <NavBar currentUser={currentUser}/>
+            <body>
+            <div className="container-fluid">
                 <Switch> 
                 <Route path="/login" render={(props) => {
                   return <LogIn {...props} onLoginSuccess={onLoginSuccess} Redirect to="/home"/>
@@ -53,7 +55,8 @@ const App = () => {
                     <Route path="/login" exact component={LogIn}/>
 
                 </Switch>
-            </div>            
+            </div>
+            </body>            
         </Router>
     );
 };
