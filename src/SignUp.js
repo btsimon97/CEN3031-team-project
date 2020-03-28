@@ -1,5 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, Component, Fragment} from 'react'
 import httpUser from './httpUser'
+
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 const SignUp = (props) => {
     const [fields, setFields] = useState({name: '', email: "", password: ""});
@@ -23,15 +26,28 @@ const SignUp = (props) => {
     };
 
     return(
-        <div>
-            <h1>Sign Up Page</h1>
-            <form onChange={onInputChange} onSubmit={onFormSubmit}>
-                <input type="text" placeholder="Name" name="name" value={fields.name} />
-                <input type="text" placeholder="Email" name="email" value={fields.email} />
-                <input type="password" placeholder="Password" name="password" value={fields.password} />
-                <button>Sign Up</button>
-            </form>
-        </div>
+        <Fragment>
+            <div className="row justify-content-center">
+                <div className="col-5">
+                    <h1>Sign Up Page</h1>
+                    <Form onChange={onInputChange} onSubmit={onFormSubmit}>
+                        <Form.Group controlId="">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Alex Smith" value={fields.name} />
+                        </Form.Group>
+                        <Form.Group controlId="formbasicEmail">
+                            <Form.Label>Email Address</Form.Label>
+                            <Form.Control type="email" placeholder="email@example.com" value={fields.email} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" value={fields.password} />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">Register</Button>
+                    </Form>
+                </div>
+            </div>
+        </Fragment>
     )
 };
 
