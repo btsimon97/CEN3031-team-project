@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "engines": {
-    "node": "13.12.x"
+    "node": "13.x"
   },
   "private": true,
   "dependencies": {
