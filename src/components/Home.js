@@ -36,8 +36,10 @@ const Home = () => {
 
     return (
         <Fragment>
-            <Row>
-                <Search setFilterText={setFilterText}/>
+            <Row className="justify-content-center">
+                <Col>
+                    <Search setFilterText={setFilterText}/>
+                </Col>
             </Row>
             <Row>
                 <Col>
