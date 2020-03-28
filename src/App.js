@@ -12,8 +12,8 @@ import LogIn from "./LogIn.js"
 import SignUp from "./SignUp"
 import LogOut from "./LogOut"
 import Dashboard from "./Dashboard.js"
+import NotFound from "./NotFound"
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
-
 
 const App = () => {
     const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
@@ -52,8 +52,8 @@ const App = () => {
                     <Route path="/add" exact component={AddBuilding} />
                     <Route path="/" exact component={Home} />
                     <Route path="/home" exact component={Home} />
-                    <Route path="/login" exact component={LogIn}/>
-
+                    <Route path="/login" exact component={LogIn} />
+                    <Route path= "*" component={NotFound}/>
                 </Switch>
             </div>
             </body>            
