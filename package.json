@@ -32,7 +32,7 @@
   "scripts": {
     "server": "nodemon server/server.js",
     "client": "react-scripts start",
-    "fill" : "cd server && node ./JSONToMongo.js",
+    "fill" : "cd server && node JSONToMongo.js && cd ..",
     "start": "concurrently \"npm run server\" \"npm run client\" \"npm run fill\"",
     "deploy" : "concurrently \"npm run server\" \"npm run client\" \"npm run fill\" ",
     "build": "react-scripts build",
