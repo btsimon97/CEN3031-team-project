@@ -33,7 +33,7 @@ connection.once('open', () => {
  */
 let listingData;
 
-fs.readFile('listings.json', 'utf8', (err, data) => {
+fs.readFile('./listings.json', 'utf8', (err, data) => {
   if (err) throw err
   listingData  = JSON.parse(data);
   listingData.entries.forEach(element => {

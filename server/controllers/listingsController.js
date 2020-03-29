@@ -123,10 +123,10 @@ export const remove = (req, res) => {
     /* If the listing could _not_ be found, be sure to send back a response in the following format: {error: 'Some message that indicates an error'} */
     if(!req.body) {
         return res.status(400).send({
-            message: "Note content can not be empty"
+            message: "Instrument content can not be empty"
         });
     }
-    console.log(req.params)
+    console.log(req.params.listingId)
     InstrumentModel.findByIdAndRemove(req.params.listingId)
     .then(instrument => {
         if(!instrument) {

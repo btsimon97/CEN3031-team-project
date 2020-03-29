@@ -21,9 +21,8 @@ const Home = () => {
     const [objectId, setObjectId] = useState("");
     const [building, setBuilding] = useState();
     
-
-    
     useEffect(() => {
+        console.log()
         axios.get('http://localhost:5000/api/listings/')
             .then(response => {
                 setCurrentAppData(response.data)
@@ -53,7 +52,9 @@ const Home = () => {
                                             currentAppData = {currentAppData}
                                             setObjectId = {setObjectId}
                                             objectId = {objectId}
-                                            setBuilding = {setBuilding}/>
+                                            setBuilding = {setBuilding}
+                                            building = {building}
+                                            selectedBuildingId = {selectedBuildingId}/>
                         </tbody>
                     </Table>
                 </Col>

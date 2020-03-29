@@ -77,7 +77,7 @@ app.use('/api/listings/', listingsRouter);
    Sends a response (res) to go to the homepage for all routes not specified */
 app.all('/*', (req, res) => {
 
-    /*Add YOUR CODE HERE
+    /*Add YOUR CODE HEREw
        see https://expressjs.com/en/api.html#res.sendFile
        see https://nodejs.org/api/path.html
        The path.resolve() method returns a string and resolves a sequence of paths or path segments into an absolute path.

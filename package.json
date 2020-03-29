@@ -32,7 +32,9 @@
   "scripts": {
     "server": "nodemon server/server.js",
     "client": "react-scripts start",
+    "fill" : "cd server && node ./JSONToMongo.js",
     "start": "concurrently \"npm run server\" \"npm run client\"",
+    "deploy" : "concurrently \"npm run server\" \"npm run client\" \"npm run fill\" ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -51,5 +53,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy":"http://localhost:5000"
 }
