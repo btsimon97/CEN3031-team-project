@@ -1,7 +1,8 @@
 import React from 'react';
 
-const ViewBuilding = ({building,selectedBuildingId}) => {
-    if(selectedBuildingId === 0)
+const ViewInstrument = ({instrument}) => {
+    console.log(instrument)
+    if(!instrument)
     {
         return (
         <div>
@@ -16,7 +17,7 @@ const ViewBuilding = ({building,selectedBuildingId}) => {
                 <more>
                     {' '}
                     {
-                        !building.keyterms || <i> keyterms: {building.keyterms.toString()}</i>
+                        !instrument.keyterms || <i> keyterms: {instrument.keyterms.toString()}</i>
                     }
                 </more>
             </div>
@@ -24,4 +25,4 @@ const ViewBuilding = ({building,selectedBuildingId}) => {
     }
 
 };
-export default ViewBuilding;
+export default ViewInstrument;

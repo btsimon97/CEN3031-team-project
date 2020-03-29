@@ -6,20 +6,8 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
+const AddInstrument = ({currentAppData,setCurrentAppData}) => {
   const [keyterms, setKeyterms] = useState([]);
-
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/listings/")
-      .then(response => {
-        setCurrentAppData(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
 
   const handleSubmit = event => {
     let keytermsArr = keyterms.split(",")
@@ -36,7 +24,7 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
       .post("http://localhost:5000/api/listings/", newInstrument)
       .then(res => console.log(currentAppData))
       .then(console.log("success!"));
-    console.log("Added!");
+      console.log("Added!");
 
   };
 
@@ -58,4 +46,4 @@ const AddBuilding = ({ currentAppData, setCurrentAppData }) => {
     </Fragment>
   );
 };
-export default AddBuilding;
+export default AddInstrument;

@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Component, Fragment} from 'react';
 import Search from './Search';
-import ViewBuilding from './ViewBuilding';
-import BuildingList from './BuildingList';
+import ViewInstrument from './ViewInstrument';
+import InstrumentList from './InstrumentList';
 import Credit from './Credit';
 import axios from 'axios';
 import httpUser from './../httpUser'
@@ -14,25 +14,21 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const Home = () => {
+const Home = ({currentAppData,setCurrentAppData}) => {
     const [filterText, setFilterText] = useState('');
-    const [selectedBuildingId, setBuildingSelectedId] = useState(0);
-    const [currentAppData, setCurrentAppData] = useState([]);
-    const [objectId, setObjectId] = useState("");
-    const [building, setBuilding] = useState();
+    const [instrument, setInstrument] = useState();
+
+    useEffect(async () => {
+        console.log("List componented updated or mounted");
+        const result = await axios.get('http://localhost:5000/api/listings/')
+        console.log(result.data)
+        setCurrentAppData(result.data)
+        let i = 0;
+        for (i; i < currentAppData.length; i++) {
+        currentAppData[i].id = currentAppData[i]._id;
+        }
+    },[])
     
-    useEffect(() => {
-        console.log()
-        axios.get('http://localhost:5000/api/listings/')
-            .then(response => {
-                setCurrentAppData(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, [])
-
-
     return (
         <Fragment>
             <Row className="justify-content-center">
@@ -45,22 +41,16 @@ const Home = () => {
                     <h2>Medical Device List</h2>
                     <Table bordered hover striped responsive>
                         <tbody>
-                            <BuildingList filterText={filterText}
-                                            setBuildingSelectedId={setBuildingSelectedId}
-                                            selectedBuildingId={selectedBuildingId}
+                            <InstrumentList filterText={filterText}
                                             setCurrentAppData = {setCurrentAppData}
                                             currentAppData = {currentAppData}
-                                            setObjectId = {setObjectId}
-                                            objectId = {objectId}
-                                            setBuilding = {setBuilding}
-                                            building = {building}
-                                            selectedBuildingId = {selectedBuildingId}/>
+                                            setInstrument = {setInstrument}/>
                         </tbody>
                     </Table>
                 </Col>
                 <Col>
-                    {!selectedBuildingId ? (<ViewBuilding selectedBuildingId={0} />)
-                        : (<ViewBuilding building={building} />)
+                    {
+                        <ViewInstrument instrument={instrument} />
                     }
                 </Col>
             </Row>

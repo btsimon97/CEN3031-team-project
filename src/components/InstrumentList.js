@@ -5,23 +5,28 @@ import { LinkContainer } from "react-router-bootstrap";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
-const BuildingList = ({filterText,currentAppData,setCurrentAppData,setObjectId,setBuilding,objectId}) => {
+const InstrumentList = ({filterText, currentAppData, setCurrentAppData, setInstrument}) => {
+    const [objectId, setObjectId] = useState(0);
 
-  const handleDelete = async id => {
-    setObjectId(id);
-    console.log(id);
-    let res = await axios
-      .delete(`http://localhost:5000/api/listings/${id}`)
-      .then(res => console.log(res.data))
-      .then(console.log("Delete successful!"));
+    useEffect(async () => {
+        console.log("List componented updated or mounted");
+        const result = await axios.get('http://localhost:5000/api/listings/')
+        console.log(result.data)
+        setCurrentAppData(result.data)
+        let i = 0;
+        for (i; i < currentAppData.length; i++) {
+        currentAppData[i].id = currentAppData[i]._id;
+        }
+    },[])
+
+  const handleDelete = async (id) => {
+    setObjectId(0);
+    let res = await axios.delete(`http://localhost:5000/api/listings/${id}`)
+    const result = await axios.get('http://localhost:5000/api/listings/')
+    setCurrentAppData(result.data)
   };
 
-  let i = 0;
-  for (i; i < currentAppData.length; i++) {
-    currentAppData[i].id = i + 1;
-  }
-  const buildingList = currentAppData
-    .filter(building => {
+  const instrumentList = currentAppData.filter(building => {
       if (filterText.trim() !== "") {
         let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
         let searchText = filterText.split(",");
@@ -55,20 +60,21 @@ const BuildingList = ({filterText,currentAppData,setCurrentAppData,setObjectId,s
       }
       return true;
     })
-    .map(instrument => {
+    .map(item => {
       return (
         <Fragment>
           <tr
-            key={instrument._id}
+            key={item._id}
             onClick={() => {
-              setObjectId(instrument._id);
+                setInstrument(currentAppData.find(x => x._id === item._id))
+                setObjectId(item._id)
             }}
           >
-            <td>{instrument.keyterms.toString()}</td>
-            <td key={instrument._id}>
+            <td>{item.keyterms.toString()}</td>
+            <td key={item._id}>
               <Button
                 variant="danger"
-                onClick={() => handleDelete(instrument._id)}
+                onClick={() => handleDelete(item._id)}
               >
                 Delete!
               </Button>
@@ -77,6 +83,6 @@ const BuildingList = ({filterText,currentAppData,setCurrentAppData,setObjectId,s
         </Fragment>
       );
     });
-  return <div>{buildingList}</div>;
+  return <div>{instrumentList}</div>;
 };
-export default BuildingList;
+export default InstrumentList;

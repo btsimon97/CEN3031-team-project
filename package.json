@@ -33,7 +33,7 @@
     "server": "nodemon server/server.js",
     "client": "react-scripts start",
     "fill" : "cd server && node JSONToMongo.js && cd ..",
-    "start": "concurrently \"npm run server\" \"npm run client\" \"npm run fill\"",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
     "deploy" : "concurrently \"npm run server\" \"npm run client\" \"npm run fill\" ",
     "heroku-postbuild": "cd server && node JSONToMongo.js && npm run build",
     "build": "react-scripts build",
@@ -55,4 +55,6 @@
       "last 1 safari version"
     ]
   }
+  ,
+  "proxy": "http://localhost:5000"
 }
