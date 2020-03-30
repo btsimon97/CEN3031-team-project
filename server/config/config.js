@@ -4,6 +4,6 @@
 
 export default {
   db: {
-    uri: 'mongodb+srv://antonioantonian:o6EExUlZ2v2dls29@mycluster-zcyok.mongodb.net/test?authSource=admin&replicaSet=myCluster-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'//place the URI of your mongo database here.
+    uri: 'mongodb://antonioantonian:P%40%24%242%40%40%40@ds061365.mlab.com:61365/heroku_dvz8qppf'//place the URI of your mongo database here.
   },
 };
