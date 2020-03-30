@@ -5,5 +5,5 @@
 export default {
   db: {
     uri: 'mongodb+srv://antonioantonian:o6EExUlZ2v2dls29@mycluster-zcyok.mongodb.net/test?authSource=admin&replicaSet=myCluster-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'//place the URI of your mongo database here.
-  }
+  },
 };
