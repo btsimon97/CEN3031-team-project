@@ -58,7 +58,6 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
               <Form.Control
                 type="text"
                 placeholder="scalpel,single-use"
-                onSubmit={handleSubmit}
               ></Form.Control>
               <Form.Text className="text-muted">
                 Enter the keywords you want to use to find this instrument.
