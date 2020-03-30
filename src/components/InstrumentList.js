@@ -8,16 +8,20 @@ import Table from "react-bootstrap/Table";
 const InstrumentList = ({filterText, currentAppData, setCurrentAppData, setInstrument}) => {
     const [objectId, setObjectId] = useState(0);
 
-    useEffect(async () => {
-        console.log("List componented updated or mounted");
+    useEffect(() => {
+      async function fetchData() {
+        console.log("fetching")
         const result = await axios.get('http://localhost:5000/api/listings/')
-        console.log(result.data)
         setCurrentAppData(result.data)
         let i = 0;
         for (i; i < currentAppData.length; i++) {
         currentAppData[i].id = currentAppData[i]._id;
         }
+      }
+      fetchData();
     },[])
+
+
 
   const handleDelete = async (id) => {
     setObjectId(0);
