@@ -35,7 +35,7 @@
     "fill": "cd server && node JSONToMongo.js && cd ..",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "concurrently \"npm run server\" \"npm run client\" \"npm run fill\" ",
-    "heroku-postbuild": "npm run build && npm start",
+    "heroku-postbuild": "npm start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
