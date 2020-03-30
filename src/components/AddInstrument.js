@@ -17,17 +17,29 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
       }
   },[])
 
+  const handleChange = (e) =>{
+    e.preventDefault();
+    setKeyterms(e.target.value.split(','));
+    console.log(keyterms);
+  }
 
+  /* const addToMongo = async(entry) =>{
+    let res = await axios.post("https://cen3031-team-project.herokuapp.com/api/listings/", entry)
+    const result = await axios.get('http://localhost:5000/api/listings/')
+    setCurrentAppData(result.data)
+  } */
 
   const handleSubmit = (event) => {
-    console.log(event.target.value)
+    console.log(keyterms);
     event.preventDefault();
-    let keytermsArr = keyterms.split(",");
-    setKeyterms(keytermsArr);
-    let newInstrument;
+    /* let keytermsArr = keyterms.split(",");
+    setKeyterms(keytermsArr);*/
+    let newInstrument; 
     newInstrument = {
-      keyterms: keytermsArr
+      keyterms: keyterms
     };
+    //addToMongo(newInstrument);
+    console.log(currentAppData)
     axios
       .post("https://cen3031-team-project.herokuapp.com/api/listings/", newInstrument)
       .then(res => console.log(currentAppData))
@@ -40,7 +52,7 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
       <Row className="justify-content-center">
         <Col className="col-5">
           <h1>Add New Instrument</h1>
-          <Form >
+          <Form onSubmit = {(event) =>{handleSubmit(event)}} onChange = {(e) =>{handleChange(e)}}>
             <Form.Group>
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control

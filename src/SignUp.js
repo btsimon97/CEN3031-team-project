@@ -18,16 +18,16 @@ const SignUp = (props) => {
 
     // used to submit user values for password and email
     const onFormSubmit = async (e) => {
-        console.log("Submitted")
-        console.log(this.input.value)
         e.preventDefault();
         const user = await httpUser.signUp(fields);
 
-        setFields({name: '', email: '', password: ''} );
+        //setFields({name: '', email: '', password: ''} );
+        console.log('success')
         if(user) {
             props.onSignUpSuccess(user);
             props.history.push('/');
-        }
+        } 
+        //console.log(fields)
     };
 
     return(
@@ -35,7 +35,7 @@ const SignUp = (props) => {
             <Row className="justify-content-center">
                 <Col className="col-5">
                     <h1>Sign Up</h1>
-                    <Form onChange={(e) =>{onInputChange(e)}} onSubmit={(e) =>{onFormSubmit(e)}}>
+                    <Form onChange={(e) =>{onInputChange(e)}} onSubmit={onFormSubmit}>
                         <Form.Group controlId="">
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="text" placeholder="Alex Smith" name ="name" />
