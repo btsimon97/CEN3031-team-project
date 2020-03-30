@@ -4,7 +4,6 @@
 
 export default {
   db: {
-    uri: 'mongodb+srv://ryanfjh:ryan99fjh@cen3031-spring-2020-btguz.mongodb.net/test?retryWrites=true&w=majority'//place the URI of your mongo database here.
-  }, 
-  port: 5000
+    uri: 'mongodb+srv://antonioantonian:o6EExUlZ2v2dls29@mycluster-zcyok.mongodb.net/test?authSource=admin&replicaSet=myCluster-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'//place the URI of your mongo database here.
+  }
 };
