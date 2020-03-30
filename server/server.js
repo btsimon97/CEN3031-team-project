@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
+import mongodb from 'mongodb'
 // import {BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
 import fs from 'fs'
 
@@ -14,7 +15,13 @@ import multer from 'multer'
 
 //connect to database
 // process.env.MONGODB_URI || 
-mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
+
+
+var MongoClient = mongodb.MongoClient;
+
+var url = process.env.MONGOLAB_URI;
+
+mongoose.connect(url, {useNewUrlParser: true}, (error) => {
    if(!error)
    {
       console.log(`Successfully connected to mongoose database.`)
@@ -30,7 +37,7 @@ mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// app.use(cors())
+app.use(cors())
 
 //enable request logging for development debugging
 app.use(morgan('dev'));
@@ -84,7 +91,7 @@ if(process.env.NODE_ENV === 'production')
    })
 }
 
-// app.use('/', express.static('./../../client'));
+app.use('/', express.static('./../../client'));
 
 app.use('/api/listings/', listingsRouter);
 
