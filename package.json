@@ -36,7 +36,6 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "concurrently \"npm run server\" \"npm run client\" \"npm run fill\" ",
     "heroku-postbuild": "npm install && npm run build && npm run server",
-    // "build": "npm st", 
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
