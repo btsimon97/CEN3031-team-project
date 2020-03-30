@@ -21,7 +21,8 @@ var MongoClient = mongodb.MongoClient;
 
 var url = process.env.MONGOLAB_URI;
 
-mongoose.connect(url, {useNewUrlParser: true}, (error) => {
+mongoose.connect(process.env.MONGOLAB_URI, 
+   {useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
    if(!error)
    {
       console.log(`Successfully connected to mongoose database.`)
