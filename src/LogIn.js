@@ -38,11 +38,11 @@ const LogIn = (props) => {
                 <Form onChange={onInputChange} onSubmit={onFormSubmit}>
                 <Form.Group controlId="formbasicEmail">
                     <Form.Label>Email Address</Form.Label>
-                    <Form.Control type="email" placeholder="email@example.com" value={fields.email} />
+                    <Form.Control type="email" placeholder="email@example.com" name = "email" />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" value={fields.password} />
+                    <Form.Control type="password" placeholder="Password" name = "password" />
                 </Form.Group>
                 <Button variant="primary" type="submit">Login</Button>
                 </Form>

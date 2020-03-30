@@ -4,7 +4,7 @@
 
 export default {
   db: {
-    uri: 'mongodb+srv://antonioantonian:o6EExUlZ2v2dls29@mycluster-zcyok.mongodb.net/test?retryWrites=true&w=majority'//place the URI of your mongo database here.
+    uri: 'mongodb+srv://ryanfjh:ryan99fjh@cen3031-spring-2020-btguz.mongodb.net/test?retryWrites=true&w=majority'//place the URI of your mongo database here.
   }, 
   port: 5000
 };
