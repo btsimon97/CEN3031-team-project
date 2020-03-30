@@ -29,7 +29,7 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
       keyterms: keytermsArr
     };
     axios
-      .post("http://localhost:5000/api/listings/", newInstrument)
+      .post("https://cen3031-team-project.herokuapp.com/api/listings/", newInstrument)
       .then(res => console.log(currentAppData))
       .then(console.log("success!"));
     

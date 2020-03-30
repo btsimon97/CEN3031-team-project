@@ -17,7 +17,7 @@ import {
 } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
-// {currentAppData,ssetCurrentAppData}
+
 const App = () => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
   const [currentAppData, setCurrentAppData] = useState([]);
@@ -25,7 +25,7 @@ const App = () => {
   useEffect(() => {
     console.log("App mounted");
     async function fetchData() {
-      const result = await axios.get("http://localhost:5000/api/listings/");
+      const result = await axios.get("https://cen3031-team-project.herokuapp.com/api/listings/");
       setCurrentAppData(result.data);
       let i = 0;
       for (i; i < currentAppData.length; i++) {
