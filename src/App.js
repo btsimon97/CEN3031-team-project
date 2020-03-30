@@ -48,16 +48,9 @@ const App = () => {
                     <Route path="/dashboard" render={() => {
                     return currentUser ? <Dashboard /> : <Redirect to="/login" />
                     }}/>
-                    <Route path="/add" render={() => {
-                    return <AddInstrument currentAppData={currentAppData} setCurrentAppData={setCurrentAppData}/>
-                    }}/>
-                    <Route path="/home" render={() => {
-                    return <Home currentAppData={currentAppData} setCurrentAppData={setCurrentAppData}/>
-                    }}/>
-                    <Route path="/" render={() => {
-                    return <Home currentAppData={currentAppData} setCurrentAppData={setCurrentAppData}/>
-                    }}/>
-                    
+                    <Route exact path="/add" render={() =><AddInstrument currentAppData={currentAppData} setCurrentAppData={setCurrentAppData}/>}/>
+                    <Route exact path="/home" render={() => <Home currentAppData={currentAppData} setCurrentAppData={setCurrentAppData}/>}/>
+                    <Route exact path="/" render={() => <Home currentAppData={currentAppData} setCurrentAppData={setCurrentAppData}/>}/>
                     <Route path= "*" component={NotFound}/>
 
 
