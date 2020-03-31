@@ -19,7 +19,7 @@ mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
 
 //initialize app
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -39,7 +39,6 @@ if(process.env.NODE_ENV === 'production') //for deployment
    app.get("*", (req, res) => {
       res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
-  
 }
 
 app.listen(PORT, () => console.log(`App now listening on port ${PORT}`));

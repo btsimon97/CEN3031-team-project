@@ -9,24 +9,22 @@ const InstrumentList = ({filterText, currentAppData, setCurrentAppData, setInstr
     const [objectId, setObjectId] = useState(0);
 
     useEffect(() => {
+      console.log("App mounted");
       async function fetchData() {
-        console.log("fetching")
-        const result = await axios.get('/api/listings/')
-        setCurrentAppData(result.data)
+        const result = await axios.get("api/listings/");
+        setCurrentAppData(result.data);
         let i = 0;
         for (i; i < currentAppData.length; i++) {
-        currentAppData[i].id = currentAppData[i]._id;
+          currentAppData[i].id = currentAppData[i]._id;
         }
       }
       fetchData();
-    },[])
-
-
+    }, []);
 
   const handleDelete = async (id) => {
     setObjectId(0);
-    let res = await axios.delete(`http://localhost:5000/api/listings/${id}`)
-    const result = await axios.get('http://localhost:5000/api/listings/')
+    let res = await axios.delete(`api/listings/${id}`)
+    const result = await axios.get('api/listings/')
     setCurrentAppData(result.data)
   };
 

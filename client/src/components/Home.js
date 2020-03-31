@@ -15,14 +15,19 @@ const Home = ({currentAppData,setCurrentAppData}) => {
     const [filterText, setFilterText] = useState('');
     const [instrument, setInstrument] = useState();
 
-    useEffect(() => {
-        console.log("List componented updated or mounted");
-        axios.get("api/listings/").then((res) => setCurrentAppData(currentAppData))
-        let i = 0;
-        for (i; i < currentAppData.length; i++) {
-        currentAppData[i].id = currentAppData[i]._id;
-        }
-    },[])
+    // useEffect(() => {
+    //     console.log("Home mounted");
+    //     async function fetchData() {
+    //       const result = await axios.get("/api/listings");
+    //       setCurrentAppData(result.data);
+    //       console.log(currentAppData)
+    //       let i = 0;
+    //       for (i; i < currentAppData.length; i++) {
+    //         currentAppData[i].id = currentAppData[i]._id;
+    //       }
+    //     }
+    //     fetchData();
+    //   }, []);
     
     return (
         <Fragment>
