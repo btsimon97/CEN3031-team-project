@@ -20,7 +20,7 @@ const Home = ({currentAppData,setCurrentAppData}) => {
 
     useEffect(() => {
         console.log("List componented updated or mounted");
-        axios.get('https://instrument-app.herokuapp.com/api/listings/').then((res) => setCurrentAppData(currentAppData))
+        axios.get('https://localhost:5000/api/listings/').then((res) => setCurrentAppData(currentAppData))
         let i = 0;
         for (i; i < currentAppData.length; i++) {
         currentAppData[i].id = currentAppData[i]._id;
