@@ -1,6 +1,8 @@
-const jwt = require('jsonwebtoken'),
-    User = require('../models/user.js'),
-    jwt_secret = process.env.secret || require('../config/config.js').secret;
+import jwt from 'jsonwebtoken'
+import User from '../models/user.js'
+const jwt_secret = process.env.secret;
+
+// import require from '../config/config.js'
 
 // function to create tokens
 function signToken(user) {
