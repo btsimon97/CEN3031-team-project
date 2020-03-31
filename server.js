@@ -7,6 +7,8 @@ import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
 
+// userRouter = require('./routes/users.js');
+
 import dotenv from 'dotenv'
 dotenv.config();
 
@@ -28,9 +30,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-// app.use('/', express.static('./../../client'));
+// app.use('/', express.static('./../../client')); //Causeing problems
 
 app.use('/api/listings/', listingsRouter);
+// app.use('/api/users', userRouter);
 
 let dirname = path.resolve();
 if(process.env.NODE_ENV === 'production') //for deployment
