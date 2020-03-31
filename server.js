@@ -35,7 +35,7 @@ app.use('/api/listings/', listingsRouter);
 let dirname = path.resolve();
 if(process.env.NODE_ENV === 'production') //for deployment
 {
-   app.use(express.static(path.join("client", "build")))
+   app.use(express.static(path.join("client/build")))
 
    app.get("*", (req, res) => {
       res.sendFile(path.join(dirname, "client", "build", "index.html"));
