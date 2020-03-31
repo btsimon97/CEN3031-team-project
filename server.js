@@ -20,13 +20,18 @@ import multer from 'multer'
 var MongoClient = mongodb.MongoClient;
 
 var url = process.env.MONGOLAB;
-console.log(process.env.MONGODB_URI);
+console.log(config.db.uri);
 
-mongoose.connect(process.env.MONGODB_URI || config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true})
-
-mongoose.connection.on("Mongoose database connected", () =>{
-   console.log("Mongoose database connected")
+//connect to database
+mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
+   if(!error)
+   {
+      console.log(`Successfully connected to mongoose database.`)
+   } else {     
+      console.log('Failed to connect to mongoose database')
+   }
 })
+
 
 //initialize app
 const app = express();
