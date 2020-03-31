@@ -6,18 +6,7 @@ import bodyParser from 'body-parser';
 import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
-import mongodb from 'mongodb'
-// import {BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
-import fs from 'fs'
 
-import multer from 'multer'
-
-
-//connect to database
-// process.env.MONGODB_URI || 
-
-
-var MongoClient = mongodb.MongoClient;
 
 console.log(config.db.uri);
 
