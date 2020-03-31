@@ -36,16 +36,6 @@ const App = () => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("APP componented updated or mounted");
-  //   console.log(currentAppData);
-  //   axios.get('/api/listings/').then((res) => setCurrentAppData(currentAppData))
-  //   let i = 0;
-  //   for (i; i < currentAppData.length; i++) {
-  //   currentAppData[i].id = currentAppData[i]._id;
-  //   }
-  // },[])
-
   const onLoginSuccess = () => {
     setCurrentUser(httpUser.getCurrentUser());
   };
