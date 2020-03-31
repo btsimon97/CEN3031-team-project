@@ -4,10 +4,10 @@
   "description": "Medical instrument",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "npm install && node server.js",
     "build":  "cd client && npm run build",
-    "client": "cd client && npm install",
-    "heroku-postbuild": "npm run client && npm run build"
+    "client": "cd client && npm install npm run build",
+    "heroku-postbuild": "npm run client && npm start"
   },
   "author": "",
   "license": "MIT",
