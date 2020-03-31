@@ -32,13 +32,13 @@ app.use(morgan('dev'));
 
 app.use('/api/listings/', listingsRouter);
 
-dirname = path.resolve();
+let dirname = path.resolve();
 if(process.env.NODE_ENV === 'production') //for deployment
 {
    app.use(express.static(path.join("client", "build")))
 
    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+      res.sendFile(path.join(dirname, "client", "build", "index.html"));
   });
 }
 
