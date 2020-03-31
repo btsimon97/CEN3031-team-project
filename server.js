@@ -30,6 +30,8 @@ app.use('/', express.static('./../../client'));
 
 app.use('/api/listings/', listingsRouter);
 
+let __dirname = path.resolve(path.dirname(''));
+
 if(process.env.NODE_ENV === 'production') //for deployment
 {
    app.use(express.static(path.join(__dirname, "client", "build")))
