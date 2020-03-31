@@ -11,7 +11,7 @@ const InstrumentList = ({filterText, currentAppData, setCurrentAppData, setInstr
     useEffect(() => {
       async function fetchData() {
         console.log("fetching")
-        const result = await axios.get('http://localhost:5000/api/listings/')
+        const result = await axios.get('https://instrument-app.herokuapp.com/api/listings/')
         setCurrentAppData(result.data)
         let i = 0;
         for (i; i < currentAppData.length; i++) {
