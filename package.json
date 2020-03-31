@@ -24,7 +24,6 @@
     "react-scripts": "^3.4.1"
   },
   "type": "module",
-  "homepage": "https://instrument-app.herokuapp.com/",
   "engines": {
     "node": "13.x"
   }
