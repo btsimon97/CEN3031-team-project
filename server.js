@@ -7,7 +7,7 @@ import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
 
-// userRouter = require('./routes/users.js');
+// userRouter = require('./routes/users.js'); 
 
 import dotenv from 'dotenv'
 dotenv.config();
