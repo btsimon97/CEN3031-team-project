@@ -67,18 +67,25 @@ const InstrumentList = ({filterText, currentAppData, setCurrentAppData, setInstr
         <Fragment>
           <tr
             key={item._id}
-            onClick={() => {
-                setInstrument(currentAppData.find(x => x._id === item._id))
-                setObjectId(item._id)
-            }}
           >
             <td>{item.keyterms.toString()}</td>
+            <td key={item._id}>
+            <Button
+                variant="primary"
+                onClick={() => {
+                  setInstrument(currentAppData.find(x => x._id === item._id))
+                  setObjectId(item._id)
+              }}
+            >
+                View Info
+              </Button>
+            </td>
             <td key={item._id}>
               <Button
                 variant="danger"
                 onClick={() => handleDelete(item._id)}
               >
-                Delete!
+                Delete Item
               </Button>
             </td>
           </tr>
