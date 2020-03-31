@@ -4,9 +4,9 @@
   "description": "Medical instrument",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm install && node server.js",
+    "start": "node server.js",
     "client": "cd client && npm install --prefix client npm run build --prefix client",
-    "heroku-postbuild": "npm run client",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "dev": "concurrently \"nodemon server.js\" \"cd client && npm start\""
   },
   "author": "",
