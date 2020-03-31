@@ -19,7 +19,6 @@ import multer from 'multer'
 
 var MongoClient = mongodb.MongoClient;
 
-var url = process.env.MONGOLAB;
 console.log(config.db.uri);
 
 //connect to database
