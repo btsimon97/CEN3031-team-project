@@ -36,8 +36,8 @@ const Home = ({currentAppData,setCurrentAppData}) => {
                     <Search setFilterText={setFilterText}/>
                 </Col>
             </Row>
-            <Row>
-                <Col>
+            <Row className="justify-content-center">
+                <Col className="col-md-auto">
                     <h2>Medical Device List</h2>
                     <Table bordered hover striped responsive>
                         <tbody>
@@ -48,7 +48,7 @@ const Home = ({currentAppData,setCurrentAppData}) => {
                         </tbody>
                     </Table>
                 </Col>
-                <Col>
+                <Col className="col-md-auto offset-md-1">
                     {
                         <ViewInstrument instrument={instrument} />
                     }
