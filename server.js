@@ -7,9 +7,6 @@ import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
 
-
-console.log(config.db.uri);
-
 //connect to database
 mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
    if(!error)
@@ -29,6 +26,10 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 
+app.use('/', express.static('./../../client'));
+
+app.use('/api/listings/', listingsRouter);
+
 if(process.env.NODE_ENV === 'production') //for deployment
 {
    app.use(express.static(path.join(__dirname, "client", "build")))
@@ -38,8 +39,5 @@ if(process.env.NODE_ENV === 'production') //for deployment
   });
   
 }
-app.use('/', express.static('./../../client'));
-
-app.use('/api/listings/', listingsRouter);
 
 app.listen(PORT, () => console.log(`App now listening on port ${PORT}`));
