@@ -77,7 +77,7 @@ const InstrumentList = ({filterText, currentAppData, setCurrentAppData, setInstr
                   setObjectId(item._id)
               }}
             >
-                View Device Info
+                View Info
               </Button>
             </td>
             <td key={item._id}>
@@ -85,7 +85,7 @@ const InstrumentList = ({filterText, currentAppData, setCurrentAppData, setInstr
                 variant="danger"
                 onClick={() => handleDelete(item._id)}
               >
-                Delete!
+                Delete Item
               </Button>
             </td>
           </tr>
