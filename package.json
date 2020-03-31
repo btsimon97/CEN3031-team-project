@@ -25,6 +25,6 @@
   "type": "module",
   "homepage": "https://instrument-app.herokuapp.com/",
   "engines": {
-    "node": "13.12.0"
+    "node": "13.12.x"
   }
 }
