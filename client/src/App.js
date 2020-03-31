@@ -45,8 +45,6 @@ const App = () => {
     setCurrentUser(null);
   };
 
-  //https://www.youtube.com/watch?v=Law7wfdg_ls&t=456s
-
   return (
     <Router>
       <NavBar currentUser={currentUser} />
