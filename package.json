@@ -4,7 +4,7 @@
   "description": "Medical instrument",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "build":  "cd client && npm run build",
     "client": "cd client && npm install",
     "heroku-postbuild": "npm run client && npm run build"
@@ -25,6 +25,6 @@
   "type": "module",
   "homepage": "https://instrument-app.herokuapp.com/",
   "engines": {
-    "node": "13.12.x"
+    "node": "13.x"
   }
 }
