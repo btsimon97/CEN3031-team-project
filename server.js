@@ -20,7 +20,7 @@ import multer from 'multer'
 var MongoClient = mongodb.MongoClient;
 
 var url = process.env.MONGOLAB;
-console.log(process.env);
+console.log(process.env.MONGODB_URI);
 
 mongoose.connect(process.env.MONGODB_URI || config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true})
 
