@@ -46,17 +46,17 @@ app.use(bodyParser.json());
 //enable request logging for development debugging
 app.use(morgan('dev'));
 
-app.use(function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-   res.header(
-   "Access-Control-Allow-Headers",
-   "Origin, X-Requested-With, Content-Type, Accept"
-   );
-   next();
-   });
+// app.use(function(req, res, next) {
+//    res.header("Access-Control-Allow-Origin", "*");
+//    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+//    res.header(
+//    "Access-Control-Allow-Headers",
+//    "Origin, X-Requested-With, Content-Type, Accept"
+//    );
+//    next();
+//    });
 
-app.options("*", cors());
+// app.options("*", cors());
 
 // const upload = multer({ storage: storage });
 	
@@ -82,17 +82,14 @@ app.options("*", cors());
 
 if(process.env.NODE_ENV === 'production')
 {
-   app.use(express.static('client/build'));
+   app.use(express.static('build'));
 
-   // app.get('*', (req, res) => {
-   //    res.sendFile(path.resolve('client', 'src', 'index.hmtl'))
-   // })
+   app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+   })
 }
-
 // app.use('/', express.static('./../../client'));
 
 app.use('/api/listings/', listingsRouter);
 
 app.listen(PORT, () => console.log(`App now listening on port ${PORT}`));
-
-export default PORT;
