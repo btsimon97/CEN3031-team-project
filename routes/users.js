@@ -1,7 +1,10 @@
-const express = require('express'),
-userRouter = new express.Router(),
-userController = require('../controllers/users.js'),
-verifyToken = require('../authHelperFunctions').verifyToken;
+import express from 'express'
+import userController from '../controllers/users.js'
+import helper from '../authHelperFunctions'
+
+userRouter = new express.Router()
+
+verifyToken = helper.verifyToken;
 
 userRouter.route('/').get(userController.index).post(userController.create);
 
