@@ -1,5 +1,6 @@
-const User = require('../models/user.js'),
-    signToken = require('../authHelperFunctions').signToken;
+import User from '../models/user.js'
+import helper from '../authHelperFunctions'
+const signToken = helper.signToken
 
 module.exports = {
     // list users
