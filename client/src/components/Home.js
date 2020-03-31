@@ -49,6 +49,7 @@ const Home = ({currentAppData,setCurrentAppData}) => {
                     </Table>
                 </Col>
                 <Col className="col-md-3 offset-md-1">
+                    <h2>&nbsp;</h2> {/* Empty Header to line up card w/ inventory table */}
                     {
                         <ViewInstrument instrument={instrument} />
                     }
