@@ -25,7 +25,7 @@ const ViewInstrument = ({instrument}) => {
         }
         else
         {
-            let instrumentTerms = instrument.keyterms.map((term) => <ListGroup.Item>{term}</ListGroup.Item>);
+            const instrumentTerms = instrument.keyterms.map((term) => <ListGroup.Item>{term}</ListGroup.Item>);
             return (
                 <Fragment>
                     <Card>
