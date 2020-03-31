@@ -4,14 +4,13 @@
   "description": "Medical instrument",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "build":  "cd client && npm run build",
     "client": "cd client && npm install",
     "heroku-postbuild": "npm run client && npm run build"
   },
   "author": "",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -22,7 +21,10 @@
     "multer": "^1.4.2",
     "react": "^16.13.1",
     "react-scripts": "^3.4.1"
+  },
+  "type": "module",
+  "homepage": "https://instrument-app.herokuapp.com/",
+  "engines": {
+    "node": "13.12.x"
   }
-  ,
-  "homepage": "https://instrument-app.herokuapp.com/"
 }
