@@ -7,6 +7,9 @@ import config from './config/config.js';
 import listingsRouter from './routes/listingsRouter.js';
 import cors from 'cors'
 
+import dotenv from 'dotenv'
+dotenv.config();
+
 //connect to database
 mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
    if(!error)
@@ -25,8 +28,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-
-app.use('/', express.static('./../../client'));
+// app.use('/', express.static('./../../client'));
 
 app.use('/api/listings/', listingsRouter);
 
