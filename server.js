@@ -20,7 +20,7 @@ import multer from 'multer'
 var MongoClient = mongodb.MongoClient;
 
 var url = process.env.MONGOLAB;
-console.log(url);
+console.log(process.env);
 
 mongoose.connect(process.env.MONGODB_URI || config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true})
 
@@ -74,8 +74,6 @@ app.options("*", cors());
 
 //body parsing middleware
 
-
-/* serve static files - see http://expressjs.com/en/starter/static-files.html */
 
 if(process.env.NODE_ENV === 'production')
 {
