@@ -47,5 +47,6 @@
       "last 1 safari version"
     ]
   },
-  "type": "module"
+  "type": "module",
+  "homepage": "https://instrument-app.herokuapp.com/"
 }
