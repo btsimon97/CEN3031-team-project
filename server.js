@@ -35,7 +35,7 @@ mongoose.connect(config.db.uri, {useNewUrlParser: true}, (error) => {
 
 //initialize app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 
