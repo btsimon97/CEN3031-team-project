@@ -22,6 +22,7 @@ import InstrumentModel from '../models/instrumentModel.js';
 
 /* Create a listing */
 export const create = async (req, res) => {
+    
     /* Instantiate a Listing */
     /* save the coordinates from the coordinatesController (located in req.results if there is an address property) */
     /* Then save the listing to the database */
@@ -35,8 +36,8 @@ export const create = async (req, res) => {
     }
     // Create a instrument model
     const newInstrument = new InstrumentModel({
-        keyterms : req.keyterms,
-        img: { data: Buffer, contentType: String}
+        keyterms : req.body.keyterms,
+        //img: { data: Buffer, contentType: String}
     });
 
     // Save Note in the database
