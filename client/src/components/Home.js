@@ -2,10 +2,7 @@ import React, {useState, useEffect, Component, Fragment} from 'react';
 import Search from './Search';
 import ViewInstrument from './ViewInstrument';
 import InstrumentList from './InstrumentList';
-import Credit from './Credit';
 import axios from 'axios';
-import httpUser from '../httpUser'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
