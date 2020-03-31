@@ -1,8 +1,8 @@
 {
-  "name": "neededfix",
+  "name": "my-app",
   "version": "1.0.0",
   "description": "Medical instrument",
-  "main": "JSONToMongo.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
