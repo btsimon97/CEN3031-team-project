@@ -20,28 +20,21 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
   const handleChange = (e) =>{
     e.preventDefault();
     setKeyterms(e.target.value.split(','));
-    console.log(keyterms);
+    
   }
 
-  /* const addToMongo = async(entry) =>{
-    let res = await axios.post("https://cen3031-team-project.herokuapp.com/api/listings/", entry)
-    const result = await axios.get('http://localhost:5000/api/listings/')
-    setCurrentAppData(result.data)
-  } */
+
 
   const handleSubmit = (event) => {
-    console.log(keyterms);
     event.preventDefault();
-    /* let keytermsArr = keyterms.split(",");
-    setKeyterms(keytermsArr);*/
     let newInstrument; 
     newInstrument = {
       keyterms: keyterms
     };
-    //addToMongo(newInstrument);
+
     console.log(currentAppData)
     axios
-      .post("https://cen3031-team-project.herokuapp.com/api/listings/", newInstrument)
+      .post("/api/listings/", newInstrument)
       .then(res => console.log(currentAppData))
       .then(console.log("success!"));
     
