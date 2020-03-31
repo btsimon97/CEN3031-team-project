@@ -48,7 +48,7 @@ const Home = ({currentAppData,setCurrentAppData}) => {
                         </tbody>
                     </Table>
                 </Col>
-                <Col className="col-md-auto offset-md-1">
+                <Col className="col-md-3 offset-md-1">
                     {
                         <ViewInstrument instrument={instrument} />
                     }
