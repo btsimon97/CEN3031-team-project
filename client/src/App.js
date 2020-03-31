@@ -23,18 +23,27 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
   const [currentAppData, setCurrentAppData] = useState([]);
 
+  // useEffect(() => {
+  //   console.log("App mounted");
+  //   async function fetchData() {
+  //     const result = await axios.get("https://instrument-app.herokuapp.com/api/listings/");
+  //     setCurrentAppData(result.data);
+  //     let i = 0;
+  //     for (i; i < currentAppData.length; i++) {
+  //       currentAppData[i].id = currentAppData[i]._id;
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
-    console.log("App mounted");
-    async function fetchData() {
-      const result = await axios.get("https://instrument-app.herokuapp.com/api/listings/");
-      setCurrentAppData(result.data);
-      let i = 0;
-      for (i; i < currentAppData.length; i++) {
-        currentAppData[i].id = currentAppData[i]._id;
-      }
+    console.log("List componented updated or mounted");
+    axios.get('https://instrument-app.herokuapp.com/api/listings/').then((res) => setCurrentAppData(currentAppData))
+    let i = 0;
+    for (i; i < currentAppData.length; i++) {
+    currentAppData[i].id = currentAppData[i]._id;
     }
-    fetchData();
-  }, []);
+  },[])
 
   const onLoginSuccess = () => {
     setCurrentUser(httpUser.getCurrentUser());
