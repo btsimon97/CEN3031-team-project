@@ -47,10 +47,13 @@ export const create = async (req, res) => {
         res.status(200).send({
             message: "Instrument added!"
         });
+        return;
     }).catch(err => {
-        res.status(500).send({
+        throw err;
+        /* res.status(500).send({
             message: err.message || "Some error occurred while creating the instrument."
         });
+        return; */
     });
 };
 
