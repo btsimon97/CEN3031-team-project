@@ -35,6 +35,7 @@ httpUser.logIn = async function(credentials) {
 };
 
 httpUser.signUp = async function(userInfo) {
+    console.log("signup",userInfo)
     const response = await axios.post('/api/users', userInfo);
 
     const token = response.data.token;

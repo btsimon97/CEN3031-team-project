@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
+import axios from "axios";
+
 const SignUp = (props) => {
     const [fields, setFields] = useState({name: '', email: "", password: ""});
     
@@ -13,19 +15,20 @@ const SignUp = (props) => {
     const onInputChange = (e) => {
         e.persist();
         setFields({...fields, [e.target.name]: e.target.value});
-        console.log(fields)
     };
 
     // used to submit user values for password and email
     const onFormSubmit = async (e) => {
+        console.log(fields)
         e.preventDefault();
         const user = await httpUser.signUp(fields);
-
+        console.log(user)
         //setFields({name: '', email: '', password: ''} );
         console.log('success')
         if(user) {
             props.onSignUpSuccess(user);
             props.history.push('/');
+
         } 
         //console.log(fields)
     };

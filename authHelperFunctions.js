@@ -1,18 +1,18 @@
 import jwt from 'jsonwebtoken'
-import User from '../models/user.js'
+import User from './models/user.js'
 const jwt_secret = process.env.secret;
 
 // import require from '../config/config.js'
 
 // function to create tokens
-function signToken(user) {
+export function signToken(user) {
     const userData = user.toObject();
     delete userData.password;
     return jwt.sign(userData, jwt_secret)
 }
 
 // function to verify tokens
-function verifyToken(req, res, next) {
+export function verifyToken(req, res, next) {
     const token = req.get('token') || req.body.token || req.query.token;
 
     // reject user if no token
@@ -34,7 +34,7 @@ function verifyToken(req, res, next) {
     })
 }
 
-module.exports = {
-    signToken,
-    verifyToken
-};
+// export default {
+//     signToken,
+//     verifyToken
+// };

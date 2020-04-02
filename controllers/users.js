@@ -1,11 +1,11 @@
 import User from '../models/user.js'
-import helper from '../authHelperFunctions'
-const signToken = helper.signToken
+import {signToken} from '../authHelperFunctions.js'
 
-module.exports = {
+export default {
     // list users
     index: async (req, res) => {
         try {
+            console.log('here!')
             const users = await User.find({});
             res.json(users);
         } catch(err) {
@@ -28,7 +28,9 @@ module.exports = {
 
     // creates new user
     create: async (req, res) => {
+        console.log('create')
         try{
+            console.log(req.body)
             const user = await User.create(req.body);
             const token = await signToken(user);
 
