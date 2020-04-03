@@ -12,6 +12,7 @@ import dotenv from 'dotenv';
 //global variables
 dotenv.config({ path: './config/config.env' });
 
+
 //connect to database
 connectDB();
 
