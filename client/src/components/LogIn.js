@@ -19,8 +19,6 @@ const LogIn = (props) => {
     const onInputChange = (e) => {
         e.persist();
         setFields(fields => ({...fields, [e.target.name]: e.target.value}))
-        console.log(fields)
-
     };
 
     // used to submit user values for password and email
@@ -29,13 +27,12 @@ const LogIn = (props) => {
         console.log(fields)
         e.preventDefault();
         const user = await httpUser.logIn(fields);
-        setFields({email: '', password: ''} );
+        setFields({email: '', password: ''});
         console.log(user);
         if(user) {
             props.onLoginSuccess(user);
+            props.history.push('/');
             console.log("Login successful")
-            props.history.push('/home');
-
         }
     };
 

@@ -1,11 +1,13 @@
 import jwt from 'jsonwebtoken'
 import User from './models/user.js'
+
 const jwt_secret = process.env.secret;
 
 // import require from '../config/config.js'
 
 // function to create tokens
 export function signToken(user) {
+    console.log(jwt_secret)
     const userData = user.toObject();
     delete userData.password;
     return jwt.sign(userData, jwt_secret)

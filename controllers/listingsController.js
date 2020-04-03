@@ -56,7 +56,7 @@ export const read = async (req, res) => {
       }
 };
 
-//FIX ME
+//CHECK ME
 export const update = async (req, res) => {
   try {
     console.log(req.params.id)

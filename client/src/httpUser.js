@@ -21,7 +21,7 @@ httpUser.logIn = async function(credentials) {
     try {
         console.log("credentials: ", credentials)
         const response = await axios.post('/api/users/authenticate', credentials);
-
+        console.log(response)
         const token = response.data.token;
         if(token) {
             console.log("Token accepted")

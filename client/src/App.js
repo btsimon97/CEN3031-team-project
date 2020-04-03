@@ -10,7 +10,6 @@ import Dashboard from "./components/Dashboard.js";
 import NotFound from "./components/NotFound";
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect
@@ -18,22 +17,10 @@ import {
 
 import Container from "react-bootstrap/Container";
 
+
 const App = () => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
   const [currentAppData, setCurrentAppData] = useState([]);
-
-  // useEffect(() => {
-  //   console.log("App mounted");
-  //   async function fetchData() {
-  //     const result = await axios.get("api/listings/");
-  //     setCurrentAppData(result.data.data);
-  //     // let i = 0;
-  //     // for (i; i < currentAppData.length; i++) {
-  //     //   currentAppData[i].id = currentAppData[i]._id;
-  //     // }
-  //   }
-  //   fetchData();
-  // }, []);
 
   const onLoginSuccess = () => {
     setCurrentUser(httpUser.getCurrentUser());
@@ -46,7 +33,7 @@ const App = () => {
   };
 
   return (
-    <Router>
+    <div>
       <NavBar currentUser={currentUser} />
       <body>
         <Container fluid>
@@ -116,7 +103,7 @@ const App = () => {
           </Switch>
         </Container>
       </body>
-    </Router>
+    </div>
   );
 };
 
