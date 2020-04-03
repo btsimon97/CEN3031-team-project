@@ -76,7 +76,7 @@ const UserList = ({filterText,currentAppData,setCurrentAppData,setInstrument}) =
               </td>
               <td>
                 <Button variant="danger" onClick={() => handleDelete(item._id)}>
-                  Delete Item
+                  Delete User
                 </Button>
               </td>
             </tr>
