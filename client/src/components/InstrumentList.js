@@ -68,6 +68,7 @@ const InstrumentList = ({
           <Fragment>
             <tr key={index}>
               <td>{item.keyterms.toString()}</td>
+              <td>{item.createdAt}</td>
               <td>
                 <Button
                   variant="primary"
