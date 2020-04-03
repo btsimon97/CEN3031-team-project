@@ -52,17 +52,9 @@ const App = () => {
                 />
               )}
             />
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <Home
-                  currentAppData={currentAppData}
-                  setCurrentAppData={setCurrentAppData}
-                  filterText = {filterText}
-                  setFilterText = {setFilterText}
-                  currentUser = {currentUser}
-                />
+            <Route exact path="/">
+                    <Redirect to="/Home" />
+            </Route>
               )}
             />
             <Route
