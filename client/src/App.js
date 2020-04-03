@@ -58,6 +58,16 @@ const App = () => {
               )}
             />
             <Route
+              exact
+              path="/admin"
+              render={() => (
+                <Home
+                  currentAppData={currentAppData}
+                  setCurrentAppData={setCurrentAppData}
+                />
+              )}
+            />
+            <Route
               path="/login"
               render={props => {
                 return (
