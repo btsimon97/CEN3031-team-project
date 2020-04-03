@@ -54,7 +54,7 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
                 Separate your keywords with a comma if using multiple keywords.
               </Form.Text>
             </Form.Group>
-            <Button variant="primary" type="submit" onclick="window.location = '/';">
+            <Button variant="primary" type="submit" href="/">
               Add Instrument
             </Button>
           </Form>
