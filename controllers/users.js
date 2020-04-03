@@ -64,13 +64,20 @@ export default {
     },
 
     authenticate: async (req, res) => {
-        const user = await User.findOne({email: req.body.email});
+        try {
+            console.log("authenticating credentials: ", req.body)
+            const user = await User.findOne({email: req.body.email});
 
-        if(!user || !user.validPassword(req.body.password)) {
-            return res.json({success: false, message: "Invalid Login"});
+            if(!user || !user.validPassword(req.body.password)) {
+                return res.json({success: false, message: "Invalid Login"});
+            }
+
+            const token = await signToken(user);
+            res.json({success: true, message: "Token attached", token});
+            
+        } catch (err) {
+            res.json({success: false, code: err.code});
         }
-
-        const token = await signToken(user);
-        res.json({success: true, message: "Token attached", token});
+        
     }
 };

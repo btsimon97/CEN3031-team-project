@@ -1,6 +1,5 @@
-import React, {useState, Component, Fragment} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import httpUser from './../httpUser'
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -11,21 +10,31 @@ import Row from 'react-bootstrap/Row'
 const LogIn = (props) => {
     const [fields, setFields] = useState({email: "", password: ""});
 
+    useEffect(() => {
+        console.log("Login mounted")
+    },[])
+
+
     // used to update user input for either password or email
     const onInputChange = (e) => {
         e.persist();
         setFields(fields => ({...fields, [e.target.name]: e.target.value}))
+        console.log(fields)
+
     };
 
     // used to submit user values for password and email
     const onFormSubmit = async (e) => {
+        console.log("clicked!")
+        console.log(fields)
         e.preventDefault();
         const user = await httpUser.logIn(fields);
-
         setFields({email: '', password: ''} );
+        console.log(user);
         if(user) {
             props.onLoginSuccess(user);
-            props.history.push('/');
+            console.log("Login successful")
+            props.history.push('/home');
 
         }
     };

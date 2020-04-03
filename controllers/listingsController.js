@@ -1,6 +1,6 @@
 /* Dependencies */
 // import mongoose, { Query } from 'mongoose';
-import InstrumentModel from '../models/instrumentModel.js';
+import InstrumentModel from "../models/instrumentModel.js";
 // import  {sortBy}   from 'async';
 
 /*
@@ -21,158 +21,106 @@ import InstrumentModel from '../models/instrumentModel.js';
  */
 
 /* Create a listing */
-export const create = async (req, res) => {
-    
-    /* Instantiate a Listing */
-    /* save the coordinates from the coordinatesController (located in req.results if there is an address property) */
-    /* Then save the listing to the database */
-
-
-    // Validate request
-    if(!req.body) {
-        return res.status(400).send({
-            message: "Note content can not be empty"
-        });
+export const create = (req, res) => {
+    try {
+        console.log(req.body)
+        const instruments = InstrumentModel.create(req.body, );
+        return res.status(200).json({
+        success: true,
+        count: instruments.length,
+        data: instruments
+      });
+    } catch (err) {
+        console.log(err)
+      return res.status(500).json({
+        success: false,
+        error: "Server Error"
+      });
     }
-    // Create a instrument model
-    const newInstrument = new InstrumentModel({
-        keyterms : req.body.keyterms,
-        //img: { data: Buffer, contentType: String}
-    });
-
-    // Save Note in the database
-    newInstrument.save()
-    .then(data => {
-        res.send(data);
-        res.status(200).send({
-            message: "Instrument added!"
-        });
-        return;
-    }).catch(err => {
-        throw err;
-        /* res.status(500).send({
-            message: err.message || "Some error occurred while creating the instrument."
-        });
-        return; */
-    });
 };
 
 /* Show the current listing */
-export const read = (req, res) => {
-    /* send back the listing as json from the request */
-    /* If the listing could _not_ be found, be sure to send back a response in the following format: {error: 'Some message that indicates an error'} */
-    InstrumentModel.findById(req.params.listingId)
-    .then(instrument => {
-        if(!instrument) {
-            return res.status(404).send({
-                message: "Instrument not found with id " + req.body.id
-            });            
-        }
-        res.send(instrument);
-    }).catch(err => {
-        if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Instrument not found with id " + req.params.id
-            });                
-        }
-        return res.status(500).send({
-            message: "Error retrieving instrument with id " + req.params.id
+export const read = async (req, res) => {
+    try {
+        const instruments = await InstrumentModel.findById(req.params.id);
+        return res.status(200).json({
+          success: true,
+          count: instruments.length,
+          data: instruments.find
         });
-    });
+      } catch (err) {
+        return res.status(500).json({
+          success: false,
+          error: "Server Error"
+        });
+      }
 };
 
-/* Update a listing - note the order in which this function is called by the router*/
-export const update = (req, res) => {
-    const instrument = req.instrument;
-    
-    if(!req.body) {
-        return res.status(400).send({
-            message: "Instrument content can not be empty"
-        });
-    }
-
-    /* Replace the listings's properties with the new properties found in req.body */
-
-    InstrumentModel.findByIdAndUpdate(req.params.listingId, {
-        keyterms: req.keyterms,
-        img: req.img
-    }, {new: true})
-    .then(instrument => {
-        if(!instrument) {
-            return res.status(404).send({
-                message: "Note not found with id " + req.params.listingId
-            });
-        }
-        res.send(instrument);
-    }).catch(err => {
-        if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Instrument not found with id " + req.params.listingId
-            });                
-        }
-        return res.status(500).send({
-            message: "Error updating instrument with id " + req.params.listingId
-        });
+//FIX ME
+export const update = async (req, res) => {
+  try {
+    console.log(req.params.id)
+    let update = {
+      keyterms: req.body.keyterms,
+    };
+    const instruments = await InstrumentModel.findByIdAndUpdate(req.params.id, update, {new: true});
+    return res.status(200).json({
+      success: true,
+      count: instruments.length
     });
-
-    /*save the coordinates (located in req.results if there is an address property) */
-
-    /* Save the listing */
-
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error"
+    });
+  }
 };
 
-/* Delete a listing */
-export const remove = (req, res) => {
-    /* Add your code to remove the listins */
-    /* If the listing could _not_ be found, be sure to send back a response in the following format: {error: 'Some message that indicates an error'} */
-    if(!req.body) {
-        return res.status(400).send({
-            message: "Instrument content can not be empty"
-        });
-    }
-    console.log(req.params.listingId)
-    InstrumentModel.findByIdAndRemove(req.params.listingId)
-    .then(instrument => {
-        if(!instrument) {
-            return res.status(404).send({
-                message: "Instrument not found with id " + req.body.id
-            });
-        }
-        res.send({message: "Instrument deleted successfully!"});
-    }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Note not found with id " + req.body.id
-            });                
-        }
-        return res.status(500).send({
-            message: "Could not delete instrument with id " + req.body.id
-        });
+export const remove = async (req, res) => {
+  try {
+    const instruments = await InstrumentModel.findByIdAndRemove(
+      req.params.id
+    );
+    return res.status(200).json({
+      success: true,
+      count: instruments.length
     });
-    console.log("Delete successful!")
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error"
+    });
+  }
 };
 
-/* Retreive all the directory listings, sorted alphabetically by listing code */
-export const list = (req, res) => {
-    /* Add your code. Make sure to send the documents as a JSON response.*/
-    InstrumentModel.find({}, (err, data) => {
-        console.log(data)
-        if (err) throw err
-        res.send(data)
+export const list = async (req, res) => {
+  try {
+    const instruments = await InstrumentModel.find();
+    return res.status(200).json({
+      success: true,
+      count: instruments.length,
+      data: instruments
     });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error"
+    });
+  }
 };
 
-/* 
-  Middleware: find a listing by its ID, then pass it to the next request handler. 
-
-  HINT: Find the listing using a mongoose query, 
-        bind it to the request object as the property 'listing', 
-        then finally call next
- */
-export const listingByID = (req, res, next, id) => {
-    InstrumentModel.findById(id, (err, data) => {
-        if (err) throw err
-        res.send(data)
-        next()
+export const listingByID = async (req, res, next, id) => {
+  try {
+    const instruments = await InstrumentModel.findById(id);
+    return res.status(200).json({
+      success: true,
+      count: instruments.length,
+      data: instruments.find(x => x._id == id)
     });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error"
+    });
+  }
 };

@@ -1,11 +1,8 @@
-import React, {Component, Fragment} from 'react';
-import { Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import React, {Fragment} from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import Container from 'react-bootstrap/Container'
 
 const NavBar = (props) => {
     return (

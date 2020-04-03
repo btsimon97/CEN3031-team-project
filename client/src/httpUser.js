@@ -19,13 +19,16 @@ httpUser.getCurrentUser = function() {
 
 httpUser.logIn = async function(credentials) {
     try {
-        const response = await axios.post( '/api/users/authenticate', credentials );
+        console.log("credentials: ", credentials)
+        const response = await axios.post('/api/users/authenticate', credentials);
 
         const token = response.data.token;
         if(token) {
+            console.log("Token accepted")
             this.defaults.headers.common.token = this.setToken(token);
             return jwtDecode(token);
         } else {
+            console.log("Token not accepted")
             return false;
         }
     } catch(err) {

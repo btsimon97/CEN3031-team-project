@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import Row from 'react-bootstrap/Row'
+import React, {Fragment} from 'react';
+// import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 const Search = ({setFilterText}) => {
 

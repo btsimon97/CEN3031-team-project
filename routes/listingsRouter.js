@@ -19,8 +19,8 @@ listingsRouter.post('/', listings.create);
 /*
   The ':' specifies a URL parameter. 
  */
-listingsRouter.get('/:listingId', listings.read);
-listingsRouter.put('/:listingId', listings.update);
-listingsRouter.delete('/:listingId', listings.remove);
+listingsRouter.get('/:id', listings.read);
+listingsRouter.put('/:id', listings.update);
+listingsRouter.delete('/:id', listings.remove);
 
 export default listingsRouter;

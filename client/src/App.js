@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import AddInstrument from "./components/AddInstrument";
-import axios from "axios";
 import httpUser from "./httpUser";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
@@ -23,21 +22,22 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
   const [currentAppData, setCurrentAppData] = useState([]);
 
-  useEffect(() => {
-    console.log("App mounted");
-    async function fetchData() {
-      const result = await axios.get("api/listings/");
-      setCurrentAppData(result.data);
-      let i = 0;
-      for (i; i < currentAppData.length; i++) {
-        currentAppData[i].id = currentAppData[i]._id;
-      }
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   console.log("App mounted");
+  //   async function fetchData() {
+  //     const result = await axios.get("api/listings/");
+  //     setCurrentAppData(result.data.data);
+  //     // let i = 0;
+  //     // for (i; i < currentAppData.length; i++) {
+  //     //   currentAppData[i].id = currentAppData[i]._id;
+  //     // }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const onLoginSuccess = () => {
     setCurrentUser(httpUser.getCurrentUser());
+    console.log("login success")
   };
 
   const logOut = () => {
