@@ -5,7 +5,6 @@ export default {
     // list users
     index: async (req, res) => {
         try {
-            console.log('here!')
             const users = await User.find({});
             res.json(users);
         } catch(err) {
@@ -15,9 +14,6 @@ export default {
 
     // get one user
     show: async (req, res) => {
-        console.log("Current User:");
-        console.log(req.user);
-
         try {
             const user = await User.findById(req.params.id);
             res.json(user);
@@ -28,9 +24,7 @@ export default {
 
     // creates new user
     create: async (req, res) => {
-        console.log('create')
         try{
-            console.log(req.body)
             const user = await User.create(req.body);
             const token = await signToken(user);
 
@@ -67,15 +61,11 @@ export default {
     
     authenticate: async (req, res) => {
         try {
-            console.log("authenticating credentials: ", req.body)
             const user = await User.findOne({email: req.body.email});
-            console.log("user", user)
             if(!user || !user.validPassword(req.body.password)) {
-                console.log("invalid user")
                 return res.json({success: false, message: "Invalid Login"});
             }
             const token = signToken(user);
-            console.log("token", token)
             res.json({success: true, message: "Token attached", token});
             
         } catch (err) {

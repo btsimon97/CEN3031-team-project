@@ -24,7 +24,6 @@ const App = () => {
 
   const onLoginSuccess = () => {
     setCurrentUser(httpUser.getCurrentUser());
-    console.log("login success")
   };
 
   const logOut = () => {

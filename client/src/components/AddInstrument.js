@@ -30,7 +30,6 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
       keyterms: keyterms
     };
 
-    console.log(currentAppData)
     axios
       .post("/api/listings/", newInstrument)
       .then(res => console.log(currentAppData))

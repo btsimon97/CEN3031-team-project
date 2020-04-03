@@ -23,7 +23,6 @@ const LogIn = (props) => {
 
     // used to submit user values for password and email
     const onFormSubmit = async (e) => {
-        console.log("clicked!")
         console.log(fields)
         e.preventDefault();
         const user = await httpUser.logIn(fields);
@@ -31,7 +30,7 @@ const LogIn = (props) => {
         console.log(user);
         if(user) {
             props.onLoginSuccess(user);
-            props.history.push('/');
+            props.history.push('/dashboard');
             console.log("Login successful")
         }
     };

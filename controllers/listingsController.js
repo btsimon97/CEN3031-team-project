@@ -23,7 +23,6 @@ import InstrumentModel from "../models/instrumentModel.js";
 /* Create a listing */
 export const create = (req, res) => {
     try {
-        console.log(req.body)
         const instruments = InstrumentModel.create(req.body, );
         return res.status(200).json({
         success: true,
@@ -59,7 +58,6 @@ export const read = async (req, res) => {
 //CHECK ME
 export const update = async (req, res) => {
   try {
-    console.log(req.params.id)
     let update = {
       keyterms: req.body.keyterms,
     };

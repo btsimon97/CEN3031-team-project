@@ -2,24 +2,20 @@ import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 
-const InstrumentList = ({
-  filterText,
-  currentAppData,
-  setCurrentAppData,
-  setInstrument
-}) => {
-  const [fetch, setFetch] = useState(false);
+const UserList = ({filterText,currentAppData,setCurrentAppData,setInstrument}) => {
+    const [fetch, setFetch] = useState(false);
+    const [users, setUsers] = useState([])
 
-  const fetchData = async () => {
-    const result = await axios.get("api/listings/");
-    setCurrentAppData(result.data.data);
+    const fetchData = async () => {
+    const result = await axios.get("api/users/");
+    setUsers(result.data.data);
     setFetch(false);
-  };
+    };
 
-  useEffect(() => {
-    console.log("List mounted or updated");
+    useEffect(() => {
+    console.log("User list mounted or updated");
     fetchData();
-  }, [fetch, setFetch]);
+    }, [fetch, setFetch]);
 
   const handleDelete = async id => {
     let res = await axios.delete(`api/listings/${id}`);
@@ -90,4 +86,4 @@ const InstrumentList = ({
     </div>
   );
 };
-export default InstrumentList;
+export default UserList;
