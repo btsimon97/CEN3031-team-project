@@ -21,6 +21,7 @@ import Container from "react-bootstrap/Container";
 const App = () => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
   const [currentAppData, setCurrentAppData] = useState([]);
+  const [filterText, setFilterText] = useState("");
 
   const onLoginSuccess = () => {
     setCurrentUser(httpUser.getCurrentUser());
@@ -44,6 +45,9 @@ const App = () => {
                 <Home
                   currentAppData={currentAppData}
                   setCurrentAppData={setCurrentAppData}
+                  filterText = {filterText}
+                  setFilterText = {setFilterText}
+                  currentUser = {currentUser}
                 />
               )}
             />
@@ -54,6 +58,9 @@ const App = () => {
                 <Home
                   currentAppData={currentAppData}
                   setCurrentAppData={setCurrentAppData}
+                  filterText = {filterText}
+                  setFilterText = {setFilterText}
+                  currentUser = {currentUser}
                 />
               )}
             />
@@ -84,8 +91,8 @@ const App = () => {
             />
             <Route
               path="/dashboard"
-              render={() => {
-                return currentUser ? <Dashboard /> : <Redirect to="/login" />;
+              render={props => {
+                return currentUser ? <Dashboard {...props} filterText = {filterText} setFilterText = {setFilterText}/> : <Redirect to="/login" />;
               }}
             />
             <Route

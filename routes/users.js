@@ -11,7 +11,9 @@ userRouter.route('/').get(userController.index).post(userController.create);
 
 userRouter.post('/authenticate', userController.authenticate);
 
-userRouter.use(verifyToken);
+userRouter.get(verifyToken);
+// userRouter.use(verifyToken);
 userRouter.route('/:id').get(userController.show).patch(userController.update).delete(userController.destroy);
+
 
 export default userRouter;

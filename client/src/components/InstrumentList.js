@@ -1,15 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
+import Table from 'react-bootstrap/Table'
 import Button from "react-bootstrap/Button";
+import httpUser from "../httpUser"
 
-const InstrumentList = ({
-  filterText,
-  currentAppData,
-  setCurrentAppData,
-  setInstrument
-}) => {
+const InstrumentList = ({filterText,currentAppData,setCurrentAppData,setInstrument,currentUser}) => {
   const [fetch, setFetch] = useState(false);
-
+  console.log(filterText)
   const fetchData = async () => {
     const result = await axios.get("api/listings/");
     setCurrentAppData(result.data.data);
@@ -19,7 +16,7 @@ const InstrumentList = ({
   useEffect(() => {
     console.log("List mounted or updated");
     fetchData();
-  }, [fetch, setFetch]);
+  }, []);
 
   const handleDelete = async id => {
     let res = await axios.delete(`api/listings/${id}`);
@@ -27,7 +24,7 @@ const InstrumentList = ({
   };
 
   let instrumentList = currentAppData.filter(building => {
-    if (filterText.trim() !== "") {
+    if (filterText && filterText.trim() !== "") {
       let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
       let searchText = filterText.split(",");
       if (searchText.length > 1) {
@@ -62,32 +59,46 @@ const InstrumentList = ({
   });
 
   return (
-    <div>
-      {instrumentList.map((item, index) => {
-        return (
-          <Fragment>
-            <tr key={index}>
-              <td>{item.keyterms.toString()}</td>
-              <td>
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    setInstrument(currentAppData.find(x => x._id === item._id));
-                  }}
-                >
-                  View Info
-                </Button>
-              </td>
-              <td>
-                <Button variant="danger" onClick={() => handleDelete(item._id)}>
-                  Delete Item
-                </Button>
-              </td>
-            </tr>
-          </Fragment>
-        );
-      })}
-    </div>
+    <Table hover striped responsive>
+      <thead>
+          <tr>
+            <th>Device Keywords</th>
+            <th>Last Modification Date/Time</th>
+            <th>Device Info</th>
+            {httpUser.getCurrentUser() && <th>Device Management</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {instrumentList.map((item, index) => {
+            return (
+              <Fragment>
+                <tr key={index}>
+                  <td>{item.keyterms.toString()}</td>
+                  <td>{item.createdAt}</td>
+                  <td>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        setInstrument(currentAppData.find(x => x._id === item._id));
+                      }}
+                    >
+                      View Info
+                    </Button>
+                  </td>
+                  {httpUser.getCurrentUser() &&
+                    <td>
+                      <Button variant="danger" onClick={() => handleDelete(item._id)}>
+                        Delete Item
+                      </Button>
+                    </td>
+                  }
+
+                </tr>
+              </Fragment>
+            );
+          })}
+        </tbody>
+    </Table>
   );
 };
 export default InstrumentList;

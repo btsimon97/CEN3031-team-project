@@ -4,7 +4,11 @@ import bcrypt from 'bcrypt-nodejs'
 const userSchema = new mongoose.Schema({
     name: {type: String},
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true}
+    password: { type: String, required: true},
+    createdAt: {
+        type: Date,
+        default: Date.now
+      }
 });
 
 // adds method to user to create hashed password

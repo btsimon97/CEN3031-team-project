@@ -14,8 +14,10 @@ export function signToken(user) {
 
 // function to verify tokens
 export function verifyToken(req, res, next) {
+    console.log(req.token)
     const token = req.get('token') || req.body.token || req.query.token;
-
+    // const token = signToken(req.body)
+    console.log("token", token);
     // reject user if no token
     if(!token) return res.json({success: false, message: "No token provided"});
 

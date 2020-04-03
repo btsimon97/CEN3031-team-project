@@ -16,8 +16,9 @@ const NavBar = (props) => {
                         <LinkContainer to='/add'><Nav.Link href="#">Add</Nav.Link></LinkContainer>
                         {props.currentUser ?
                         (
-                            <NavDropdown title="Account" id="basic-nav-dropdown" bg="dark" variant="dark">
-                            <LinkContainer to='/dashboard'><NavDropdown.Item href="#">Profile</NavDropdown.Item></LinkContainer>
+                            <NavDropdown title="My Places" id="basic-nav-dropdown" bg="dark" variant="dark">
+                            <LinkContainer to='/dashboard'><NavDropdown.Item href="#">Admin Dashboard</NavDropdown.Item></LinkContainer>
+                            <LinkContainer to='/profile'><NavDropdown.Item href="#">My Profile</NavDropdown.Item></LinkContainer>
                             <LinkContainer to='/logout'><NavDropdown.Item href="#">Logout</NavDropdown.Item></LinkContainer>
                             </NavDropdown>
                         ) :
