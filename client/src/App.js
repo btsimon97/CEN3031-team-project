@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp";
 import LogOut from "./components/LogOut";
 import Dashboard from "./components/Dashboard.js";
 import NotFound from "./components/NotFound";
+import Admin from "./components/Admin.js"
 
 import {
   Switch,
@@ -61,7 +62,7 @@ const App = () => {
               exact
               path="/admin"
               render={() => (
-                <Home
+                <Admin
                   currentAppData={currentAppData}
                   setCurrentAppData={setCurrentAppData}
                 />
