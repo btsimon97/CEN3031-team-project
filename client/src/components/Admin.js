@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Component, Fragment} from 'react';
 import Search from './Search';
 import ViewInstrument from './ViewInstrument';
-import UserList from './userList';
+import UserList from './UserList';
 
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
