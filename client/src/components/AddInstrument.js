@@ -23,6 +23,9 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
     
   }
 
+  const redirect = (res) =>{
+    return res.redirect('/UserHomePage');
+  }
 
 
   const handleSubmit = (event) => {
@@ -57,7 +60,7 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
                 Separate your keywords with a comma if using multiple keywords.
               </Form.Text>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onclick="redirect()">
               Add Instrument
             </Button>
           </Form>
