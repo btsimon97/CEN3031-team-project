@@ -19,6 +19,7 @@ const LogIn = (props) => {
     const onInputChange = (e) => {
         e.persist();
         setFields(fields => ({...fields, [e.target.name]: e.target.value}))
+        console.log(fields)
     };
 
     // used to submit user values for password and email
