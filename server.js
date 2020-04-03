@@ -14,7 +14,6 @@ dotenv.config({ path: './config/config.env' });
 
 const PORT = process.env.PORT || 5000;
 
-
 //connect to database
 connectDB();
 
@@ -52,4 +51,4 @@ if(process.env.NODE_ENV === 'production') //for deployment
 
 app.use('/', express.static('./client')); 
 
-app.listen(PORT, () => console.log(`App now listening on port ${process.env.PORT || 5000}`));
+app.listen(PORT, () => console.log(`App now listening on port ${PORT}`));
