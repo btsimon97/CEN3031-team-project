@@ -41,6 +41,7 @@ const UserList = ({ filterText, setUser }) => {
   });
 
   return (
+<<<<<<< HEAD
       <Table hover striped responsive>
         <thead>
           <tr>
@@ -76,6 +77,34 @@ const UserList = ({ filterText, setUser }) => {
           })}
         </tbody>
     </Table>
+=======
+    <div>
+      {instrumentList.map((item, index) => {
+        return (
+          <Fragment>
+            <tr key={index}>
+              <td>{item.keyterms.toString()}</td>
+              <td>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setInstrument(currentAppData.find(x => x._id === item._id));
+                  }}
+                >
+                  View Info
+                </Button>
+              </td>
+              <td>
+                <Button variant="danger" onClick={() => handleDelete(item._id)}>
+                  Delete User
+                </Button>
+              </td>
+            </tr>
+          </Fragment>
+        );
+      })}
+    </div>
+>>>>>>> e7811779ee41e8bcd1a3d714786afe600b866358
   );
 };
 export default UserList;
