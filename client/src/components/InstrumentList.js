@@ -23,7 +23,7 @@ const InstrumentList = ({
   useEffect(() => {
     console.log("List mounted or updated");
     fetchData();
-  }, []);
+  }, [setFetch, fetch]);
 
   const handleDelete = async (id) => {
     let res = await axios.delete(`api/listings/${id}`);
@@ -80,9 +80,9 @@ const InstrumentList = ({
                 <td>
                   <Button
                     variant="primary"
-                    onClick={() => {
+                    onClick={async () => {
                       setInstrument(
-                        currentAppData.find((x) => x._id === item._id)
+                        currentAppData.find(await axios.get(`api/intruments/${item._id}`))
                       );
                     }}
                   >
