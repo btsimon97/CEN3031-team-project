@@ -12,8 +12,6 @@ import dotenv from 'dotenv';
 //global variables
 dotenv.config({ path: './config/config.env' });
 
-const PORT = process.env.PORT || 3001;
-
 //connect to database
 connectDB();
 
@@ -34,7 +32,6 @@ app.use(function(req, res, next) {
 });
 app.options("*", cors());
 
-
 app.use('/api/listings', listingsRouter);
 app.use('/api/users', userRouter);
 
@@ -42,13 +39,11 @@ let dirname = path.resolve();
 if(process.env.NODE_ENV === 'production') //for deployment
 {
    app.use(express.static(path.join("client/build")))
-
    app.get("*", (req, res) => {
       res.sendFile(path.join(dirname, "client", "build", "index.html"));
   });
 }
 
-
 app.use('/', express.static('./client')); 
 
-app.listen(PORT, () => console.log(`App now listening on port ${PORT}`));
+app.listen(process.env.PORT, () => console.log(`App now listening on port ${process.env.PORT}`));
