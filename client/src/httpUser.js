@@ -25,6 +25,7 @@ httpUser.logIn = async function(credentials) {
             this.defaults.headers.common.token = this.setToken(token);
             return jwtDecode(token);
         } else {
+            console.log("token not accepted")
             return false;
         }
     } catch(err) {

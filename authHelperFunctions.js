@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import User from './models/user.js'
 
-const jwt_secret = process.env.secret;
+const jwt_secret = process.env.SECRET;
 
 // import require from '../config/config.js'
 

@@ -69,6 +69,7 @@ export default {
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user || !user.validPassword(req.body.password)) {
+        console.log("auth failed")
         return res.json({ success: false, message: "Invalid Login" });
       }
       const token = signToken(user);
