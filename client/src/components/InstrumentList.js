@@ -1,12 +1,19 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
-import Table from 'react-bootstrap/Table'
+import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import httpUser from "../httpUser"
+import httpUser from "../httpUser";
+import Moment from "react-moment"
 
-const InstrumentList = ({filterText,currentAppData,setCurrentAppData,setInstrument,currentUser}) => {
+const InstrumentList = ({
+  filterText,
+  currentAppData,
+  setCurrentAppData,
+  setInstrument,
+  currentUser,
+}) => {
   const [fetch, setFetch] = useState(false);
-  console.log(filterText)
+  console.log(filterText);
   const fetchData = async () => {
     const result = await axios.get("api/listings/");
     setCurrentAppData(result.data.data);
@@ -18,12 +25,12 @@ const InstrumentList = ({filterText,currentAppData,setCurrentAppData,setInstrume
     fetchData();
   }, []);
 
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     let res = await axios.delete(`api/listings/${id}`);
     setFetch(true);
   };
 
-  let instrumentList = currentAppData.filter(building => {
+  let instrumentList = currentAppData.filter((building) => {
     if (filterText && filterText.trim() !== "") {
       let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
       let searchText = filterText.split(",");
@@ -32,10 +39,7 @@ const InstrumentList = ({filterText,currentAppData,setCurrentAppData,setInstrume
         let j = 0;
         for (; j < searchText.length; j++) {
           let word = "(?=.*" + searchText[j] + ")";
-          multipleSearch += word
-            .trim()
-            .toLowerCase()
-            .replace(/ /g, "");
+          multipleSearch += word.trim().toLowerCase().replace(/ /g, "");
         }
         regExp = new RegExp(multipleSearch + ".+", "gi");
       }
@@ -43,11 +47,7 @@ const InstrumentList = ({filterText,currentAppData,setCurrentAppData,setInstrume
       if (building) {
         if (
           regExp.test(
-            building.keyterms
-              .toString()
-              .replace(/,/g, " ")
-              .toLowerCase()
-              .trim()
+            building.keyterms.toString().replace(/,/g, " ").toLowerCase().trim()
           )
         ) {
           return true;
@@ -61,43 +61,49 @@ const InstrumentList = ({filterText,currentAppData,setCurrentAppData,setInstrume
   return (
     <Table hover striped responsive>
       <thead>
-          <tr>
-            <th>Device Keywords</th>
-            <th>Last Modification Date/Time</th>
-            <th>Device Info</th>
-            {httpUser.getCurrentUser() && <th>Device Management</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {instrumentList.map((item, index) => {
-            return (
-              <Fragment>
-                <tr key={index}>
-                  <td>{item.keyterms.toString()}</td>
-                  <td>{item.createdAt}</td>
+        <tr>
+          <th>Device Keywords</th>
+          <th>Last Modification Date/Time</th>
+          <th>Device Info</th>
+          {httpUser.getCurrentUser() && <th>Device Management</th>}
+        </tr>
+      </thead>
+      <tbody>
+        {instrumentList.map((item, index) => {
+          return (
+            <Fragment>
+              <tr key={index}>
+                <td>{item.keyterms.toString()}</td>
+                <td>
+                  <Moment format="HH:mm A YYYY/MM/DD">{item.createdAt}</Moment>
+                </td>
+                <td>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      setInstrument(
+                        currentAppData.find((x) => x._id === item._id)
+                      );
+                    }}
+                  >
+                    View Info
+                  </Button>
+                </td>
+                {httpUser.getCurrentUser() && (
                   <td>
                     <Button
-                      variant="primary"
-                      onClick={() => {
-                        setInstrument(currentAppData.find(x => x._id === item._id));
-                      }}
+                      variant="danger"
+                      onClick={() => handleDelete(item._id)}
                     >
-                      View Info
+                      Delete Item
                     </Button>
                   </td>
-                  {httpUser.getCurrentUser() &&
-                    <td>
-                      <Button variant="danger" onClick={() => handleDelete(item._id)}>
-                        Delete Item
-                      </Button>
-                    </td>
-                  }
-
-                </tr>
-              </Fragment>
-            );
-          })}
-        </tbody>
+                )}
+              </tr>
+            </Fragment>
+          );
+        })}
+      </tbody>
     </Table>
   );
 };
