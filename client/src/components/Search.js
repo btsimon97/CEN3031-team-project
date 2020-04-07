@@ -74,7 +74,8 @@ const Search = ({filterText,setFilterText,edit,instrument,setFetch,setEdit,}) =>
                <Form onChange={e => handleChange(e)}
                               onSubmit={e => handleSubmit(e)}>
                     <Form.Group>
-                         <Form.Label>Search Term(s)</Form.Label>
+                         {edit && <Form.Label>Edit keyterm(s)</Form.Label>}
+                         {!edit && <Form.Label>Search Term(s)</Form.Label>}
                          <Form.Control
                               type="text"
                               placeholder={"Enter search terms"}
