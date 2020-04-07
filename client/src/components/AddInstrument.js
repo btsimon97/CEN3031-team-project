@@ -5,10 +5,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useHistory } from "react-router-dom";
+
 
 const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
   const [keyterms, setKeyterms] = useState([]);
 
+  let history = useHistory();
   useEffect(() => {
       console.log("App mounted")
       return () => {
@@ -17,23 +20,22 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
       }
   },[])
 
-  const handleChange = (e) =>{
+  const onChange = (e) =>{
     e.preventDefault();
     setKeyterms(e.target.value.split(','));
-    
+    console.log(keyterms)
   }
 
-  const handleSubmit = (event) => {
+  const onSubmit = async  (event) => {
+    console.log("handling submited")
     event.preventDefault();
     let newInstrument; 
     newInstrument = {
       keyterms: keyterms
     };
 
-    axios
-      .post("/api/listings/", newInstrument)
-      .then(res => console.log(currentAppData))
-      .then(console.log("success!"));
+    await axios.post("/api/listings", newInstrument);
+    history.push('/')
     
   };
 
@@ -42,7 +44,7 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
       <Row className="justify-content-center">
         <Col className="col-5">
           <h1>Add New Instrument</h1>
-          <Form onSubmit = {(event) =>{handleSubmit(event)}} onChange = {(e) =>{handleChange(e)}}>
+          <Form onSubmit = {onSubmit} onChange = {onChange}>
             <Form.Group>
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control
@@ -54,7 +56,7 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
                 Separate your keywords with a comma if using multiple keywords.
               </Form.Text>
             </Form.Group>
-            <Button variant="primary" type="submit" href="/">
+            <Button variant="primary" type="submit">
               Add Instrument
             </Button>
           </Form>

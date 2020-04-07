@@ -9,7 +9,7 @@
     "heroku-postbuild": "cd client && npm install && npm run build",
     "dev": "concurrently \"nodemon server.js\" \"cd client && npm start\""
   },
-  "author": "",
+  "author": "Antonio Antonian",
   "license": "MIT",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

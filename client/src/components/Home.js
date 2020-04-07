@@ -9,15 +9,29 @@ import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
+import axios from "axios"
 
-const Home = ({currentAppData,setCurrentAppData, filterText, setFilterText}) => {
-    const [instrument, setInstrument] = useState();
+const Home = ({currentAppData,setCurrentAppData, filterText, setFilterText, instrument, setInstrument}) => {
+  const [edit, setEdit]  = useState(false);
+  const [fetch, setFetch] = useState(false);
     
+  const fetchData = async () => {
+    const result = await axios.get("api/listings/");
+    setCurrentAppData(result.data.data);
+    setFetch(false);
+  };
+
+  useEffect(() => {
+    console.log("List mounted or updated");
+    fetchData();
+  }, [setFetch, fetch]);
+
+
     return (
         <Fragment>
             <Row className="justify-content-center">
                 <Col className="col-8">
-                    <Search setFilterText={setFilterText}/>
+                    <Search setFilterText={setFilterText} setEdit = {setEdit} edit = {edit} instrument = {instrument} setFetch = {setFetch}/>
                 </Col>
             </Row>
             <Row className="justify-content-center">
@@ -28,7 +42,13 @@ const Home = ({currentAppData,setCurrentAppData, filterText, setFilterText}) => 
                             <InstrumentList filterText={filterText}
                                             setCurrentAppData = {setCurrentAppData}
                                             currentAppData = {currentAppData}
-                                            setInstrument = {setInstrument}/>
+                                            setInstrument = {setInstrument}
+                                            instrument = {instrument}
+                                            setFilterText = {setFilterText}
+                                            setEdit = {setEdit}
+                                            edit = {edit}
+                                            fectch={fetch}
+                                            setFetch = {setFetch}/>
                         {/*</tbody>*/}
                     {/*</Table>*/}
                 </Col>

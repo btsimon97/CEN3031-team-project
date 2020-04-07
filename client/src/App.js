@@ -10,6 +10,7 @@ import Dashboard from "./components/Dashboard.js";
 import NotFound from "./components/NotFound";
 import Admin from "./components/Admin.js"
 
+
 import {
   Switch,
   Route,
@@ -23,7 +24,10 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
   const [currentAppData, setCurrentAppData] = useState([]);
   const [filterText, setFilterText] = useState("");
+  const [instrument, setInstrument] = useState();
 
+
+  
   const onLoginSuccess = () => {
     setCurrentUser(httpUser.getCurrentUser());
   };
@@ -49,6 +53,8 @@ const App = () => {
                   filterText = {filterText}
                   setFilterText = {setFilterText}
                   currentUser = {currentUser}
+                  instrument = {instrument}
+                  setInstrument = {setInstrument}
                 />
               )}
             />

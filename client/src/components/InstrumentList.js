@@ -3,60 +3,39 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import httpUser from "../httpUser";
-import Moment from "react-moment"
+import Moment from "react-moment";
+import { useHistory } from "react-router-dom";
 
-const InstrumentList = ({
-  filterText,
-  currentAppData,
-  setCurrentAppData,
-  setInstrument,
-  currentUser,
-}) => {
-  const [fetch, setFetch] = useState(false);
-  console.log(filterText);
-  const fetchData = async () => {
-    const result = await axios.get("api/listings/");
-    setCurrentAppData(result.data.data);
-    setFetch(false);
-  };
+const InstrumentList = ({edit,filterText,currentAppData,setCurrentAppData,setInstrument,instrument,currentUser,setEdit,setFilterText,setFetch,fetch }) => {
 
-  useEffect(() => {
-    console.log("List mounted or updated");
-    fetchData();
-  }, [setFetch, fetch]);
+  let history = useHistory();
+
+  useEffect(()=>{
+        setCurrentAppData(formatList(currentAppData, filterText))
+  },[filterText])
 
   const handleDelete = async (id) => {
-    let res = await axios.delete(`api/listings/${id}`);
+     await axios.delete(`api/listings/${id}`);
     setFetch(true);
   };
 
-  let instrumentList = currentAppData.filter((building) => {
-    if (filterText && filterText.trim() !== "") {
-      let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
-      let searchText = filterText.split(",");
-      if (searchText.length > 1) {
-        let multipleSearch = "";
-        let j = 0;
-        for (; j < searchText.length; j++) {
-          let word = "(?=.*" + searchText[j] + ")";
-          multipleSearch += word.trim().toLowerCase().replace(/ /g, "");
-        }
-        regExp = new RegExp(multipleSearch + ".+", "gi");
-      }
-      console.log(building.keyterms.toString().replace(/,/g, " "));
-      if (building) {
-        if (
-          regExp.test(
-            building.keyterms.toString().replace(/,/g, " ").toLowerCase().trim()
-          )
-        ) {
-          return true;
-        }
-      }
-      return false;
+  const handleUpdate = async (id) => {
+    if (edit) {
+      setEdit(false);
+    } else {
+      setEdit(true);
+      let instrument = currentAppData.filter((x) => x._id === id)[0];
+      setInstrument(instrument);
+      console.log("setting edit mode on");
     }
-    return true;
-  });
+
+  };
+
+  const handleClick = (id) => {
+    let instrument = currentAppData.filter((x) => x._id === id)[0];
+    setInstrument(instrument);
+  };
+
 
   return (
     <Table hover striped responsive>
@@ -68,10 +47,10 @@ const InstrumentList = ({
           {httpUser.getCurrentUser() && <th>Device Management</th>}
         </tr>
       </thead>
-      <tbody>
-        {instrumentList.map((item, index) => {
+      <tbody >
+        {currentAppData.map((item, index) => {
           return (
-            <Fragment>
+            <Fragment  key={index}>
               <tr key={index}>
                 <td>{item.keyterms.toString()}</td>
                 <td>
@@ -80,11 +59,7 @@ const InstrumentList = ({
                 <td>
                   <Button
                     variant="primary"
-                    onClick={async () => {
-                      setInstrument(
-                        currentAppData.find(await axios.get(`api/intruments/${item._id}`))
-                      );
-                    }}
+                    onClick={() => handleClick(item._id)}
                   >
                     View Info
                   </Button>
@@ -99,6 +74,16 @@ const InstrumentList = ({
                     </Button>
                   </td>
                 )}
+                {httpUser.getCurrentUser() && (
+                  <td>
+                    <Button
+                      variant="info"
+                      onClick={() => handleUpdate(item._id)}
+                    >
+                      Update
+                    </Button>
+                  </td>
+                )}
               </tr>
             </Fragment>
           );
@@ -108,3 +93,30 @@ const InstrumentList = ({
   );
 };
 export default InstrumentList;
+
+const formatList = (data, filterText) => {
+  return data.filter((building) => {
+    if (filterText && filterText.trim() !== "") {
+      let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
+      let searchText = filterText.split(",");
+      if (searchText.length > 1) {
+        let multipleSearch = "";
+        let j = 0;
+        for (; j < searchText.length; j++) {
+          let word = "(?=.*" + searchText[j] + ")";
+          multipleSearch += word.trim().toLowerCase().replace(/ /g, "");
+        }
+        regExp = new RegExp(multipleSearch + ".+", "gi");
+      }
+      if (building) {
+        if (
+          regExp.test(
+            building.keyterms.toString().replace(/,/g, " ").toLowerCase().trim()
+          )
+        )
+          return true;
+      } else return false;
+    }
+    return true;
+  });
+};

@@ -57,6 +57,8 @@ export const read = async (req, res) => {
 
 //CHECK ME
 export const update = async (req, res) => {
+  console.log("Updating")
+  console.log(req.params.id)
   try {
     let update = {
       keyterms: req.body.keyterms,
@@ -64,7 +66,8 @@ export const update = async (req, res) => {
     const instruments = await InstrumentModel.findByIdAndUpdate(req.params.id, update, {new: true});
     return res.status(200).json({
       success: true,
-      count: instruments.length
+      count: instruments.length,
+      data: instruments
     });
   } catch (err) {
     return res.status(500).json({

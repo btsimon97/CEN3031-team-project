@@ -27,8 +27,6 @@ const SignUp = props => {
 
   // used to submit user values for password and email
   const onFormSubmit = async e => {
-    console.log(fields);
-    console.log(process.env.PORT)
     e.preventDefault();
     const user = await httpUser.signUp(fields);
     if (user) {
