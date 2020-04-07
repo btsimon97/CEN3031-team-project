@@ -72,6 +72,7 @@ const InstrumentList = ({edit,filterText,currentAppData,setCurrentAppData,setIns
                     >
                       Delete Item
                     </Button>
+                    &nbsp;
                     <Button
                       variant="info"
                       onClick={() => handleUpdate(item._id)}
