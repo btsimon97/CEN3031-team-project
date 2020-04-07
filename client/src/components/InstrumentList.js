@@ -72,15 +72,11 @@ const InstrumentList = ({edit,filterText,currentAppData,setCurrentAppData,setIns
                     >
                       Delete Item
                     </Button>
-                  </td>
-                )}
-                {httpUser.getCurrentUser() && (
-                  <td>
                     <Button
                       variant="info"
                       onClick={() => handleUpdate(item._id)}
                     >
-                      Update
+                      Edit Item
                     </Button>
                   </td>
                 )}
