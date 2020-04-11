@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import Moment from "react-moment"
+import Moment from "react-moment";
+import "./ViewUser.css";
 
 const ViewUser = ({ user }) => {
   console.log(user);
   if (user) {
     return (
       <Fragment>
-        <Card bsPrefix="card sticky-top sticky-top-pad">
+        <Card className="sticky-top sticky-top-pad">
           <Card.Header>User Details</Card.Header>
           <Card.Body>
             <Card.Text>
@@ -31,7 +32,7 @@ const ViewUser = ({ user }) => {
   } else {
     return (
       <Fragment>
-        <Card>
+        <Card className="sticky-top sticky-top-pad">
           <Card.Header>User Details</Card.Header>
           <Card.Body>
             <Card.Text>
