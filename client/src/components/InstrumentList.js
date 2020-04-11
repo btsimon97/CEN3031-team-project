@@ -85,9 +85,7 @@ const InstrumentList = () => {
                     {searchResults.map((item, index) => {
                          return (
                               <Fragment>
-                                   <tr  key={item._id} 
-                                        onMouseOver={() => setInstrument(currentAppData.find(x => x._id === item._id))}
-                                        onMouseLeave = {() => setInstrument(null)}>
+                                   <tr  key={item._id}>
                                         <td>{item.keyterms.toString()}</td>
                                         <td>
                                              <Moment format="HH:mm A YYYY/MM/DD">
