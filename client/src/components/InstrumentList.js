@@ -5,6 +5,7 @@ import httpUser from "../httpUser";
 import Moment from "react-moment";
 import { useHistory } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
+import "./InstrumentList.css";
 
 const InstrumentList = () => {
      const {
