@@ -46,6 +46,18 @@ httpUser.signUp = async function(userInfo) {
     }
 };
 
+httpUser.updateUser = async function(userInfo, id) {
+    console.log(id)
+    const response = await axios.patch(`/api/users/${id}`, userInfo);
+    const token = response.data.token;
+    if(token) {
+        this.defaults.headers.common.token = this.setToken(token);
+        return jwtDecode(token);
+    } else {
+        return false;
+    }
+};
+
 httpUser.logOut = function() {
     localStorage.removeItem('token');
     delete this.defaults.headers.common.token;

@@ -8,9 +8,8 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 
-const Dashboard = ({filterText, setFilterText}) => {
+const Dashboard = ({setFetch, fetch, filterText, setFilterText, users, setUsers}) => {
     const [user, setUser] = useState();
-
     return (
         <Fragment>
             <Row className="justify-content-center">
@@ -21,7 +20,7 @@ const Dashboard = ({filterText, setFilterText}) => {
             <Row className="justify-content-center">
                 <Col className="col-md-auto">
                     <h2>User List</h2>
-                    <UserList filterText={filterText} setUser={setUser}  />
+                    <UserList filterText={filterText} setUser={setUser} users = {users}setFetch = {setFetch} />
                 </Col>
                 <Col className="col-md-3 offset-md-1">
                     <h2>&nbsp;</h2>

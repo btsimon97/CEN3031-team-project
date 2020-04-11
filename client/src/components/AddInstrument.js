@@ -1,22 +1,21 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
 import axios from "axios";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
 
+import { GlobalContext } from '../context/GlobalState';
 
-const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
+
+const AddInstrument = () => {
   const [keyterms, setKeyterms] = useState([]);
+  const { addInstrument } = useContext(GlobalContext);
 
   let history = useHistory();
   useEffect(() => {
-      console.log("App mounted")
       return () => {
-        console.log("Add unmounted")
-
       }
   },[])
 
@@ -27,14 +26,13 @@ const AddInstrument = ({ currentAppData, setCurrentAppData }) => {
   }
 
   const onSubmit = async  (event) => {
-    console.log("handling submited")
     event.preventDefault();
     let newInstrument; 
     newInstrument = {
       keyterms: keyterms
     };
-
-    await axios.post("/api/listings", newInstrument);
+    addInstrument(newInstrument)
+    // await axios.post("/api/listings", newInstrument);
     history.push('/')
     
   };

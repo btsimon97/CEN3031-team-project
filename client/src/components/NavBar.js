@@ -9,7 +9,7 @@ const NavBar = (props) => {
     return (
             <Fragment>
                 <Navbar expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand to= '/home' href="#">Medical Image Search</Navbar.Brand>
+                    <Navbar.Brand to= '/home' href="/">Medical Image Search</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">

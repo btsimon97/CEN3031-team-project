@@ -5,7 +5,7 @@ import {verifyToken} from '../authHelperFunctions.js'
 let userRouter = new express.Router()
 
 
-userRouter.route('/').get(userController.index)
+// userRouter.route('/').get(userController.index)
 
 userRouter.route('/').get(userController.index).post(userController.create);
 

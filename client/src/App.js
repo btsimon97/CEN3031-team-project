@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AddInstrument from "./components/AddInstrument";
-import httpUser from "./httpUser";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import LogIn from "./components/LogIn.js";
@@ -8,118 +7,117 @@ import SignUp from "./components/SignUp";
 import LogOut from "./components/LogOut";
 import Dashboard from "./components/Dashboard.js";
 import NotFound from "./components/NotFound";
-import Admin from "./components/Admin.js"
+import Admin from "./components/Admin.js";
+import Profile from "./components/Profile.js";
+import httpUser from "./httpUser";
+import axios from "axios";
 
-
-import {
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 
+import { GlobalContext } from "./context/GlobalState";
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
-  const [currentAppData, setCurrentAppData] = useState([]);
-  const [filterText, setFilterText] = useState("");
-  const [instrument, setInstrument] = useState();
+     const { getInstruments, currentAppData, getUsers, users } = useContext(
+          GlobalContext
+     );
+     const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
 
+     // useEffect(()=>{
+     //      console.log("App mounted! ");
+     //      getInstruments();
+     // },[])
 
-  
-  const onLoginSuccess = () => {
-    setCurrentUser(httpUser.getCurrentUser());
-  };
+     useEffect(() => {
+          console.log("App mounted! ");
+          getUsers();
+          // getInstruments();
+     }, []);
 
-  const logOut = () => {
-    httpUser.logOut();
-    setCurrentUser(null);
-  };
+     const onLoginSuccess = () => {
+          setCurrentUser(httpUser.getCurrentUser());
+     };
 
-  return (
-    <div>
-      <NavBar currentUser={currentUser} />
-      <body>
-        <Container fluid>
-          <Switch>
-            <Route
-              exact
-              path="/home"
-              render={() => (
-                <Home
-                  currentAppData={currentAppData}
-                  setCurrentAppData={setCurrentAppData}
-                  filterText = {filterText}
-                  setFilterText = {setFilterText}
-                  currentUser = {currentUser}
-                  instrument = {instrument}
-                  setInstrument = {setInstrument}
-                />
-              )}
-            />
-            <Route exact path="/">
-                    <Redirect to="/Home" />
-            </Route>
-              )}
-            />
-            <Route
-              exact
-              path="/admin"
-              render={() => (
-                <Admin
-                  currentAppData={currentAppData}
-                  setCurrentAppData={setCurrentAppData}
-                />
-              )}
-            />
-            <Route
-              path="/login"
-              render={props => {
-                return (
-                  <LogIn
-                    {...props}
-                    onLoginSuccess={onLoginSuccess}
-                    Redirect
-                    to="/home"
-                  />
-                );
-              }}
-            />
-            <Route
-              path="/signup"
-              render={props => {
-                return <SignUp {...props} onSignUpSuccess={onLoginSuccess} />;
-              }}
-            />
-            <Route
-              path="/logout"
-              render={props => {
-                return <LogOut onLogOut={logOut} />;
-              }}
-            />
-            <Route
-              path="/dashboard"
-              render={props => {
-                return currentUser ? <Dashboard {...props} filterText = {filterText} setFilterText = {setFilterText}/> : <Redirect to="/login" />;
-              }}
-            />
-            <Route
-              exact
-              path="/add"
-              render={() => (
-                <AddInstrument
-                  currentAppData={currentAppData}
-                  setCurrentAppData={setCurrentAppData}
-                />
-              )}
-            />
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </Container>
-      </body>
-    </div>
-  );
+     const logOut = () => {
+          httpUser.logOut();
+          setCurrentUser(null);
+     };
+
+     return (
+          <body>
+               <NavBar currentUser={currentUser} />
+               <Container fluid>
+                    <Switch>
+                         <Route exact path="/Home">
+                              <Home />
+                         </Route>
+                         <Route exact path="/">
+                              <Redirect to="/Home" />
+                         </Route>
+                         )} />
+                         <Route exact path="/admin" component={Admin} />
+                         <Route
+                              exact
+                              path="/profile"
+                              render={(props) => (
+                                   <Profile props={props} users={users} />
+                              )}
+                         />
+                         <Route
+                              path="/login"
+                              render={(props) => {
+                                   return (
+                                        <LogIn
+                                             {...props}
+                                             onLoginSuccess={onLoginSuccess}
+                                             Redirect
+                                             to="/home"
+                                        />
+                                   );
+                              }}
+                         />
+                         <Route
+                              path="/signup"
+                              render={(props) => {
+                                   return (
+                                        <SignUp
+                                             {...props}
+                                             onSignUpSuccess={onLoginSuccess}
+                                        />
+                                   );
+                              }}
+                         />
+                         <Route
+                              path="/logout"
+                              render={(props) => {
+                                   return <LogOut onLogOut={logOut} />;
+                              }}
+                         />
+                         <Route
+                              path="/dashboard"
+                              render={(props) => {
+                                   return currentUser ? (
+                                        <Dashboard
+                                             {...props}
+                                             users={users}
+                                             fetch={fetch}
+                                             // filterText={filterText}
+                                             // setFilterText={
+                                             //      setFilterText
+                                             // }
+                                        />
+                                   ) : (
+                                        <Redirect to="/login" />
+                                   );
+                              }}
+                         />
+                         <Route exact path="/add" component={AddInstrument} />
+                         <Route path="*" component={NotFound} />
+                    </Switch>
+               </Container>
+          </body>
+     );
 };
 
 export default App;

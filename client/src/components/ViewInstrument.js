@@ -1,8 +1,12 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext} from 'react';
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 
-const ViewInstrument = ({instrument, match}) => {
+import { GlobalContext } from "../context/GlobalState";
+
+const ViewInstrument = () => {
+    const {instrument} = useContext(GlobalContext);
+
     if(instrument)
     {
         if(!instrument.keyterms)

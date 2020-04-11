@@ -1,23 +1,18 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table'
 import Search from "./Search";
 
+import { GlobalContext } from "../context/GlobalState";
+
 const UserList = ({ filterText, setUser }) => {
   const [fetch, setFetch] = useState(false);
-  const [users, setUsers] = useState([]);
-
-  const fetchData = async () => {
-    const result = await axios.get("api/users/");
-    setUsers(result.data);
-    console.log(users);
-    setFetch(false);
-  };
+  // const [users, setUsers] = useState([]);
+  const { users, getUsers } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log("User list mounted or updated");
-    fetchData();
+    getUsers();
   }, [fetch, setFetch]);
 
   const handleDelete = async (id) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
 // import Row from 'react-bootstrap/Row'
 import Form from "react-bootstrap/Form";
 import InstrumentList from "./InstrumentList";
@@ -6,80 +6,73 @@ import axios from "axios";
 
 import Button from "react-bootstrap/Button";
 import { readFileSync } from "fs";
+import { GlobalContext } from '../context/GlobalState'
 
-const Search = ({filterText,setFilterText,edit,instrument,setFetch,setEdit,}) => {
-     const [value, setValue] = useState("");
-     //Notes:
-     // Figure out why its not getting the endpoint
+const Search = () => {
+     const { setFilterText, filterText, getInstruments, edit , setEditMode, instrument } = useContext(GlobalContext);
+     const [keyterms, setKeyterms] = useState("");
 
      useEffect(() => {
-          console.log("Search mounted or updated");
-          if (edit) setValue(instrument.keyterms);
+          if (edit) setKeyterms(instrument.keyterms);
+
           return () => {
-               setValue("");
+               setKeyterms("")
           };
      }, [edit]);
 
      const handleChange = (e) => {
           e.preventDefault();
-          console.log(e.target.value);
           if (edit) {
-               setValue(e.target.value);
+               setKeyterms(e.target.value);
           } else {
                //Search mode
-               setValue(e.target.value);
+               setFilterText(e.target.value);
           }
      };
 
      const handleCancel = (e) => {
           e.preventDefault();
-          setValue("");
-          setEdit(false);
+          setKeyterms("");
+          setEditMode(false);
      }
+
      const handleSubmit = async (e) => {
           e.preventDefault();
-          setValue(e.target.value);
-
-          console.log("Handling submit ");
-
+          setKeyterms(e.target.value);
           if (edit) {
-               if (value && value !== "") {
-                    console.log(value);
-                    let update = value.split(",");
+               if (filterText && filterText !== "") {
+                    let update = filterText.split(",");
                     update.forEach((element, index) => {
                          update[index] = element.trim().toLowerCase();
                     });
-                    console.log(update);
                     //2. make axios call
                     let newInstrument = {
                          keyterms: update,
                     };
-                    console.log(instrument._id);
                     axios.put(`/api/listings/${instrument._id}`,
                          newInstrument
                     ).catch((err) => {
                         console.log(err);
                     })
-
-                    setFetch(true);
-                    setFilterText("");
+                    getInstruments();
                }
-               setValue("");
-               setEdit(false);
+               filterText("");
+               setEditMode(false);
           }
      };
 
      return (
           <Fragment>
-               <Form onChange={e => handleChange(e)}
-                              onSubmit={e => handleSubmit(e)}>
+               <Form >
                     <Form.Group>
                          {edit && <Form.Label>Edit keyterm(s)</Form.Label>}
                          {!edit && <Form.Label>Search Term(s)</Form.Label>}
                          <Form.Control
                               type="text"
                               placeholder={"Enter search terms"}
-                              value={value}
+                              onChange={e => handleChange(e)}
+                              onSubmit={e => handleSubmit(e)}
+                              value = {edit ? keyterms : filterText}
                          />
                     </Form.Group>
                     {edit && (
