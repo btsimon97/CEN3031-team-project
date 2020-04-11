@@ -95,6 +95,13 @@ const InstrumentList = () => {
                                                   {item.createdAt}
                                              </Moment>
                                         </td>
+                                        <td>
+                                        <Button   
+                                             variant="primary"
+                                             onClick={() => setInstrument(currentAppData.find(x => x._id === item._id))}>
+                                             View Info
+                                        </Button>
+                                        </td>
                                         {httpUser.getCurrentUser() && (
                                              <td>
                                                   <Button
