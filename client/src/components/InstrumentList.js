@@ -28,7 +28,7 @@ const InstrumentList = () => {
      const handleDelete = async (id) => {
           deleteInstrument(id);
      };
-
+          
      const handleUpdate = async (id) => {
           if (editMode) {
                setEditMode(false);
@@ -86,7 +86,9 @@ const InstrumentList = () => {
                     {searchResults.map((item, index) => {
                          return (
                               <Fragment>
-                                   <tr key={item._id} onMouseOver={() => setInstrument(currentAppData.find(x => x._id === item._id))}>
+                                   <tr  key={item._id} 
+                                        onMouseOver={() => setInstrument(currentAppData.find(x => x._id === item._id))}
+                                        onMouseLeave = {() => setInstrument(null)}>
                                         <td>{item.keyterms.toString()}</td>
                                         <td>
                                              <Moment format="HH:mm A YYYY/MM/DD">

@@ -15,7 +15,7 @@ const Search = () => {
           return () => {
                setFilterText("");
           };
-     }, []);
+     }, []);   
 
      const handleChange = (e) => {
           e.preventDefault();
