@@ -39,7 +39,7 @@ const Profile = (props) => {
                               ...value, 
                               [e.target.name]: e.target.value});
 
-               };
+          };
 
           const handleSubmit = async (e) => {
                     e.preventDefault();

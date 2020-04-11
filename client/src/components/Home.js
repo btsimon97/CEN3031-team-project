@@ -24,11 +24,8 @@ const Home = () => {
 
      // useEffect(()=>{
      //      console.log("App mounted! ");
-     //      console.log(currentAppData)
-     //      // getInstruments();
+     //      getInstruments();
      // },[]) 
-
-     const [fetch, setFetch] = useState(false);
 
      
 
@@ -36,9 +33,7 @@ const Home = () => {
           <Fragment>
                <Row className="justify-content-center">
                     <Col className="col-8">
-                         <Search
-                              setFetch={setFetch}
-                         />
+                         <Search/>
                     </Col>
                </Row>
                <Row className="justify-content-center">

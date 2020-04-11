@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Fragment, useContext } from "react";
-import axios from "axios";
+import React, { useEffect, Fragment, useContext } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import httpUser from "../httpUser";
@@ -40,11 +39,6 @@ const InstrumentList = () => {
           }
      };
 
-     const handleMouseOver = (id) => {
-          let instrument = currentAppData.filter((x) => x._id === id)[0];
-          setInstrument(instrument);
-     };
-
      let searchResults = currentAppData.filter((building) => {
           if (filterText && filterText.trim() !== "") {
                let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
@@ -78,7 +72,7 @@ const InstrumentList = () => {
      });
 
      return (
-          <Table hover striped responsive>
+          <Table hover responsive="sm"> 
                <thead>
                     <tr>
                          <th>Device Keywords</th>
@@ -114,11 +108,12 @@ const InstrumentList = () => {
                                                   &nbsp;
                                                   <Button
                                                        variant="info"
-                                                       onClick={() =>
-                                                            handleUpdate(
-                                                                 item._id
-                                                            )
-                                                       }
+                                                       onClick={(e) => 
+                                                            {
+                                                                 e.preventDefault();
+                                                                 setInstrument(currentAppData.find(x => x._id === item._id))
+                                                                 history.push("/update")
+                                                            }}
                                                   >
                                                        Edit Item
                                                   </Button>

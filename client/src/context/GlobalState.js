@@ -33,6 +33,21 @@ export const GlobalProvider = ({ children }) => {
           }
      };
 
+     const updateInstrument = async (id, instrument) => {
+          try {
+               let res = await axios.put(`api/listings/${id}`, instrument);
+               dispatch({
+                    type: "UPDATE_INSTRUMENT",
+                    payload: res.data,
+               });
+          } catch (error) {
+               dispatch({
+                    type: "INSTRUMENT_ERROR",
+                    payload: error.response.data.error,
+               });
+          }
+     };
+
 
 
      const deleteInstrument = async (id) => {
@@ -118,7 +133,8 @@ export const GlobalProvider = ({ children }) => {
                     setFilterText,
                     setEditMode,
                     getUsers,
-                    setInstrument
+                    setInstrument,
+                    updateInstrument    
                }}>
                {children}
           </GlobalContext.Provider>

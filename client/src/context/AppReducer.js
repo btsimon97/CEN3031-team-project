@@ -5,6 +5,10 @@ export default (state, action) => {
                                         ...state, 
                                         currentAppData: [...state.currentAppData, action.payload]
                               }
+                    case 'UPDATE_INSTRUMENT':
+                              return {
+                                        ...state
+                              }
 
                     case 'SET_INSTRUMENT':
                               return {

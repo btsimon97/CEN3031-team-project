@@ -16,6 +16,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
 import { GlobalContext } from "./context/GlobalState";
+import UpdateInstrument from "./components/UpdateInstrument";
 
 const App = () => {
      const {getUsers, users } = useContext(
@@ -53,7 +54,9 @@ const App = () => {
                          <Route exact path="/">
                               <Redirect to="/Home" />
                          </Route>
-                         )} />
+                         <Route exact path="/update">
+                              <UpdateInstrument />
+                         </Route>
                          <Route exact path="/admin" component={Admin} />
                          <Route
                               exact
