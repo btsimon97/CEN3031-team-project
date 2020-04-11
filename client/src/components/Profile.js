@@ -3,6 +3,8 @@ import React, {useState, useEffect,useContext, Component, Fragment} from 'react'
 import Form from "react-bootstrap/Form";
 import httpUser from "../httpUser";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
 
 
@@ -55,35 +57,38 @@ const Profile = (props) => {
 
           return (
           <Fragment>
-               <Form onChange={e => handleChange(e)}
+               <Row className="justify-content-center">
+                    <Col className="col-5">
+                         <h1>Edit My Profile</h1>
+                         <Form onChange={e => handleChange(e)}
                               onSubmit={e => handleSubmit(e)}>
-                    <Form.Group>
-                         <Form.Label>Edit name</Form.Label>
-                         <Form.Control
-                              onChange={e => handleChange(e)}
-                              type="text"
-                              placeholder={"Enter name"}
-                              name="name"
-                              value={value.name}
-                         />
+                              <Form.Group>
+                                   <Form.Label>Edit name</Form.Label>
+                                   <Form.Control
+                                        onChange={e => handleChange(e)}
+                                        type="text"
+                                        placeholder={"Enter name"}
+                                        name="name"
+                                        value={value.name}
+                                   />
 
-                    <Form.Label>Edit email</Form.Label>
-                         <Form.Control
-                              onChange={e => handleChange(e)}
-                              type="text"
-                              placeholder={"Enter email"}
-                              name="email"
-                              value={value.email}
-                         />
-                    </Form.Group>
-                    <Form.Group>
-                    <Button variant="success" type="submit" onClick = {e => handleSubmit(e)}>
-                              Confirm
-                    </Button>
-                    </Form.Group>
-                    
-                    
-               </Form>
+                                   <Form.Label>Edit email</Form.Label>
+                                   <Form.Control
+                                        onChange={e => handleChange(e)}
+                                        type="text"
+                                        placeholder={"Enter email"}
+                                        name="email"
+                                        value={value.email}
+                                   />
+                              </Form.Group>
+                              <Form.Group>
+                                   <Button variant="success" type="submit" onClick = {e => handleSubmit(e)}>
+                                   Confirm
+                                   </Button>
+                              </Form.Group>
+                         </Form>
+                    </Col>
+               </Row>
           </Fragment>
           );
 };
