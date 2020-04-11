@@ -1,5 +1,4 @@
 export default (state, action) => {
-          console.log("state", state)
           switch (action.type) {
                     case 'ADD_INSTRUMENT':
                               return {

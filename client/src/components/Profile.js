@@ -18,14 +18,18 @@ const Profile = (props) => {
           })
 
           useEffect  (()=>{
-                    user = httpUser.getCurrentUser();
+                    user = httpUser.getCurrentUser()
+                    console.log(user)
                     setValue({
                              name: user.name,
                              email: user.email
                     });
-                    
-
-                    
+                    // return () => {
+                    //      setValue({
+                    //           name: user.name,
+                    //           email: user.email
+                    //  });
+                    // }
           },[])
           
 
@@ -45,10 +49,10 @@ const Profile = (props) => {
                       props.setLogin(true);
                       props.setCurrrentUser(userBack)
                     }
-
+                    
                     setValue({
-                              email: "", 
-                              name: "",
+                              email: userBack.email, 
+                              name: userBack.name,
                     })
                     history.push("/dashboard")
                     

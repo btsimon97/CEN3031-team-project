@@ -43,7 +43,7 @@ export default {
 
       res.json({ success: true, message: "User updated", user });
     } catch (err) {
-      res.json({ success: false, code: err.code });
+      res.json({ success: false, code: err.code , error: err});
     }
   },
 

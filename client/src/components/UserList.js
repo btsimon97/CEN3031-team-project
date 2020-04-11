@@ -41,25 +41,16 @@ const UserList = ({ filterText, setUser }) => {
           <tr>
             <th>User Name</th>
             <th>User Email</th>
-            <th>User Info</th>
             <th>User Management</th>
           </tr>
         </thead>
         <tbody>
           {userList.map((item, index) => {
             return (
-              <Fragment>
-                <tr key={index}>
-                  <td>{item.name}</td>
+              <Fragment key={item._id}>
+                <tr onMouseOver={() => setUser(users.find(x => x._id === item._id))}>
+                  <td >{item.name}</td>
                   <td>{item.email}</td>
-                  <td>
-                    <Button
-                      variant="primary"
-                      onClick={() => setUser(users.find(x => x._id === item._id))}
-                    >
-                      View User Info
-                    </Button>
-                  </td>
                   <td>
                     <Button variant="danger" onClick={() => handleDelete(item._id)}>
                       Delete User

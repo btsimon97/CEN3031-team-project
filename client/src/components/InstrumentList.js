@@ -40,7 +40,7 @@ const InstrumentList = () => {
           }
      };
 
-     const handleClick = (id) => {
+     const handleMouseOver = (id) => {
           let instrument = currentAppData.filter((x) => x._id === id)[0];
           setInstrument(instrument);
      };
@@ -83,7 +83,6 @@ const InstrumentList = () => {
                     <tr>
                          <th>Device Keywords</th>
                          <th>Last Modification Date/Time</th>
-                         <th>Device Info</th>
                          {httpUser.getCurrentUser() && (
                               <th>Device Management</th>
                          )}
@@ -92,23 +91,13 @@ const InstrumentList = () => {
                <tbody>
                     {searchResults.map((item, index) => {
                          return (
-                              <Fragment key={index}>
-                                   <tr key={index}>
+                              <Fragment>
+                                   <tr key={item._id} onMouseOver={() => setInstrument(currentAppData.find(x => x._id === item._id))}>
                                         <td>{item.keyterms.toString()}</td>
                                         <td>
                                              <Moment format="HH:mm A YYYY/MM/DD">
                                                   {item.createdAt}
                                              </Moment>
-                                        </td>
-                                        <td>
-                                             <Button
-                                                  variant="primary"
-                                                  onClick={() =>
-                                                       handleClick(item._id)
-                                                  }
-                                             >
-                                                  View Info
-                                             </Button>
                                         </td>
                                         {httpUser.getCurrentUser() && (
                                              <td>

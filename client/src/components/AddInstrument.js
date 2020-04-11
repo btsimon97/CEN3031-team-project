@@ -22,7 +22,6 @@ const AddInstrument = () => {
   const onChange = (e) =>{
     e.preventDefault();
     setKeyterms(e.target.value.split(','));
-    console.log(keyterms)
   }
 
   const onSubmit = async  (event) => {

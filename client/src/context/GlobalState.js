@@ -53,7 +53,6 @@ export const GlobalProvider = ({ children }) => {
      const getInstruments = async () => {
           try {
                const res = await axios.get("api/listings/");
-               console.log(res.data.data);
                dispatch({
                     type: "GET_INSTRUMENTS",
                     payload: res.data.data,

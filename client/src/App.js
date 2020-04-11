@@ -10,7 +10,6 @@ import NotFound from "./components/NotFound";
 import Admin from "./components/Admin.js";
 import Profile from "./components/Profile.js";
 import httpUser from "./httpUser";
-import axios from "axios";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
@@ -19,7 +18,7 @@ import Container from "react-bootstrap/Container";
 import { GlobalContext } from "./context/GlobalState";
 
 const App = () => {
-     const { getInstruments, currentAppData, getUsers, users } = useContext(
+     const {getUsers, users } = useContext(
           GlobalContext
      );
      const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
@@ -30,7 +29,6 @@ const App = () => {
      // },[])
 
      useEffect(() => {
-          console.log("App mounted! ");
           getUsers();
           // getInstruments();
      }, []);
