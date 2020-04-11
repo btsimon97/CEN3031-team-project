@@ -86,8 +86,8 @@ const InstrumentList = () => {
                          return (
                               <Fragment>
                                    <tr  key={item._id}>
-                                        <td>{item.keyterms.toString()}</td>
-                                        <td>
+                                        <td className="align-middle">{item.keyterms.toString()}</td>
+                                        <td className="align-middle">
                                              <Moment format="HH:mm A YYYY/MM/DD">
                                                   {item.createdAt}
                                              </Moment>
