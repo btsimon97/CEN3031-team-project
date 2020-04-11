@@ -8,7 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 const NavBar = (props) => {
     return (
             <Fragment>
-                <Navbar expand="lg" bg="dark" variant="dark">
+                <Navbar expand="lg" bg="dark" variant="dark" sticky="top">
                     <Navbar.Brand to= '/home' href="/">Medical Image Search</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

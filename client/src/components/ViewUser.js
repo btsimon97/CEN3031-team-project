@@ -8,7 +8,7 @@ const ViewUser = ({ user }) => {
   if (user) {
     return (
       <Fragment>
-        <Card>
+        <Card className="sticky-top">
           <Card.Header>User Details</Card.Header>
           <Card.Body>
             <Card.Text>
