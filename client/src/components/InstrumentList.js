@@ -79,7 +79,6 @@ const InstrumentList = () => {
                                              </Button>
                                              {httpUser.getCurrentUser() && (
                                                   <Fragment>
-                                                       &nbsp;&nbsp;
                                                        <Button
                                                             variant="danger"
                                                             onClick={() =>
@@ -90,7 +89,6 @@ const InstrumentList = () => {
                                                        >
                                                             Delete Item
                                                        </Button>
-                                                       &nbsp;&nbsp;
                                                        <Button
                                                             variant="info"
                                                             onClick={(e) => 
