@@ -19,7 +19,7 @@ import { GlobalContext } from "./context/GlobalState";
 import UpdateInstrument from "./components/UpdateInstrument";
 
 const App = () => {
-     const {getUsers, users } = useContext(
+     const {getUsers, users, getInstruments } = useContext(
           GlobalContext
      );
      const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
@@ -31,7 +31,7 @@ const App = () => {
 
      useEffect(() => {
           getUsers();
-          // getInstruments();
+          getInstruments();
      }, []);
 
      const onLoginSuccess = () => {
