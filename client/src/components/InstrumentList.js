@@ -92,45 +92,39 @@ const InstrumentList = () => {
                                                   {item.createdAt}
                                              </Moment>
                                         </td>
-                                        <td>
-                                             <ul>
-                                                  <li>
-                                                       <Button   
-                                                       variant="primary"
-                                                            onClick={() => setInstrument(currentAppData.find(x => x._id === item._id))}>
-                                                            View Info
+                                        <td className="d-flex flex-wrap">
+                                             <Button   
+                                             variant="primary"
+                                                  onClick={() => setInstrument(currentAppData.find(x => x._id === item._id))}>
+                                                  View Info
+                                             </Button>
+                                             {httpUser.getCurrentUser() && (
+                                                  <Fragment>
+                                                       &nbsp;&nbsp;
+                                                       <Button
+                                                            variant="danger"
+                                                            onClick={() =>
+                                                                 handleDelete(
+                                                                      item._id
+                                                                 )
+                                                            }
+                                                       >
+                                                            Delete Item
                                                        </Button>
-                                                  </li>
-                                                  {httpUser.getCurrentUser() && (
-                                                       <Fragment>
-                                                            <li>
-                                                                 <Button
-                                                                      variant="danger"
-                                                                      onClick={() =>
-                                                                           handleDelete(
-                                                                                item._id
-                                                                           )
-                                                                      }
-                                                                 >
-                                                                      Delete Item
-                                                                 </Button>
-                                                            </li>
-                                                            <li>
-                                                                 <Button
-                                                                      variant="info"
-                                                                      onClick={(e) => 
-                                                                           {
-                                                                                e.preventDefault();
-                                                                                setInstrument(currentAppData.find(x => x._id === item._id))
-                                                                                history.push("/update")
-                                                                           }}
-                                                                 >
-                                                                      Edit Item
-                                                                 </Button>
-                                                            </li>
+                                                       &nbsp;&nbsp;
+                                                       <Button
+                                                            variant="info"
+                                                            onClick={(e) => 
+                                                                 {
+                                                                      e.preventDefault();
+                                                                      setInstrument(currentAppData.find(x => x._id === item._id))
+                                                                      history.push("/update")
+                                                                 }}
+                                                       >
+                                                            Edit Item
+                                                       </Button>
                                                   </Fragment>
-                                        )}
-                                             </ul>
+                                             )}
                                         </td>
                                    </tr>
                               </Fragment>
