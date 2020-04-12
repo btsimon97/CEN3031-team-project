@@ -20,28 +20,15 @@ const InstrumentList = () => {
 
      let history = useHistory();
 
-     useEffect(()=> {
-          getInstruments();
-     }, [])
-
- 
-
+     
      const handleDelete = async (id) => {
           deleteInstrument(id);
      };
           
-     const handleUpdate = async (id) => {
-          if (editMode) {
-               setEditMode(false);
-          } else {
-               setEditMode(true);
-               let instrument = currentAppData.filter((x) => x._id === id)[0];
-               setInstrument(instrument);
-          }
-     };
 
-     let searchResults = currentAppData.filter((building) => {
+     let searchResults = currentAppData.filter((item) => {
           if (filterText && filterText.trim() !== "") {
+               console.log(currentAppData)
                let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
                let searchText = filterText.split(",");
                if (searchText.length > 1) {
@@ -56,20 +43,12 @@ const InstrumentList = () => {
                     }
                     regExp = new RegExp(multipleSearch + ".+", "gi");
                }
-               if (building) {
-                    if (
-                         regExp.test(
-                              building.keyterms
-                                   .toString()
-                                   .replace(/,/g, " ")
-                                   .toLowerCase()
-                                   .trim()
-                         )
-                    )
-                         return true;
+               if (item) {
+                    if (regExp.test(item.keyterms.toString()
+                         .replace(/,/g, " ").toLowerCase().trim())){return true}
                } else return false;
-          }
-          return true;
+          } else return true;
+          
      });
 
      return (
