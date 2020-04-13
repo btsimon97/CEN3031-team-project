@@ -67,6 +67,7 @@ export const GlobalProvider = ({ children }) => {
 
      const getInstruments = async () => {
           try {
+               console.log("bruh");
                const res = await axios.get("api/listings/");
                dispatch({
                     type: "GET_INSTRUMENTS",
