@@ -18,8 +18,10 @@ const Search = () => {
      }, []);   
 
      const handleChange = (e) => {
+          console.time("search");
           e.preventDefault();
           setFilterText(e.target.value);
+          console.timeEnd("search");
           console.log(e.target.value)
      };
 
