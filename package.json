@@ -12,6 +12,7 @@
   "author": "Antonio Antonian",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.9.10",
     "bcrypt-nodejs": "0.0.3",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",

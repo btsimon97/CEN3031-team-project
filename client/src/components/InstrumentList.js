@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
 import './InstrumentList.css';
 
+// import { Button } from '@material-ui/core';
+
 const InstrumentList = () => {
   const {
     currentAppData,
@@ -64,40 +66,30 @@ const InstrumentList = () => {
                 <td className="align-middle">
                   <Moment format="HH:mm A YYYY/MM/DD">{item.createdAt}</Moment>
                 </td>
-                <td>
-                  <ul>
-                    <li>
-                      <Button
-                        variant="primary"
-                        onClick={() =>
-                          setInstrument(currentAppData.find((x) => x._id === item._id))
-                        }
-                      >
-                        View Info
+                <td className="d-flex flex-wrap">
+                  <Button
+                    variant="primary"
+                    onClick={() => setInstrument(currentAppData.find((x) => x._id === item._id))}
+                  >
+                    View Info
+                  </Button>
+                  {httpUser.getCurrentUser() && (
+                    <Fragment>
+                      <Button variant="danger" onClick={() => handleDelete(item._id)}>
+                        Delete Item
                       </Button>
-                    </li>
-                    {httpUser.getCurrentUser() && (
-                      <Fragment>
-                        <li>
-                          <Button variant="danger" onClick={() => handleDelete(item._id)}>
-                            Delete Item
-                          </Button>
-                        </li>
-                        <li>
-                          <Button
-                            variant="info"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setInstrument(currentAppData.find((x) => x._id === item._id));
-                              history.push('/update');
-                            }}
-                          >
-                            Edit Item
-                          </Button>
-                        </li>
-                      </Fragment>
-                    )}
-                  </ul>
+                      <Button
+                        variant="info"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setInstrument(currentAppData.find((x) => x._id === item._id));
+                          history.push('/update');
+                        }}
+                      >
+                        Edit Item
+                      </Button>
+                    </Fragment>
+                  )}
                 </td>
               </tr>
             </Fragment>

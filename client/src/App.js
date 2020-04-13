@@ -33,6 +33,7 @@ const App = () => {
   }, []);
 
   const onLoginSuccess = () => {
+    console.log(httpUser.getCurrentUser());
     setCurrentUser(httpUser.getCurrentUser());
   };
 
