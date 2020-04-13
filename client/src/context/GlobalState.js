@@ -74,7 +74,8 @@ export const GlobalProvider = ({ children }) => {
                     type: "GET_INSTRUMENTS",
                     payload: res.data.data,
                });
-               console.timeEnd("lol");
+               var retTime = console.timeEnd("lol");
+               console.log(retTime);
           } catch (error) {
                dispatch({
                     type: "INSTRUMENT_ERROR",
