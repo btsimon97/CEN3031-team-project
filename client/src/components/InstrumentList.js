@@ -29,7 +29,7 @@ const InstrumentList = () => {
   let searchResults = currentAppData.filter((item) => {
     
     if (filterText && filterText.trim() !== '') {
-      var t0 = performance.now();
+      var t0 = new Date().getMilliseconds();
       console.log(currentAppData);
       let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
       let searchText = filterText.split(',');
@@ -47,7 +47,7 @@ const InstrumentList = () => {
           return true;
         }
       } else return false;
-      var t1 = performance.now();
+      var t1 = new Date().getMilliseconds();
       console.log(t1);
       console.log(t0);
     } else return true;
