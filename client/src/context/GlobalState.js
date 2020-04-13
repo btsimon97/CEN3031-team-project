@@ -68,11 +68,13 @@ export const GlobalProvider = ({ children }) => {
      const getInstruments = async () => {
           try {
                console.log("bruh");
+               console.time("lol");
                const res = await axios.get("api/listings/");
                dispatch({
                     type: "GET_INSTRUMENTS",
                     payload: res.data.data,
                });
+               console.timeEnd("lol");
           } catch (error) {
                dispatch({
                     type: "INSTRUMENT_ERROR",

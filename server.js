@@ -40,10 +40,7 @@ if(process.env.NODE_ENV === 'production') //for deployment
 {
    app.use(express.static(path.join("client/build")))
    app.get("*", (req, res) => {
-      console.log("here");
-      console.time("lol");
       res.sendFile(path.join(dirname, "client", "build", "index.html"));
-      console.timeEnd("lol");
   });
 }
 
