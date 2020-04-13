@@ -48,7 +48,8 @@ const InstrumentList = () => {
         }
       } else return false;
       var t1 = performance.now();
-      console.log(t1 - t0);
+      console.log(t1);
+      console.log(t0);
     } else return true;
     
   });
