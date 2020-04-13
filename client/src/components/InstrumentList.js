@@ -27,6 +27,7 @@ const InstrumentList = () => {
   };
 
   let searchResults = currentAppData.filter((item) => {
+    console.time("search2");
     if (filterText && filterText.trim() !== '') {
       console.log(currentAppData);
       let regExp = new RegExp(escape(filterText.trim().toLowerCase()));
@@ -46,6 +47,7 @@ const InstrumentList = () => {
         }
       } else return false;
     } else return true;
+    console.timeEnd("search2");
   });
 
   return (
