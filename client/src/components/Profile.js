@@ -6,23 +6,21 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useHistory } from 'react-router-dom';
 
-const Profile = (props) => {
+const Profile = ({ props, currentUser }) => {
   let history = useHistory();
-  const user = useRef();
+  const user = useRef(httpUser.getCurrentUser());
 
-  const [value, setValue] = useState({
-    name: user ? user.name : '',
-    email: user ? user.email : '',
-  });
+  const [value, setValue] = useState({});
 
   useEffect(() => {
-    user.focus();
-    user.current = httpUser.getCurrentUser();
-    console.log(user);
+    let name = user.current.name;
+    let email = user.current.email;
+
     setValue({
-      name: user.name,
-      email: user.email,
+      name: name,
+      email: email,
     });
+
     // return () => {
     //      setValue({
     //           name: user.name,
@@ -32,17 +30,19 @@ const Profile = (props) => {
   }, []);
 
   const handleChange = (e) => {
-    e.preventDefault();
+    e.persist();
+    console.log(value);
     setValue({
       ...value,
       [e.target.name]: e.target.value,
+
       createdAt: Date.now(),
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userBack = await httpUser.updateUser(value, user._id);
+    const userBack = await httpUser.updateUser(value, currentUser._id);
     if (userBack) {
       props.onSignUpSuccess(userBack);
       props.setLogin(true);
@@ -67,18 +67,15 @@ const Profile = (props) => {
               <Form.Control
                 onChange={(e) => handleChange(e)}
                 type="text"
-                placeholder={'Enter name'}
                 name="name"
-                value={value.name}
+                defaultValue={value.name}
               />
-
               <Form.Label>Edit email</Form.Label>
               <Form.Control
                 onChange={(e) => handleChange(e)}
                 type="text"
-                placeholder={'Enter email'}
                 name="email"
-                value={value.email}
+                defaultValue={value.email}
               />
             </Form.Group>
             <Form.Group>

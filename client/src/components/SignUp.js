@@ -1,37 +1,38 @@
-import React, { useState, useEffect, Fragment } from "react";
-import httpUser from "./../httpUser";
+import React, { useState, useEffect, Fragment } from 'react';
+import httpUser from './../httpUser';
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-import axios from "axios";
+import axios from 'axios';
 
-const SignUp = props => {
-  const [fields, setFields] = useState({ name: "", email: "", password: "" });
+const SignUp = (props) => {
+  const [fields, setFields] = useState({ name: '', email: '', password: '' });
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
     return () => {
-        console.log("Signup unmount!")
-        setLogin(false);
+      console.log('Signup unmount!');
+      setLogin(false);
     };
-  },[login]);
+  }, [login]);
 
   // used to update user input for either password or email
-  const onInputChange = e => {
+  const onInputChange = (e) => {
     e.persist();
     setFields({ ...fields, [e.target.name]: e.target.value });
   };
+  console.log(fields);
 
   // used to submit user values for password and email
-  const onFormSubmit = async e => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     const user = await httpUser.signUp(fields);
     if (user) {
       props.onSignUpSuccess(user);
-      
+
       setLogin(true);
     }
   };
@@ -42,36 +43,41 @@ const SignUp = props => {
         <Col className="col-5">
           <h1>Sign Up</h1>
           <Form
-            onChange={e => {
+            onChange={(e) => {
               onInputChange(e);
             }}
             onSubmit={onFormSubmit}
           >
             <Form.Group controlId="">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Alex Smith" name="name" />
+              <Form.Control type="text" placeholder="Alex Smith" name="name" value={fields.name} />
             </Form.Group>
             <Form.Group controlId="formbasicEmail">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="email@example.com"
                 name="email"
+                value={fields.email}
+                autocomplete="off"
               />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type="password"
+                type="text"
                 placeholder="Password"
                 name="password"
+                value={fields.password}
+                autocomplete="off"
               />
             </Form.Group>
             <Button variant="primary" type="submit">
               Register
             </Button>
           </Form>
-        </Col>`
+        </Col>
+        `
       </Row>
     </Fragment>
   );

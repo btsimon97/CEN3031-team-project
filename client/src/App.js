@@ -60,7 +60,7 @@ const App = () => {
           <Route
             exact
             path="/profile"
-            render={(props) => <Profile props={props} users={users} />}
+            render={(props) => <Profile props={props} currentUser={currentUser} />}
           />
           <Route
             path="/login"
