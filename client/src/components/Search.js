@@ -25,7 +25,13 @@ const Search = () => {
           console.log(e.target.value)
      };
 
-     var timeDiff = 0;
+     // var timeDiff = 0;
+
+     const [timeDiff, setTimeDiff] = useState(0);
+
+     const setTimeDiff = (time) => {
+          setTime(time);
+     };
 
      return (
           <Fragment>
@@ -38,7 +44,7 @@ const Search = () => {
                               onChange={(e) => handleChange(e)}
                               value={filterText}
                          />
-                         {<Form.Label>Search took ${{timeDiff}} milliseconds</Form.Label>}
+                         {<Form.Label>Search took {timeDiff} milliseconds</Form.Label>}
                     </Form.Group>
                </Form>
           </Fragment>

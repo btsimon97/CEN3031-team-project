@@ -75,7 +75,8 @@ export const GlobalProvider = ({ children }) => {
                     payload: res.data.data,
                });
                var t1 = performance.now();
-               Search.timeDiff = t1 - t0;
+               // Search.timeDiff = t1 - t0;
+               Search.setTimeDiff(t1 - t0);
                console.log(Search.timeDiff);
                console.log("Call to get all took " + (t1 - t0) + " milliseconds.");
           } catch (error) {
