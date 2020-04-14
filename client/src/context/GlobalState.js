@@ -83,6 +83,7 @@ export const GlobalProvider = ({ children }) => {
                // console.log(retTime);
                var t1 = performance.now();
                Search.timeDiff = t1 - t0;
+               console.log(Search.timeDiff);
                console.log("Call to get all took " + (t1 - t0) + " milliseconds.");
           } catch (error) {
                dispatch({

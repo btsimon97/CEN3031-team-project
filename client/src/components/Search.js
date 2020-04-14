@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import { readFileSync } from "fs";
 import { GlobalContext } from "../context/GlobalState";
 
-var timeDiff = 0;
+
 
 const Search = () => {
      const {setFilterText,filterText} = useContext(GlobalContext);
@@ -25,7 +25,7 @@ const Search = () => {
           console.log(e.target.value)
      };
 
-     
+     var timeDiff = 0;
 
      return (
           <Fragment>
@@ -38,7 +38,7 @@ const Search = () => {
                               onChange={(e) => handleChange(e)}
                               value={filterText}
                          />
-                         {<Form.Label>Search took ${timeDiff} milliseconds</Form.Label>}
+                         {<Form.Label>Search took {timeDiff} milliseconds</Form.Label>}
                     </Form.Group>
                </Form>
           </Fragment>
