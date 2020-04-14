@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import axios from "axios";
-import Search from "../Search";
+import Search from "../components/Search";
 
 const initialState = {
      currentAppData: [],
