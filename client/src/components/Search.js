@@ -8,6 +8,8 @@ import Button from "react-bootstrap/Button";
 import { readFileSync } from "fs";
 import { GlobalContext } from "../context/GlobalState";
 
+static var timeDiff = 0;
+
 const Search = () => {
      const {setFilterText,filterText} = useContext(GlobalContext);
 
@@ -16,8 +18,6 @@ const Search = () => {
                setFilterText("");
           };
      }, []);   
-     
-     static var timeDiff = 0;
 
      const handleChange = (e) => {
           e.preventDefault();
