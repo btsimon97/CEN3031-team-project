@@ -27,7 +27,7 @@ const Search = () => {
 
      // var timeDiff = 0;
 
-     const [timeDiff, setTimeDiff] = useState(0);
+     const [timeDiff, setTime] = useState(0);
 
      const setTimeDiff = (time) => {
           setTime(time);
