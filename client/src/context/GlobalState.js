@@ -69,12 +69,15 @@ export const GlobalProvider = ({ children }) => {
           try {
                console.log("bruh");
                console.time("lol");
+               const time = process.hrtime();
                const res = await axios.get("api/listings/");
                dispatch({
                     type: "GET_INSTRUMENTS",
                     payload: res.data.data,
                });
                var retTime = console.timeEnd("lol");
+               const diff = process.hrtime(time);
+               console.log(diff[0] * NS_PER_SEC + diff[1]); // nanoseconds
                console.log(retTime);
           } catch (error) {
                dispatch({
