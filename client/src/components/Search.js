@@ -38,7 +38,7 @@ const Search = () => {
                               onChange={(e) => handleChange(e)}
                               value={filterText}
                          />
-                         {<Form.Label>Search took {timeDiff} milliseconds</Form.Label>}
+                         {<Form.Label>Search took {{timeDiff}} milliseconds</Form.Label>}
                     </Form.Group>
                </Form>
           </Fragment>
