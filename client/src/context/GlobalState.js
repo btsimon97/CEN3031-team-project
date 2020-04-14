@@ -64,7 +64,7 @@ export const GlobalProvider = ({ children }) => {
                });
           }
      };
-
+     const NS_PER_SEC = 1e9;
      const getInstruments = async () => {
           try {
                console.log("bruh");
