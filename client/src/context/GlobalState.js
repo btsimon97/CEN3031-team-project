@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import axios from "axios";
+import Search from "./Search";
 
 const initialState = {
      currentAppData: [],
@@ -81,6 +82,7 @@ export const GlobalProvider = ({ children }) => {
                // console.log(diff[0] * NS_PER_SEC + diff[1]); // nanoseconds
                // console.log(retTime);
                var t1 = performance.now();
+               Search.timeDiff = t1 - t0;
                console.log("Call to get all took " + (t1 - t0) + " milliseconds.");
           } catch (error) {
                dispatch({
