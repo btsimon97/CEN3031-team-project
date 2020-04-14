@@ -64,21 +64,24 @@ export const GlobalProvider = ({ children }) => {
                });
           }
      };
-     const NS_PER_SEC = 1e9;
+     // const NS_PER_SEC = 1e9;
      const getInstruments = async () => {
           try {
-               console.log("bruh");
-               console.time("lol");
-               const time = process.hrtime();
+               // console.log("bruh");
+               // console.time("lol");
+               // const time = process.hrtime();
+               var t0 = performance.now();
                const res = await axios.get("api/listings/");
                dispatch({
                     type: "GET_INSTRUMENTS",
                     payload: res.data.data,
                });
-               var retTime = console.timeEnd("lol");
-               const diff = process.hrtime(time);
-               console.log(diff[0] * NS_PER_SEC + diff[1]); // nanoseconds
-               console.log(retTime);
+               // var retTime = console.timeEnd("lol");
+               // const diff = process.hrtime(time);
+               // console.log(diff[0] * NS_PER_SEC + diff[1]); // nanoseconds
+               // console.log(retTime);
+               var t1 = performance.now();
+               console.log("Call to get all took " + (t1 - t0) + " milliseconds.");
           } catch (error) {
                dispatch({
                     type: "INSTRUMENT_ERROR",
