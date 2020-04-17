@@ -34,6 +34,7 @@ const SignUp = (props) => {
       props.onSignUpSuccess(user);
 
       setLogin(true);
+      alert("registration successful.")
     }
   };
 
