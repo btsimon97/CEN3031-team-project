@@ -58,8 +58,8 @@ const InstrumentList = () => {
           return (
             <Fragment key={item._id}>
               <tr key={item._id}>
-                <td className="align-middle">{item.keyterms.toString()}</td>
-                <td className="align-middle">
+                <td className="align-middle" onClick={() => setInstrument(currentAppData.find((x) => x._id === item._id))}>{item.keyterms.toString()}</td>
+                <td className="align-middle" onClick={() => setInstrument(currentAppData.find((x) => x._id === item._id))}>
                   <Moment format="HH:mm A YYYY/MM/DD">{item.createdAt}</Moment>
                 </td>
                 <td className="d-flex flex-wrap">
