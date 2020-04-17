@@ -51,7 +51,7 @@ const SignUp = (props) => {
           >
             <Form.Group controlId="">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Alex Smith" name="name" value={fields.name} />
+              <Form.Control type="text" placeholder="First Name Last Name" name="name" value={fields.name} />
             </Form.Group>
             <Form.Group controlId="formbasicEmail">
               <Form.Label>Email Address</Form.Label>
