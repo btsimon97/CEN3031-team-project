@@ -5,16 +5,19 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useHistory } from 'react-router-dom';
+import { GlobalContext } from '../context/GlobalState';
 
-const Profile = ({ props, currentUser }) => {
+const Profile = (props) => {
   let history = useHistory();
-  const user = useRef(httpUser.getCurrentUser());
+  // const user = useRef(httpUser.getCurrentUser());
 
   const [value, setValue] = useState({});
 
+  const { setCurrentUser, currentUser } = useContext(GlobalContext);
+
   useEffect(() => {
-    let name = user.current.name;
-    let email = user.current.email;
+    let name = currentUser.name;
+    let email = currentUser.email;
 
     setValue({
       name: name,
@@ -43,6 +46,7 @@ const Profile = ({ props, currentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userBack = await httpUser.updateUser(value, currentUser._id);
+    console.log(userBack);
     if (userBack) {
       props.onSignUpSuccess(userBack);
       props.setLogin(true);
@@ -53,6 +57,8 @@ const Profile = ({ props, currentUser }) => {
       email: '',
       name: '',
     });
+    httpUser.logOut();
+    setCurrentUser(null);
     history.push('/dashboard');
   };
 

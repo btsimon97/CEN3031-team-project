@@ -19,8 +19,10 @@ import { GlobalContext } from './context/GlobalState';
 import UpdateInstrument from './components/UpdateInstrument';
 
 const App = () => {
-  const { getUsers, users, getInstruments } = useContext(GlobalContext);
-  const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
+  const { getUsers, users, getInstruments, setCurrentUser, currentUser } = useContext(
+    GlobalContext,
+  );
+  // const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
 
   // useEffect(()=>{
   //      console.log("App mounted! ");
@@ -30,6 +32,7 @@ const App = () => {
   useEffect(() => {
     getUsers();
     getInstruments();
+    setCurrentUser(httpUser.getCurrentUser());
   }, []);
 
   const onLoginSuccess = () => {
@@ -57,11 +60,7 @@ const App = () => {
             <UpdateInstrument />
           </Route>
           <Route exact path="/admin" component={Admin} />
-          <Route
-            exact
-            path="/profile"
-            render={(props) => <Profile props={props} currentUser={currentUser} />}
-          />
+          <Route exact path="/profile" render={(props) => <Profile props={props} />} />
           <Route
             path="/login"
             render={(props) => {

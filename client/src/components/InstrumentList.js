@@ -10,15 +10,7 @@ import './InstrumentList.css';
 // import { Button } from '@material-ui/core';
 
 const InstrumentList = () => {
-  const {
-    currentAppData,
-    deleteInstrument,
-    getInstruments,
-    filterText,
-    editMode,
-    setInstrument,
-    setEditMode,
-  } = useContext(GlobalContext);
+  const { currentAppData, deleteInstrument, filterText, setInstrument } = useContext(GlobalContext);
 
   let history = useHistory();
 
@@ -27,7 +19,6 @@ const InstrumentList = () => {
   };
 
   let searchResults = currentAppData.filter((item) => {
-    
     if (filterText && filterText.trim() !== '') {
       var t0 = new Date().getMilliseconds();
       console.log(currentAppData);
@@ -51,7 +42,6 @@ const InstrumentList = () => {
       console.log(t1);
       console.log(t0);
     } else return true;
-    
   });
 
   return (
@@ -66,7 +56,7 @@ const InstrumentList = () => {
       <tbody>
         {searchResults.map((item, index) => {
           return (
-            <Fragment>
+            <Fragment key={item._id}>
               <tr key={item._id}>
                 <td className="align-middle">{item.keyterms.toString()}</td>
                 <td className="align-middle">
