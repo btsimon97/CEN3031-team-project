@@ -40,8 +40,8 @@ const AddInstrument = () => {
             <Form.Group>
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
-              <Form.Text className="text-muted">
-                Enter the keywords you want to use to find this instrument. Separate your keywords
+              <Form.Text className="text">
+                Enter the keywords or phrases you want to use to find this instrument. Separate your keywords
                 with a comma if using multiple keywords.
               </Form.Text>
             </Form.Group>
