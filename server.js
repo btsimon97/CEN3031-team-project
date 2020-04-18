@@ -35,7 +35,7 @@ app.options('*', cors());
 app.use('/api/listings', listingsRouter);
 app.use('/api/users', userRouter);
 
-let dirname = path.resolve();
+const dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
   // for deployment
   app.use(express.static(path.join('client/build')));
