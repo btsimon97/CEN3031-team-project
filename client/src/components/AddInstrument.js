@@ -9,7 +9,7 @@ import { GlobalContext } from '../context/GlobalState';
 import { FileDrop } from 'react-file-drop';
 
 const AddInstrument = () => {
-  const styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
+  const styles = { border: '1px solid black', width: 480, color: 'black', padding: 20 };
   const [keyterms, setKeyterms] = useState([]);
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
@@ -58,7 +58,6 @@ const AddInstrument = () => {
           <h1>Add New Instrument</h1>
           <Form onSubmit={onSubmit} onChange={onChange}>
             <Form.Group>
-<<<<<<< HEAD
               <div>
                 <div style={styles}>
                 <FileDrop
@@ -73,10 +72,10 @@ const AddInstrument = () => {
                 </FileDrop>
                 </div>
               </div>
-=======
+
               <Form.Label>Instrument Name</Form.Label>
               <Form.Control type="text" placeholder="scalpel"></Form.Control>
->>>>>>> 203638a3af8ff9e0a9751e86962684fda9b29a92
+
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
               <Form.Text className="text">
