@@ -31,11 +31,10 @@ const ViewInstrument = () => {
       const instrumentTerms = instrument.keyterms.map((term) => (
         <ListGroup.Item key={term.id}>{term}</ListGroup.Item>
       ));
-      console.log(instrument);
       return (
         <Fragment>
           <Card className="sticky-top sticky-top-pad">
-            <Card.Header>Device Details</Card.Header>
+      <Card.Header>Device Details for {instrument.name}</Card.Header>
             <Card.Img variant="top" src={instrument.instrumentImage} />
             <Card.Body>
               <Card.Text>This device has the following keywords associated with it:</Card.Text>
