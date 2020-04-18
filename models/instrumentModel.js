@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const instrumentSchema = new mongoose.Schema({
+  name: {type: String, required: true},
   keyterms: { type: Array, required: true },
   createdAt: {
     type: Date,
