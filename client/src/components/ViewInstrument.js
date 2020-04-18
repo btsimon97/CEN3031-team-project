@@ -34,9 +34,10 @@ const ViewInstrument = () => {
       return (
         <Fragment>
           <Card className="sticky-top sticky-top-pad">
-      <Card.Header>Device Details for {instrument.name}</Card.Header>
+      <Card.Header>Device Details</Card.Header>
             <Card.Img variant="top" src={instrument.instrumentImage} />
             <Card.Body>
+              <Card.Text>Name of device: {instrument.name}</Card.Text>
               <Card.Text>This device has the following keywords associated with it:</Card.Text>
               <ListGroup className="list-group-flush">{instrumentTerms}</ListGroup>
             </Card.Body>
