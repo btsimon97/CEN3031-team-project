@@ -1,33 +1,23 @@
-/* Dependencies */
-// import mongoose, { Query } from 'mongoose';
 import InstrumentModel from '../models/instrumentModel.js';
-// import  {sortBy}   from 'async';
 
-/*
-  In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
-  On an error you should send a 404 status code, as well as the error message.
-  On success (aka no error), you should send the listing(s) as JSON in the response.
+// const storage =
 
-  HINT: if you are struggling with implementing these functions refer back to this tutorial
-  https://www.callicoder.com/node-js-express-mongodb-restful-crud-api-tutorial/
-  or
-  https://medium.com/@dinyangetoh/how-to-build-simple-restful-api-with-nodejs-expressjs-and-mongodb-99348012925d
+// const upload = multer({ dest: 'uploads/' });
 
-
-  If you are looking for more understanding of exports and export modules -
-  https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
-  or
-  https://medium.com/@etherealm/named-export-vs-default-export-in-es6-affb483a0910
- */
-
-/* Create a listing */
-export const create = (req, res) => {
+export const create = async (req, res) => {
   try {
-    const instruments = InstrumentModel.create(req.body);
+    console.log(req.file);
+    console.log(req.body);
+    const instruments = await InstrumentModel.create({
+      keyterms: req.body.keyterms,
+      instrumentImage: req.file.path,
+    });
     return res.status(200).json({
       success: true,
       count: instruments.length,
       data: instruments,
+      filePath: req.file.path,
+      fileName: req.file.originalname,
     });
   } catch (err) {
     console.log(err);
@@ -55,7 +45,7 @@ export const read = async (req, res) => {
   }
 };
 
-//CHECK ME
+// CHECK ME
 export const update = async (req, res) => {
   console.log('Updating');
   console.log(req.params.id);

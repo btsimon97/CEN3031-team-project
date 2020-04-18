@@ -12,6 +12,10 @@ const initialState = {
   instrument: {},
   editMode: false,
   currentUser: null,
+  uploadedImage: {
+    fileName: '',
+    filePath: '',
+  },
 };
 
 export const GlobalContext = createContext(initialState);
@@ -22,16 +26,25 @@ export const GlobalProvider = ({ children }) => {
   //Actions
   const addInstrument = async (instrument) => {
     try {
-      await axios.post(`api/listings/`, instrument);
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+      let res = await axios.post(`api/listings/`, instrument, config);
+      const { fileName, filePath } = res.data;
+      console.log(res.data);
+      let file = { fileName: fileName, filePath: filePath };
       dispatch({
         type: 'ADD_INSTRUMENT',
-        payload: instrument,
+        payload: { instrument: res.data.data, uploadedImage: file },
       });
     } catch (error) {
-      dispatch({
-        type: 'INSTRUMENT_ERROR',
-        payload: error.response.data.error,
-      });
+      console.log(error);
+      // dispatch({
+      //   type: 'INSTRUMENT_ERROR',
+      //   payload: error.response.data.error,
+      // });
     }
   };
 
@@ -123,6 +136,13 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const setUploadedImage = (img) => {
+    dispatch({
+      type: 'SET_UPLOADEDIMAGE',
+      payload: img,
+    });
+  };
+
   const setCurrentUser = (user) => {
     dispatch({
       type: 'SET_CURRENT_USER',
@@ -141,6 +161,7 @@ export const GlobalProvider = ({ children }) => {
         editMode: state.editMode,
         users: state.users,
         currentUser: state.currentUser,
+        uploadedImage: state.uploadedImage,
         getInstruments,
         addInstrument,
         deleteInstrument,
@@ -150,6 +171,7 @@ export const GlobalProvider = ({ children }) => {
         setInstrument,
         updateInstrument,
         setCurrentUser,
+        setUploadedImage,
       }}
     >
       {children}

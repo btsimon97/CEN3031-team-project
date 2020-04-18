@@ -3,7 +3,8 @@ export default (state, action) => {
     case 'ADD_INSTRUMENT':
       return {
         ...state,
-        currentAppData: [...state.currentAppData, action.payload],
+        currentAppData: [...state.currentAppData, action.payload.instrument],
+        uploadedImage: action.payload.uploadedImage,
       };
     case 'UPDATE_INSTRUMENT':
       return {
@@ -19,6 +20,12 @@ export default (state, action) => {
       return {
         ...state,
         currentUser: action.payload,
+      };
+
+    case 'SET_UPLOADEDIMAGE':
+      return {
+        ...state,
+        uploadedImage: action.payload,
       };
 
     case 'GET_INSTRUMENTS':

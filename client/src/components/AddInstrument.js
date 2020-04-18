@@ -7,9 +7,12 @@ import Col from 'react-bootstrap/Col';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
 import { FileDrop } from 'react-file-drop';
+
 const AddInstrument = () => {
   const [keyterms, setKeyterms] = useState([]);
-  const { addInstrument } = useContext(GlobalContext);
+  const [image, setImage] = useState('');
+
+  const { addInstrument, uploadedImage, setUploadedImage } = useContext(GlobalContext);
   const history = useHistory();
   useEffect(() => {
     return () => {};
@@ -18,6 +21,12 @@ const AddInstrument = () => {
   const onChange = (e) => {
     e.preventDefault();
     setKeyterms(e.target.value.split(','));
+    console.log(uploadedImage);
+  };
+
+  const onDropHandler = (files, event) => {
+    console.log(files[0]);
+    setImage(files[0]);
   };
 
   const onSubmit = async (event) => {
@@ -25,9 +34,12 @@ const AddInstrument = () => {
     let newInstrument;
     newInstrument = {
       keyterms: keyterms,
+      instrumentImage: image,
     };
-    addInstrument(newInstrument);
-    // await axios.post("/api/listings", newInstrument);
+    const data = new FormData();
+    data.append('instrumentImage', image);
+    data.append('keyterms', keyterms);
+    addInstrument(data);
     history.push('/');
   };
 
@@ -41,8 +53,8 @@ const AddInstrument = () => {
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
               <Form.Text className="text">
-                Enter the keywords or phrases you want to use to find this instrument. Separate your keywords
-                with a comma if using multiple keywords.
+                Enter the keywords or phrases you want to use to find this instrument. Separate your
+                keywords with a comma if using multiple keywords.
               </Form.Text>
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -52,7 +64,7 @@ const AddInstrument = () => {
         </Col>
       </Row>
       <Row>
-        <FileDrop onDrop={(files, event) => console.log('onDrop!', files, event)}>
+        <FileDrop onDrop={(files, event) => onDropHandler(files, event)}>
           Drop some files here!
         </FileDrop>
       </Row>

@@ -6,6 +6,7 @@ const instrumentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  instrumentImage: { type: String },
 });
 
 export default mongoose.model('instruments', instrumentSchema);
