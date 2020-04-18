@@ -9,6 +9,7 @@ import { GlobalContext } from '../context/GlobalState';
 import { FileDrop } from 'react-file-drop';
 
 const AddInstrument = () => {
+  const styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
   const [keyterms, setKeyterms] = useState([]);
   const [image, setImage] = useState('');
 
@@ -50,6 +51,20 @@ const AddInstrument = () => {
           <h1>Add New Instrument</h1>
           <Form onSubmit={onSubmit} onChange={onChange}>
             <Form.Group>
+              <div>
+                <div style={styles}>
+                <FileDrop
+                  /* onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
+                  onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
+                  onFrameDrop={(event) => console.log('onFrameDrop', event)}
+                  onDragOver={(event) => console.log('onDragOver', event)}
+                  onDragLeave={(event) => console.log('onDragLeave', event)} */
+                  onDrop={(files, event) => onDropHandler(files, event)}
+                >
+                Drop some files here!
+                </FileDrop>
+                </div>
+              </div>
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
               <Form.Text className="text">
@@ -63,11 +78,11 @@ const AddInstrument = () => {
           </Form>
         </Col>
       </Row>
-      <Row>
+      {/* <Row>
         <FileDrop onDrop={(files, event) => onDropHandler(files, event)}>
           Drop some files here!
         </FileDrop>
-      </Row>
+      </Row> */}
     </Fragment>
   );
 };
