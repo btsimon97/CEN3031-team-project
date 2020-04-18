@@ -31,6 +31,7 @@ const ViewInstrument = () => {
       const instrumentTerms = instrument.keyterms.map((term) => (
         <ListGroup.Item key={term.id}>{term}</ListGroup.Item>
       ));
+      console.log(instrument);
       return (
         <Fragment>
           <Card className="sticky-top sticky-top-pad">

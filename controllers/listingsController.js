@@ -9,6 +9,7 @@ export const create = async (req, res) => {
     console.log(req.file);
     console.log(req.body);
     const instruments = await InstrumentModel.create({
+      name: req.body.name,
       keyterms: req.body.keyterms,
       instrumentImage: req.file.path,
     });

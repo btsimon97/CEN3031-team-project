@@ -11,6 +11,7 @@ import { FileDrop } from 'react-file-drop';
 const AddInstrument = () => {
   const [keyterms, setKeyterms] = useState([]);
   const [image, setImage] = useState('');
+  const [name, setName] = useState('');
 
   const { addInstrument, uploadedImage, setUploadedImage } = useContext(GlobalContext);
   const history = useHistory();
@@ -20,7 +21,11 @@ const AddInstrument = () => {
 
   const onChange = (e) => {
     e.preventDefault();
-    setKeyterms(e.target.value.split(','));
+    if(e.target.placeholder == "scalpel") {
+      setName(e.target.value);
+    } else if (e.target.placeholder === "scalpel,single-use") {
+      setKeyterms(e.target.value.split(','));
+    }
     console.log(uploadedImage);
   };
 
@@ -33,12 +38,14 @@ const AddInstrument = () => {
     event.preventDefault();
     let newInstrument;
     newInstrument = {
+      name: name,
       keyterms: keyterms,
       instrumentImage: image,
     };
     const data = new FormData();
     data.append('instrumentImage', image);
     data.append('keyterms', keyterms);
+    data.append('name', name);
     addInstrument(data);
     history.push('/');
   };
@@ -50,6 +57,8 @@ const AddInstrument = () => {
           <h1>Add New Instrument</h1>
           <Form onSubmit={onSubmit} onChange={onChange}>
             <Form.Group>
+              <Form.Label>Instrument Name</Form.Label>
+              <Form.Control type="text" placeholder="scalpel"></Form.Control>
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
               <Form.Text className="text">
