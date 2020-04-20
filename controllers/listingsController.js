@@ -11,6 +11,7 @@ export const create = async (req, res) => {
     const instruments = await InstrumentModel.create({
       name: req.body.name,
       keyterms: req.body.keyterms,
+      description: req.body.description,
       instrumentImage: req.file.path,
     });
     return res.status(200).json({
