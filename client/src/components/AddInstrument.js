@@ -9,10 +9,11 @@ import { GlobalContext } from '../context/GlobalState';
 import { FileDrop } from 'react-file-drop';
 
 const AddInstrument = () => {
-  const styles = { border: '1px solid grey', width: 480, color: 'black', padding: 40 };
+  const styles = { border: '1px solid grey', width: 715, color: 'black', padding: 40 };
   const [keyterms, setKeyterms] = useState([]);
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
+  const [desc, setDesc] = useState('');
 
   const { addInstrument, uploadedImage, setUploadedImage } = useContext(GlobalContext);
   const history = useHistory();
@@ -26,6 +27,8 @@ const AddInstrument = () => {
       setName(e.target.value);
     } else if (e.target.placeholder === "scalpel,single-use") {
       setKeyterms(e.target.value.split(','));
+    } else if (e.target.placeholder == "description") {
+      setDesc(e.target.value);
     }
     console.log(uploadedImage);
   };
@@ -41,11 +44,13 @@ const AddInstrument = () => {
     newInstrument = {
       name: name,
       keyterms: keyterms,
+      description: desc,
       instrumentImage: image,
     };
     const data = new FormData();
     data.append('instrumentImage', image);
     data.append('keyterms', keyterms);
+    data.append('description', desc);
     data.append('name', name);
     addInstrument(data);
     history.push('/');
@@ -76,12 +81,17 @@ const AddInstrument = () => {
               <Form.Label>Instrument Name</Form.Label>
               <Form.Control type="text" placeholder="scalpel"></Form.Control>
 
+              <Form.Label>Instrument Description (Optional)</Form.Label>
+              <Form.Control type = "text" placeholder="description"></Form.Control>
+
               <Form.Label>Instrument Keywords</Form.Label>
               <Form.Control type="text" placeholder="scalpel,single-use"></Form.Control>
+
               <Form.Text className="text">
                 Enter the keywords or phrases you want to use to find this instrument. Separate your
                 keywords with a comma if using multiple keywords.
               </Form.Text>
+
             </Form.Group>
             <Button variant="primary" type="submit">
               Add Instrument

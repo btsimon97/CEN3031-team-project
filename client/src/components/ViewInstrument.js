@@ -8,7 +8,14 @@ import { GlobalContext } from '../context/GlobalState';
 const ViewInstrument = () => {
   const { instrument, uploadedImage } = useContext(GlobalContext);
   console.log(instrument, uploadedImage);
+
   if (instrument) {
+    let descText;
+    if(instrument.description) {
+      descText = <Card.Text>Description: {instrument.description}</Card.Text>
+    } else {
+      descText = null;
+    }
     if (!instrument.keyterms) {
       return (
         <Fragment>
@@ -40,6 +47,7 @@ const ViewInstrument = () => {
               <Card.Text>Name of device: {instrument.name}</Card.Text>
               <Card.Text>This device has the following keywords associated with it:</Card.Text>
               <ListGroup className="list-group-flush">{instrumentTerms}</ListGroup>
+              {descText}
             </Card.Body>
           </Card>
         </Fragment>
