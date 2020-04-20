@@ -48,7 +48,7 @@ const InstrumentList = () => {
     <Table hover responsive="sm">
       <thead>
         <tr>
-          <th>Device Keywords</th>
+          <th>Device Name</th>
           <th className="text-centered">Last Modification Date/Time</th>
           <th className="text-centered">Device Options</th>
         </tr>
@@ -58,7 +58,7 @@ const InstrumentList = () => {
           return (
             <Fragment key={item._id}>
               <tr key={item._id}>
-                <td className="align-middle" onClick={() => setInstrument(currentAppData.find((x) => x._id === item._id))}>{item.keyterms.toString()}</td>
+                <td className="align-middle" onClick={() => setInstrument(currentAppData.find((x) => x._id === item._id))}>{item.name.toString()}</td>
                 <td className="align-middle" onClick={() => setInstrument(currentAppData.find((x) => x._id === item._id))}>
                   <Moment format="HH:mm A YYYY/MM/DD">{item.createdAt}</Moment>
                 </td>
