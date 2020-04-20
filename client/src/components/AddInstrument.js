@@ -7,11 +7,11 @@ import Col from 'react-bootstrap/Col';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
 import { FileDrop } from 'react-file-drop';
+import Dropzone from './Dropzone'
 
 const AddInstrument = () => {
-  const styles = { border: '1px solid grey', width: 715, color: 'black', padding: 40 };
   const [keyterms, setKeyterms] = useState([]);
-  const [image, setImage] = useState('');
+  //const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
 
@@ -33,11 +33,6 @@ const AddInstrument = () => {
     console.log(uploadedImage);
   };
 
-  const onDropHandler = (files, event) => {
-    console.log(files[0]);
-    setImage(files[0]);
-  };
-
   const onSubmit = async (event) => {
     event.preventDefault();
     let newInstrument;
@@ -45,10 +40,10 @@ const AddInstrument = () => {
       name: name,
       keyterms: keyterms,
       description: desc,
-      instrumentImage: image,
+      instrumentImage: uploadedImage,
     };
     const data = new FormData();
-    data.append('instrumentImage', image);
+    data.append('instrumentImage', uploadedImage);
     data.append('keyterms', keyterms);
     data.append('description', desc);
     data.append('name', name);
@@ -61,23 +56,10 @@ const AddInstrument = () => {
       <Row className="justify-content-center">
         <Col className="col-5">
           <h1>Add New Instrument</h1>
+          <Dropzone/>
           <Form onSubmit={onSubmit} onChange={onChange}>
             <Form.Group>
-              <div>
-                <div style={styles}>
-                <FileDrop id="formcheck-api-regular"
-                  /* onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
-                  onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
-                  onFrameDrop={(event) => console.log('onFrameDrop', event)}
-                  onDragOver={(event) => console.log('onDragOver', event)}
-                  onDragLeave={(event) => console.log('onDragLeave', event)} */
-                  onDrop={(files, event) => onDropHandler(files, event)}
-                >
-                Drop some files here!
-                </FileDrop>
-                </div>
-              </div>
-
+            
               <Form.Label>Instrument Name</Form.Label>
               <Form.Control type="text" placeholder="scalpel"></Form.Control>
 
