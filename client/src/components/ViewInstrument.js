@@ -7,7 +7,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 const ViewInstrument = () => {
   const { instrument, uploadedImage } = useContext(GlobalContext);
-  console.log(instrument, uploadedImage);
+  // console.log(instrument, uploadedImage);
 
   if (instrument) {
     let descText;

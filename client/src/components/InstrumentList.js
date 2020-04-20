@@ -8,6 +8,7 @@ import { GlobalContext } from '../context/GlobalState';
 import './InstrumentList.css';
 
 // import { Button } from '@material-ui/core';
+export var timeSearch;
 
 const InstrumentList = () => {
   const { currentAppData, deleteInstrument, filterText, setInstrument } = useContext(GlobalContext);
@@ -39,8 +40,7 @@ const InstrumentList = () => {
         }
       } else return false;
       var t1 = new Date().getMilliseconds();
-      console.log(t1);
-      console.log(t0);
+      timeSearch = t1-t0;
     } else return true;
   });
 

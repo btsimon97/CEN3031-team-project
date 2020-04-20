@@ -7,6 +7,7 @@ const initialState = {
   currentAppData: [],
   users: [],
   filterText: '',
+  timeTaken: 0,
   loading: true,
   error: null,
   instrument: {},
@@ -19,6 +20,8 @@ const initialState = {
 };
 
 export const GlobalContext = createContext(initialState);
+
+export var time;
 
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -77,7 +80,6 @@ export const GlobalProvider = ({ children }) => {
       });
     }
   };
-  // const NS_PER_SEC = 1e9;
   const getInstruments = async () => {
     try {
       var t0 = performance.now();
@@ -87,10 +89,9 @@ export const GlobalProvider = ({ children }) => {
         payload: res.data.data,
       });
       var t1 = performance.now();
-      // Search.timeDiff = t1 - t0;
-      // Search.setTimeDiff(t1 - t0);
-      // console.log(Search.timeDiff);
-      // console.log('Call to get all took ' + (t1 - t0) + ' milliseconds.');
+      console.log(t1 - t0);
+      time = t1 - t0;
+      setTimeTaken();
     } catch (error) {
       console.log(error);
       dispatch({
@@ -119,6 +120,13 @@ export const GlobalProvider = ({ children }) => {
     dispatch({
       type: 'SET_FILTERTEXT',
       payload: text,
+    });
+  };
+
+  const setTimeTaken = () => {
+    dispatch({
+      type: 'SET_TIMETAKEN',
+      payload: time,
     });
   };
 
@@ -157,6 +165,7 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         error: state.error,
         filterText: state.filterText,
+        timeTaken: state.timeTaken,
         instrument: state.instrument,
         editMode: state.editMode,
         users: state.users,
@@ -166,6 +175,7 @@ export const GlobalProvider = ({ children }) => {
         addInstrument,
         deleteInstrument,
         setFilterText,
+        setTimeTaken,
         setEditMode,
         getUsers,
         setInstrument,
