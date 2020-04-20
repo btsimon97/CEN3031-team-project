@@ -9,7 +9,7 @@ import { GlobalContext } from '../context/GlobalState';
 import { FileDrop } from 'react-file-drop';
 
 const AddInstrument = () => {
-  const styles = { border: '1px solid black', width: 480, color: 'black', padding: 20 };
+  const styles = { border: '1px solid grey', width: 480, color: 'black', padding: 40 };
   const [keyterms, setKeyterms] = useState([]);
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
@@ -60,7 +60,7 @@ const AddInstrument = () => {
             <Form.Group>
               <div>
                 <div style={styles}>
-                <FileDrop
+                <FileDrop id="formcheck-api-regular"
                   /* onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
                   onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
                   onFrameDrop={(event) => console.log('onFrameDrop', event)}
