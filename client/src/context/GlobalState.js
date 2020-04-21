@@ -27,16 +27,17 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //Actions
-  const addInstrument = async (instrument) => {
+  const addInstrument = async (instrument, uplaodedImage) => {
     try {
-      const config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      };
-      let res = await axios.post(`api/listings/`, instrument, config);
-      const { fileName, filePath } = res.data;
+      console.log(instrument);
+      // const config = {
+      //   headers: {
+      //     'content-type': 'multipart/form-data',
+      //   },
+      // };
+      let res = await axios.post(`api/listings/`, instrument);
       console.log(res.data);
+      const { fileName, filePath } = res.data;
       let file = { fileName: fileName, filePath: filePath };
       dispatch({
         type: 'ADD_INSTRUMENT',
