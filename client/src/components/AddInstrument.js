@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
 import { FileDrop } from 'react-file-drop';
-import Dropzone from './Dropzone'
+import Dropzone from './Dropzone.js'
 
 const AddInstrument = () => {
   const [keyterms, setKeyterms] = useState([]);
