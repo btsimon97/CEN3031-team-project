@@ -11,7 +11,6 @@ import Dropzone from './Dropzone.js';
 
 const AddInstrument = () => {
   const [keyterms, setKeyterms] = useState([]);
-  //const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
 
@@ -30,7 +29,6 @@ const AddInstrument = () => {
     } else if (e.target.placeholder == 'description') {
       setDesc(e.target.value);
     }
-    console.log(uploadedImage);
   };
 
   const onSubmit = async (event) => {
@@ -53,13 +51,6 @@ const AddInstrument = () => {
       description: desc,
       instrumentImage: imageUrl,
     };
-
-    // console.log(imageUrl);
-    // const data = new FormData();
-    // data.append('instrumentImage', imageUrl);
-    // data.append('keyterms', keyterms);
-    // data.append('description', desc);
-    // data.append('name', name);
 
     addInstrument(newInstrument);
     history.push('/');
@@ -93,11 +84,6 @@ const AddInstrument = () => {
           </Form>
         </Col>
       </Row>
-      {/* <Row>
-        <FileDrop onDrop={(files, event) => onDropHandler(files, event)}>
-          Drop some files here!
-        </FileDrop>
-      </Row> */}
     </Fragment>
   );
 };

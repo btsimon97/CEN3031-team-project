@@ -54,7 +54,8 @@ export const update = async (req, res) => {
   try {
     let update = {
       keyterms: req.body.keyterms,
-      instrumentImage: req.body.instrumentImage
+      instrumentImage: req.body.instrumentImage,
+      createdAt: req.body.createdAt
     };
     const instruments = await InstrumentModel.findByIdAndUpdate(req.params.id, update, {
       new: true,
