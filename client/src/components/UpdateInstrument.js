@@ -29,7 +29,7 @@ const UpdateInstrument = () => {
      const handleChange = (e) => {
           e.preventDefault();
           setValue(e.target.value.split(','));
-          console.log(uploadedImage);
+          console.log(new Date().toLocaleString());
      };
 
      const handleSubmit = async (e) => {
@@ -50,6 +50,7 @@ const UpdateInstrument = () => {
                let newInstrument = {
                     keyterms: value,
                     instrumentImage: imageUrl,
+                    createdAt: new Date().toLocaleString()
                };
                updateInstrument(instrument._id, newInstrument)
                getInstruments();
@@ -57,7 +58,8 @@ const UpdateInstrument = () => {
           } else if(uploadedImage.fileName == "") {
                let newInstrument = {
                     keyterms: value,
-                    instrumentImage:instrument.instrumentImage
+                    instrumentImage:instrument.instrumentImage,
+                    createdAt: new Date().toLocaleString()
                };
                updateInstrument(instrument._id, newInstrument)
                getInstruments();
