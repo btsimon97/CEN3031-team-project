@@ -1,65 +1,65 @@
-import React, { useContext, useMemo, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { useDropzone } from "react-dropzone";
+import React, { useContext, useMemo, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { useDropzone } from 'react-dropzone';
 import { GlobalContext } from '../context/GlobalState';
 
 const baseStyle = {
   flex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '20px',
   borderWidth: 2,
   borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  outline: "none",
-  transition: "border .24s ease-in-out"
+  borderColor: '#eeeeee',
+  borderStyle: 'dashed',
+  backgroundColor: '#fafafa',
+  color: '#bdbdbd',
+  outline: 'none',
+  transition: 'border .24s ease-in-out',
 };
 
 const activeStyle = {
-  borderColor: "#2196f3"
+  borderColor: '#2196f3',
 };
 
 const acceptStyle = {
-  borderColor: "#00e676"
+  borderColor: '#00e676',
 };
 
 const rejectStyle = {
-  borderColor: "#ff1744"
+  borderColor: '#ff1744',
 };
 
 const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  marginTop: 16,
 };
 
 const thumb = {
-  display: "inline-flex",
+  display: 'inline-flex',
   borderRadius: 2,
-  border: "1px solid #eaeaea",
+  border: '1px solid #eaeaea',
   marginBottom: 8,
   marginRight: 8,
-  width: "auto",
+  width: 'auto',
   height: 200,
   padding: 4,
-  boxSizing: "border-box"
+  boxSizing: 'border-box',
 };
 
 const thumbInner = {
-  display: "flex",
+  display: 'flex',
   minWidth: 0,
-  overflow: "hidden"
+  overflow: 'hidden',
 };
 
 const img = {
-  display: "block",
-  width: "auto",
-  height: "100%"
+  display: 'block',
+  width: 'auto',
+  height: '100%',
 };
 
 function StyledDropzone(props) {
@@ -72,21 +72,21 @@ function StyledDropzone(props) {
     isDragAccept,
     isDragReject,
     acceptedFiles,
-    open
+    open,
   } = useDropzone({
-    accept: "image/*",
+    accept: 'image/*',
     noClick: true,
     noKeyboard: true,
-    onDrop: acceptedFiles => {
+    onDrop: (acceptedFiles) => {
       setUploadedImage(acceptedFiles[0]);
       setFiles(
-        acceptedFiles.map(file =>
+        acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
+            preview: URL.createObjectURL(file),
+          }),
+        ),
       );
-    }
+    },
   });
 
   const style = useMemo(
@@ -94,12 +94,12 @@ function StyledDropzone(props) {
       ...baseStyle,
       ...(isDragActive ? activeStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {})
+      ...(isDragReject ? rejectStyle : {}),
     }),
-    [isDragActive, isDragReject]
+    [isDragActive, isDragReject],
   );
 
-  const thumbs = files.map(file => (
+  const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} />
@@ -110,12 +110,12 @@ function StyledDropzone(props) {
   useEffect(
     () => () => {
       //prevent leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
     },
-    [files]
+    [files],
   );
 
-  const filepath = acceptedFiles.map(file => (
+  const filepath = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
     </li>
