@@ -17,7 +17,9 @@ const AddInstrument = () => {
   const { addInstrument, uploadedImage, setUploadedImage } = useContext(GlobalContext);
   const history = useHistory();
   useEffect(() => {
-    return () => {};
+    return () => {
+      setUploadedImage(null);
+    };
   }, []);
 
   const onChange = (e) => {
