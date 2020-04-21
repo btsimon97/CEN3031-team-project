@@ -52,7 +52,7 @@
     ]
   },
   "type": "module",
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:5000/",
   "engines": {
     "node": "13.x"
   }

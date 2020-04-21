@@ -35,7 +35,7 @@ const SignUp = (props) => {
 
       setLogin(true);
       alert("registration successful.")
-    }
+    } else{alert("Registration error!")}
   };
 
   return (

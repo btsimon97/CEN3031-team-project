@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^4.9.10",
+    "aws": "0.0.3-2",
     "aws-sdk": "^2.659.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
