@@ -13,10 +13,11 @@ import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
 
 import { GlobalContext } from '../context/GlobalState';
-import axios from 'axios'
+import Dropzone from './Dropzone.js';
+import axios from 'axios';
 
 const UpdateInstrument = () => {
-     const { instrument, updateInstrument, getInstruments } = useContext(GlobalContext);
+     const { instrument, updateInstrument, getInstruments, uploadedImage } = useContext(GlobalContext);
      const [value, setValue] = useState("");
 
      let history = useHistory();
@@ -27,23 +28,41 @@ const UpdateInstrument = () => {
 
      const handleChange = (e) => {
           e.preventDefault();
-          setValue(e.target.value);
+          setValue(e.target.value.split(','));
+          console.log(uploadedImage);
      };
 
      const handleSubmit = async (e) => {
           e.preventDefault();
-          if (value && value !== "") {
-               let update = value.split(",");
-               update.forEach((element, index) => {
-                    update[index] = element.trim().toLowerCase();
-               });
+          
+          if (uploadedImage.fileName !== "" ) {
+               const config = {
+                    headers: {
+                      'content-type': 'multipart/form-data',
+                    },
+               };
+               const img = new FormData();
+               img.append('image', uploadedImage);
+               let res = await axios.post(`api/uploads`, img, config);
+              
+               const { imageUrl } = res.data;
+          
                let newInstrument = {
-                    keyterms: update,
+                    keyterms: value,
+                    instrumentImage: imageUrl,
                };
                updateInstrument(instrument._id, newInstrument)
                getInstruments();
                history.push("/home")
-          }
+          } else if(uploadedImage.fileName == "") {
+               let newInstrument = {
+                    keyterms: value,
+                    instrumentImage:instrument.instrumentImage
+               };
+               updateInstrument(instrument._id, newInstrument)
+               getInstruments();
+               history.push("/home")
+          } 
      };
 
      return (
@@ -51,6 +70,7 @@ const UpdateInstrument = () => {
                <Row className="justify-content-center">
                     <Col className="col-5">
                          <h1>Update Instrument</h1>
+                         <Dropzone />
                          <Form onChange={handleChange} onSubmit={handleSubmit}>
                               <Form.Group>
                                    <Form.Label>Edit keyterms</Form.Label>

@@ -37,8 +37,13 @@ const SignUp = (props) => {
     if (user) {
       props.onSignUpSuccess(user);
       setLogin(true);
+<<<<<<< HEAD
       alert('registration successful.');
     }
+=======
+      alert("registration successful.")
+    } else{alert("Registration error!")}
+>>>>>>> 6e5bd0c50132ff6e4a6597e6261e3710e7f24c07
   };
 
   return (
