@@ -6,20 +6,19 @@ import InstrumentModel from '../models/instrumentModel.js';
 
 export const create = async (req, res) => {
   try {
-    console.log(req.file);
-    console.log(req.body);
     const instruments = await InstrumentModel.create({
       name: req.body.name,
       keyterms: req.body.keyterms,
       description: req.body.description,
-      instrumentImage: req.file.path,
+      // instrumentImage: req.file.path,
     });
+
     return res.status(200).json({
       success: true,
       count: instruments.length,
       data: instruments,
-      filePath: req.file.path,
-      fileName: req.file.originalname,
+      // filePath: req.file.path,
+      // fileName: req.file.originalname,
     });
   } catch (err) {
     console.log(err);
