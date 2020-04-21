@@ -29,7 +29,6 @@ const UpdateInstrument = () => {
      const handleChange = (e) => {
           e.preventDefault();
           setValue(e.target.value.split(','));
-          console.log(new Date().toLocaleString());
      };
 
      const handleSubmit = async (e) => {
