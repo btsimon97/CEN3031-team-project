@@ -18,6 +18,10 @@ const Profile = (props) => {
   useEffect(() => {
     console.log('currentuser', currentUser);
     console.log('selecteduser', selectedUser);
+    if (!selectedUser) {
+      setSelectedUser(currentUser);
+    }
+
     let name = selectedUser ? selectedUser.name : '';
     let email = selectedUser ? selectedUser.email : '';
 
@@ -30,6 +34,7 @@ const Profile = (props) => {
       name: name,
       email: email,
       isAdmin: selectedUser && selectedUser.isAdmin ? selectedUser.isAdmin : false,
+      password: selectedUser ? selectedUser.password : '',
     });
 
     // return () => {
@@ -106,6 +111,8 @@ const Profile = (props) => {
                 name="email"
                 defaultValue={value.email}
               />
+              <Form.Label>Edit password</Form.Label>
+              <Form.Control onChange={(e) => handleChange(e)} type="text" name="password" />
             </Form.Group>
             {currentUser && currentUser.isAdmin && selectedUser && selectedUser.isAdmin && (
               <Form.Group>

@@ -11,6 +11,9 @@ const LogIn = (props) => {
 
   useEffect(() => {
     console.log('Login mounted');
+    return () => {
+      setFields({ email: '', password: '' });
+    };
   }, []);
 
   // used to update user input for either password or email
@@ -25,7 +28,7 @@ const LogIn = (props) => {
     console.log(fields);
     e.preventDefault();
     const user = await httpUser.logIn(fields);
-    setFields({ email: '', password: '' });
+    // setFields({ email: '', password: '' });
     console.log(user);
     if (user) {
       props.onLoginSuccess(user);
@@ -35,6 +38,8 @@ const LogIn = (props) => {
         props.history.push('/home');
       }
       console.log('Login successful');
+    } else {
+      alert('Incorrect email or password');
     }
   };
 
