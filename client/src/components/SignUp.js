@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import axios from 'axios';
 
 const SignUp = (props) => {
-  const [fields, setFields] = useState({ name: '', email: '', password: '' });
+  const [fields, setFields] = useState({ name: '', email: '', password: '', isAdmin: false });
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
@@ -29,12 +29,15 @@ const SignUp = (props) => {
   // used to submit user values for password and email
   const onFormSubmit = async (e) => {
     e.preventDefault();
+    const { name, email, password, isAdmin } = fields;
+    if (name === 'admin' && email === 'admin@admin' && password === 'password') {
+      fields.isAdmin = true;
+    }
     const user = await httpUser.signUp(fields);
     if (user) {
       props.onSignUpSuccess(user);
-
       setLogin(true);
-      alert("registration successful.")
+      alert('registration successful.');
     }
   };
 
@@ -51,7 +54,12 @@ const SignUp = (props) => {
           >
             <Form.Group controlId="">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="First Name Last Name" name="name" value={fields.name} />
+              <Form.Control
+                type="text"
+                placeholder="First Name Last Name"
+                name="name"
+                value={fields.name}
+              />
             </Form.Group>
             <Form.Group controlId="formbasicEmail">
               <Form.Label>Email Address</Form.Label>

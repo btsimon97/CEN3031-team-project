@@ -1,11 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { GlobalContext } from '../context/GlobalState';
 
 //Nav
 const NavBar = (props) => {
+  const { currentUser } = useContext(GlobalContext);
+
   return (
     <Fragment>
       <Navbar expand="lg" bg="dark" variant="dark" sticky="top">
@@ -23,9 +26,11 @@ const NavBar = (props) => {
             </LinkContainer>
             {props.currentUser ? (
               <NavDropdown title="My Places" id="basic-nav-dropdown" bg="dark" variant="dark">
-                <LinkContainer to="/dashboard">
-                  <NavDropdown.Item href="#">Admin Dashboard</NavDropdown.Item>
-                </LinkContainer>
+                {currentUser.isAdmin && (
+                  <LinkContainer to="/dashboard">
+                    <NavDropdown.Item href="#">Admin Dashboard</NavDropdown.Item>
+                  </LinkContainer>
+                )}
                 <LinkContainer to="/profile">
                   <NavDropdown.Item href="#">My Profile</NavDropdown.Item>
                 </LinkContainer>

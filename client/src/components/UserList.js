@@ -5,11 +5,13 @@ import Table from 'react-bootstrap/Table';
 import Search from './Search';
 
 import { GlobalContext } from '../context/GlobalState';
+import { useHistory } from 'react-router-dom';
 
 const UserList = ({ filterText, setUser }) => {
   const [fetch, setFetch] = useState(false);
   // const [users, setUsers] = useState([]);
-  const { users, getUsers } = useContext(GlobalContext);
+  const { users, getUsers, currentUser, setSelectedUser } = useContext(GlobalContext);
+  const history = useHistory();
 
   useEffect(() => {
     getUsers();
@@ -19,6 +21,14 @@ const UserList = ({ filterText, setUser }) => {
     console.log('handle delete', id);
     await axios.delete(`api/users/${id}`);
     setFetch(true);
+  };
+
+  const handleUpdate = async (id) => {
+    console.log('handle update', id);
+    let res = await axios.get(`api/users/${id}`);
+    console.log(res.data);
+    setSelectedUser(res.data);
+    history.push('/profile');
   };
   const userList = users.filter((user) => {
     if (filterText && filterText.trim() !== '') {
@@ -36,9 +46,9 @@ const UserList = ({ filterText, setUser }) => {
     <Table hover striped responsive>
       <thead>
         <tr>
-          <th>User Name</th>
-          <th>User Email</th>
-          <th>User Management</th>
+          {<th>User Name</th>}
+          {<th>User Email</th>}
+          {currentUser.isAdmin && <th>User Management</th>}
         </tr>
       </thead>
       <tbody>
@@ -46,13 +56,22 @@ const UserList = ({ filterText, setUser }) => {
           return (
             <Fragment key={item._id}>
               <tr onMouseOver={() => setUser(users.find((x) => x._id === item._id))}>
-                <td>{item.name}</td>
-                <td>{item.email}</td>
-                <td>
-                  <Button variant="danger" onClick={() => handleDelete(item._id)}>
-                    Delete User
-                  </Button>
-                </td>
+                {(!item.isAdmin || currentUser.isAdmin) && <td>{item.name}</td>}
+                {(!item.isAdmin || currentUser.isAdmin) && <td>{item.email}</td>}
+                {currentUser.isAdmin && (
+                  <td>
+                    <Button variant="danger" onClick={() => handleDelete(item._id)}>
+                      Delete User
+                    </Button>
+                  </td>
+                )}
+                {currentUser.isAdmin && (
+                  <td>
+                    <Button variant="info" onClick={() => handleUpdate(item._id)}>
+                      Update User
+                    </Button>
+                  </td>
+                )}
               </tr>
             </Fragment>
           );

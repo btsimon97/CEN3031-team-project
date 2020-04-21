@@ -13,15 +13,23 @@ const Profile = (props) => {
 
   const [value, setValue] = useState({});
 
-  const { setCurrentUser, currentUser } = useContext(GlobalContext);
+  const { setCurrentUser, currentUser, setSelectedUser, selectedUser } = useContext(GlobalContext);
 
   useEffect(() => {
-    let name = currentUser.name;
-    let email = currentUser.email;
+    console.log('currentuser', currentUser);
+    console.log('selecteduser', selectedUser);
+    let name = selectedUser ? selectedUser.name : '';
+    let email = selectedUser ? selectedUser.email : '';
+
+    if (currentUser && !currentUser.isAdmin) {
+      name = currentUser.name;
+      email = currentUser.email;
+    }
 
     setValue({
       name: name,
       email: email,
+      isAdmin: selectedUser && selectedUser.isAdmin ? selectedUser.isAdmin : false,
     });
 
     // return () => {
@@ -42,24 +50,39 @@ const Profile = (props) => {
       createdAt: Date.now(),
     });
   };
+  const handleAdmin = (e) => {
+    e.persist();
+    setValue({
+      ...value,
+      isAdmin: value.isAdmin ? false : true,
+    });
+    console.log('changing admin mode', selectedUser.isAdmin);
+
+    selectedUser.isAdmin = selectedUser.isAdmin ? false : true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userBack = await httpUser.updateUser(value, currentUser._id);
+    console.log(value);
+    const userBack = await httpUser.updateUser(value, selectedUser._id);
     console.log(userBack);
-    if (userBack) {
+    if (userBack && !currentUser.isAdmin) {
       props.onSignUpSuccess(userBack);
       props.setLogin(true);
-      props.setCurrrentUser(userBack);
+      props.setCurrentUser(userBack);
     }
 
     setValue({
       email: '',
       name: '',
     });
-    httpUser.logOut();
-    setCurrentUser(null);
-    history.push('/dashboard');
+    if (!currentUser.isAdmin) {
+      httpUser.logOut();
+      setSelectedUser(null);
+      history.push('/login');
+    } else {
+      history.push('/dashboard');
+    }
   };
 
   return (
@@ -84,6 +107,20 @@ const Profile = (props) => {
                 defaultValue={value.email}
               />
             </Form.Group>
+            {currentUser && currentUser.isAdmin && selectedUser && selectedUser.isAdmin && (
+              <Form.Group>
+                <Button variant="danger" type="button" onClick={(e) => handleAdmin(e)}>
+                  Remove Admin privileges
+                </Button>
+              </Form.Group>
+            )}
+            {currentUser && currentUser.isAdmin && selectedUser && !selectedUser.isAdmin && (
+              <Form.Group>
+                <Button variant="info" type="button" onClick={(e) => handleAdmin(e)}>
+                  Give Admin privileges
+                </Button>
+              </Form.Group>
+            )}
             <Form.Group>
               <Button variant="success" type="submit" onClick={(e) => handleSubmit(e)}>
                 Confirm

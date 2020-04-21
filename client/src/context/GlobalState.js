@@ -13,6 +13,7 @@ const initialState = {
   instrument: {},
   editMode: false,
   currentUser: null,
+  selectedUser: null,
   uploadedImage: {
     fileName: '',
     filePath: '',
@@ -159,6 +160,12 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const setSelectedUser = (user) => {
+    dispatch({
+      type: 'SET_SELECTED_USER',
+      payload: user,
+    });
+  };
   return (
     <GlobalContext.Provider
       value={{
@@ -172,6 +179,7 @@ export const GlobalProvider = ({ children }) => {
         users: state.users,
         currentUser: state.currentUser,
         uploadedImage: state.uploadedImage,
+        selectedUser: state.selectedUser,
         getInstruments,
         addInstrument,
         deleteInstrument,
@@ -183,6 +191,7 @@ export const GlobalProvider = ({ children }) => {
         updateInstrument,
         setCurrentUser,
         setUploadedImage,
+        setSelectedUser,
       }}
     >
       {children}

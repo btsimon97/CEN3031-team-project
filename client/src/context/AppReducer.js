@@ -22,6 +22,12 @@ export default (state, action) => {
         currentUser: action.payload,
       };
 
+    case 'SET_SELECTED_USER':
+      return {
+        ...state,
+        selectedUser: action.payload,
+      };
+
     case 'SET_UPLOADEDIMAGE':
       return {
         ...state,

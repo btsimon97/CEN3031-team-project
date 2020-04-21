@@ -29,7 +29,11 @@ const LogIn = (props) => {
     console.log(user);
     if (user) {
       props.onLoginSuccess(user);
-      props.history.push('/dashboard');
+      if (user.isAdmin) {
+        props.history.push('/dashboard');
+      } else {
+        props.history.push('/home');
+      }
       console.log('Login successful');
     }
   };
