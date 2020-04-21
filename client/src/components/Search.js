@@ -16,7 +16,6 @@ const Search = () => {
 
      const {setFilterText,filterText} = useContext(GlobalContext);
 
-     // var timeD = 0;
      const [timeD, setTimeD] = useState(0);
      useEffect(() => {
           initTimeD();
