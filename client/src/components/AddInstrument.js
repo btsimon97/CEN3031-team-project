@@ -41,19 +41,25 @@ const AddInstrument = () => {
         'content-type': 'multipart/form-data',
       },
     };
-    const img = new FormData();
-    img.append('image', uploadedImage);
-    let res = await axios.post(`api/uploads`, img, config);
-
-    const { imageUrl } = res.data;
-
-    let newInstrument = {
-      name: name,
-      keyterms: keyterms,
-      description: desc,
-      instrumentImage: imageUrl,
-    };
-
+    let newInstrument;
+    if (uploadedImage) {
+      const img = new FormData();
+      img.append('image', uploadedImage);
+      let res = await axios.post(`api/uploads`, img, config);
+      let { imageUrl } = res.data;
+      newInstrument = {
+        name: name,
+        keyterms: keyterms,
+        description: desc,
+        instrumentImage: imageUrl,
+      };
+    } else {
+      newInstrument = {
+        name: name,
+        keyterms: keyterms,
+        description: desc,
+      };
+    }
     addInstrument(newInstrument);
     history.push('/');
   };
